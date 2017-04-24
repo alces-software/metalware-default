@@ -88,11 +88,8 @@ ntpdate 0.centos.pool.ntp.org
 set -x -v
 exec 1>/root/ks-post.log 2>&1
 
-
-curl http://<%= hostip %>/deployment/epel/conf/config > /root/.deployment
-export ALCES_PROFILE=compute
-source /root/.deployment
-run_profile
+# Example of running rendered Metalware script.
+curl http://<%= hostip %>/metalware/scripts/<%= nodename %>/example | /bin/bash
 
 curl http://<%= hostip %>/metalware/exec/kscomplete.php?name=<%= nodename %>
 
