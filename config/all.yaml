@@ -1,2 +1,5 @@
 iptail: <%= index + 100 %>
 q3: 1
+# GENERATE with `openssl passwd -1 $PASSWD`.
+# This is 'password'.
+encrypted_root_password: '$1$ljsJHJMq$aUpshtR7MKh3IjrFIUK9.1'
