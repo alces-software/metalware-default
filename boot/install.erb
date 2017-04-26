@@ -3,7 +3,7 @@ PROMPT 0
 MENU TITLE PXE Menu
 TIMEOUT 5
 TOTALTIMEOUT 5
-<%= firstboot ? "ONTIMEOUT INSTALL" : "ONTIMEOUT LOCAL"%>
+<%= firstboot ? "ONTIMEOUT INSTALL" : "ONTIMEOUT local"%>
 
 LABEL INSTALL
      KERNEL boot/centos7-kernel
@@ -13,3 +13,4 @@ LABEL INSTALL
 LABEL local
      MENU LABEL (local)
      MENU DEFAULT
+     LOCALBOOT 0
