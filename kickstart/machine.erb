@@ -87,8 +87,8 @@ set -x -v
 exec 1>/root/ks-post.log 2>&1
 
 # Example of running rendered Metalware script.
-curl http://<%= hostip %>/metalware/scripts/<%= nodename %>/example | /bin/bash
+curl http://<%= alces.hostip %>/metalware/scripts/<%= alces.nodename %>/example | /bin/bash
 
-curl http://<%= hostip %>/metalware/exec/kscomplete.php?name=<%= nodename %>
+curl http://<%= alces.hostip %>/metalware/exec/kscomplete.php?name=<%= alces.nodename %>
 
 %end
