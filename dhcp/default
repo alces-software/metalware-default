@@ -1,7 +1,10 @@
-  host <%= alces.nodename %> {
-    hardware ethernet <%= hwaddr %>;
-    option host-name "<%= alces.nodename %>.prv.cluster.local";
-    option routers <%= alces.hostip %>;
-    filename "/pxelinux.0";
-    fixed-address <%= fixedaddr %>;
-  }
+
+<% alces.hunter.each do |hostname, mac_address| %>
+host <%= hostname %> {
+  hardware ethernet <%= mac_address %>;
+  option host-name "<%= hostname %>.prv.cluster.local";
+  option routers <%= alces.hostip %>;
+  filename "/pxelinux.0";
+  fixed-address <%= `gethostip -d #{hostname}`.chomp %>;
+}
+<% end %>
