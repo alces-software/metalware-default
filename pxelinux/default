@@ -1,0 +1,16 @@
+DEFAULT menu
+PROMPT 0
+MENU TITLE PXE Menu
+TIMEOUT 5
+TOTALTIMEOUT 5
+<%= alces.firstboot ? "ONTIMEOUT INSTALL" : "ONTIMEOUT local"%>
+
+LABEL INSTALL
+     KERNEL boot/centos7-kernel
+        APPEND initrd=boot/centos7-initrd.img ks=http://<%= alces.hostip %>/kickstart/<%= alces.nodename %> network ks.sendmac _ALCES_BASE_HOSTNAME=<%= alces.nodename %> <%= kernelappendoptions %>
+        IPAPPEND 2
+
+LABEL local
+     MENU LABEL (local)
+     MENU DEFAULT
+     LOCALBOOT 0
