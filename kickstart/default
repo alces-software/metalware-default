@@ -86,9 +86,10 @@ ntpdate 0.centos.pool.ntp.org
 set -x -v
 exec 1>/root/ks-post.log 2>&1
 
-# Example of running rendered Metalware script.
-curl http://<%= alces.hostip %>/metalware/scripts/<%= alces.nodename %>/example | /bin/bash
+# Example of using rendered Metalware file; this file itself also uses other
+# rendered files.
+curl <%= alces.files.main.first.url %> | /bin/bash | tee /tmp/metalware-default-output
 
-curl http://<%= alces.hostip %>/metalware/exec/kscomplete.php?name=<%= alces.nodename %>
+curl <%= alces.build_complete_url %>
 
 %end

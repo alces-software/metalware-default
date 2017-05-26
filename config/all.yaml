@@ -4,3 +4,14 @@ disk: vda
 # GENERATE with `openssl passwd -1 $PASSWD`.
 # This is 'password'.
 encrypted_root_password: '$1$ljsJHJMq$aUpshtR7MKh3IjrFIUK9.1'
+
+files:
+  main:
+    - main.sh
+  scripts:
+    - local-script.sh
+    - https://raw.githubusercontent.com/alces-software/metalware-default/bob/files/remote-script.sh
+    - non-existent-local-script.sh
+    - http://example.com/non-existent-remote-script.sh
+  configs:
+    - demo-config.conf
