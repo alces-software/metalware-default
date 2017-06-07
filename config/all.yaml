@@ -10,7 +10,7 @@ files:
     - main.sh
   scripts:
     - local-script.sh
-    - https://raw.githubusercontent.com/alces-software/metalware-default/bob/files/remote-script.sh
+    - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
     - non-existent-local-script.sh
     - http://example.com/non-existent-remote-script.sh
   configs:
