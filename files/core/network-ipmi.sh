@@ -17,7 +17,7 @@ HOST="<%= alces.nodename %>.<%= bmcdomain %>"
 #No IP has been given, use the hosts file as a lookup table
 if [ -z "${IP}" ]; then
   echo "Guessing IP using: $HOST"
-  IP=`getent hosts | grep $HOST | awk ' { print $1 }'`
+  IP="$(getent hosts | grep "$HOST" | awk ' { print $1 }')"
 fi
 
 BMCPASSWORD="<%= bmcpassword %>"

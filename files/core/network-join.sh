@@ -10,7 +10,7 @@ HOST="<%= alces.nodename %>.<%= domain %>"
 
 #No IP has been given, use the hosts file as a lookup table
 if [ -z "${IP}" ]; then
-  IP=`getent hosts | grep $HOST | awk ' { print $1 }'`
+  IP="$(getent hosts | grep "$HOST" | awk ' { print $1 }')"
 fi
 
 echo "Running network configuration for NET:$NET HOSTNAME:$HOST INTERFACE:$INTERFACE NETMASK:$NETMASK NETWORK:$NETWORK GATEWAY:$GATEWAY IP:$IP"
