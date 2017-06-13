@@ -20,7 +20,7 @@ FILENAME="${CONFIGDIR}ifcfg-${INTERFACE}"
 
 if ! [ -z "${TYPE}" ]; then
   TYPE=$TYPE
-elif ( `echo "${INTERFACE}" | grep -q "^bond.*$"` ); then 
+elif ( `echo "${INTERFACE}" | grep -q "^bond.*$"` ); then
   TYPE="Bond"
 elif ( `echo "${INTERFACE}" | grep -q "^ib.*$"` ); then
   TYPE="InfiniBand"

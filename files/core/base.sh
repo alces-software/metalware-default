@@ -19,14 +19,13 @@ systemctl disable chronyd
 mkdir -m 0700 /root/.ssh
 install_file authorized_keys /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
-
 echo "StrictHostKeyChecking no" >> /root/.ssh/config
 
 yum -y install yum-plugin-priorities yum-utils
 
 yum -y install net-tools bind-utils ipmitool
 
-yum -y update 
+yum -y update
 
 #Branch for profile
 if [ "<%= profile %>" == 'INFRA' ]; then
@@ -35,5 +34,5 @@ if [ "<%= profile %>" == 'INFRA' ]; then
   mpathconf
   mpathconf --enable
 else
-  echo "Unrecognised profile"    
+  echo "Unrecognised profile"
 fi
