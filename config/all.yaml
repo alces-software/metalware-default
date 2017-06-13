@@ -4,9 +4,73 @@ disk: vda
 # This is 'password'.
 encrypted_root_password: '$1$ljsJHJMq$aUpshtR7MKh3IjrFIUK9.1'
 
+localmirror: true
+yum_template: "<% if localmirror %>yum.local<% else %>yum.upstream<% end %>"
+profile: MASTER
+
+# Generic networking properties.
+domain: testcluster.cluster.local
+search_domains: "prv.<%= domain %> mgt.<%= domain %> ib.<%= domain %> <%= domain %>"
+externaldns: 10.101.0.1
+internaldns: <%= alces.hostip %>
+
+# Properties for specific networks.
+networks:
+  prv:
+    interface: em1
+    domain: "<%= 'prv.' + domain %>"
+    ip:
+    netmask: 255.255.0.0
+    network: 10.10.0.0
+    gateway: 10.10.0.11
+    type:
+
+  mgt:
+    interface: em2
+    domain: "<%= 'mgt.' + domain %>"
+    ip:
+    netmask: 255.255.0.0
+    network: 10.11.0.0
+    gateway:
+    type:
+    slave_interfaces: 'em3'
+
+  ib:
+    interface: ib0
+    domain: "<%= 'ib.' + domain %>"
+    ip:
+    netmask: 255.255.0.0
+    network: 10.12.0.0
+    gateway:
+    type:
+
+bond0_options: 'mode=1 primary=p3p2 miimon=80'
+bond0_interfaces: 'em1 em2 p3p2' # XXX Needed?
+
+# BMC defined separately as different to other networks.
+bmcdomain: "<%= 'bmc.' + domain %>"
+bmcip:
+bmcnetmask: 255.255.248.0
+bmcnetwork: 172.16.139.0
+bmcgateway: 0.0.0.0
+bmcpassword: 'Scitjaf4'
+bmcchannel: 1
+bmcuser: 2
+
 files:
   main:
     - main.sh
+  core:
+    - core/base.sh
+    - core/network-base.sh
+    - core/network-ipmi.sh
+    - core/network-join.sh
+    - core/networking.sh
+    - core/configs/yum.local
+    - core/configs/yum.upstream
+    - core/configs/authorized_keys
+    - core/configs/ntp
+
   scripts:
     - local-script.sh
     - https://raw.githubusercontent.com/alces-software/metalware-default/bob/files/remote-script.sh

@@ -3,31 +3,10 @@
 #Job ID: <%=jobid%>
 #Cluster: <%=cluster%>
 
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $BASEDIR/config
-
-if [ -z "${_ALCES_NET}" ]; then
-  NET="PRV"
-else
-  NET="${_ALCES_NET}"
-fi
-NETDOMAIN=`get_value "_ALCES_${NET}DOMAIN"`
-INTERFACE=`get_value "_ALCES_${NET}INTERFACE"`
-NETMASK=`get_value "_ALCES_${NET}NETMASK"`
-NETWORK=`get_value "_ALCES_${NET}NETWORK"`
-GATEWAY=`get_value "_ALCES_${NET}GATEWAY"`
-
-#This is literally translated to the TYPE in redhat-sysconfig-network
-TYPE=`get_value "_ALCES_${NET}TYPE"`
-#If TYPE is 'Bond' or 'Bridge', we'll also need these set to setup the slaves
-SLAVEINTERFACES=`get_value "_ALCES_${INTERFACE}_INTERFACES"`
 #If TYPE is 'Bond', you can set bonding options here
-BONDOPTIONS=`get_value "_ALCES_${INTERFACE}_OPTIONS"`
+BONDOPTIONS="<%= bond0_options %>"
 
-#Force an IP, rather than attempt a lookup
-IP=`get_value "_ALCES_${NET}IP"`
-
-HOST="${_ALCES_BASE_HOSTNAME}.${NETDOMAIN}"
+HOST="<%= alces.nodename %>.<%= domain %>"
 
 #No IP has been given, use the hosts file as a lookup table
 if [ -z "${IP}" ]; then

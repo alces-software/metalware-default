@@ -3,14 +3,23 @@
 #Job ID: <%=jobid%>
 #Cluster: <%=cluster%>
 
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $BASEDIR/config
+run_script network-base
+run_script network-ipmi
 
-run_script network-base.sh
-run_script network-ipmi.sh
+<% networks.each do |name, network| %>
 
-for n in $_ALCES_NETWORKS; do
-  export _ALCES_NET=$n
-  run_script network-join.sh
-done
+export NET="<%= name %>"
+export INTERFACE="<%= network.interface %>"
+export DOMAIN="<%= network.domain %>"
+export IP="<%= network.ip %>"
+export NETMASK="<%= network.netmask %>"
+export NETWORK="<%= network.network %>"
+export GATEWAY="<%= network.gateway %>"
+#If TYPE is 'Bond' or 'Bridge', we'll also need these set to setup the slaves
+export SLAVEINTERFACES="<%= slave_interfaces %>"
+#This is literally translated to the TYPE in redhat-sysconfig-network
+export TYPE="<%= network.type %>"
 
+run_script network-join
+
+<% end %>

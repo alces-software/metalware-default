@@ -3,15 +3,13 @@
 #Job ID: <%=jobid%>
 #Cluster: <%=cluster%>
 
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $BASEDIR/config
-
-install_file hosts /etc/hosts
+curl "<%= alces.hosts_url %>" > /etc/hosts
 
 yum -y install git vim emacs xauth xhost xdpyinfo xterm xclock tigervnc-server ntpdate wget vconfig bridge-utils patch tcl-devel gettext
 
 rm -rf /etc/yum.repos.d/*.repo
-install_file $_ALCES_YUMTEMPLATE /etc/yum.repos.d/cluster.repo
+install_file "<%= yum_template %>" /etc/yum.repos.d/cluster.repo
+
 yum -y install ntp
 install_file ntp /etc/ntp.conf
 systemctl enable ntpd
@@ -31,7 +29,7 @@ yum -y install net-tools bind-utils ipmitool
 yum -y update 
 
 #Branch for profile
-if [ "${_ALCES_PROFILE}" == 'INFRA' ]; then
+if [ "<%= profile %>" == 'INFRA' ]; then
   yum -y install device-mapper-multipath sg3_utils
   yum -y groupinstall "Gnome Desktop"
   mpathconf
@@ -39,4 +37,3 @@ if [ "${_ALCES_PROFILE}" == 'INFRA' ]; then
 else
   echo "Unrecognised profile"    
 fi
-

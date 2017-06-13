@@ -3,19 +3,16 @@
 #Job ID: <%=jobid%>
 #Cluster: <%=cluster%>
 
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $BASEDIR/config
-
-NET="BMC"
-NETDOMAIN=`get_value "_ALCES_${NET}DOMAIN"`
-NETMASK=`get_value "_ALCES_${NET}NETMASK"`
-NETWORK=`get_value "_ALCES_${NET}NETWORK"`
-GATEWAY=`get_value "_ALCES_${NET}GATEWAY"`
+# NET="BMC" # XXX Need to make this configurable?
+NETDOMAIN="<%= bmcdomain %>" # XXX Unused - needed?
+NETMASK="<%= bmcnetmask %>"
+NETWORK="<%=bmcnetwork %>" # XXX Unused - needed?
+GATEWAY="<%= bmcgateway %>"
 
 #Force an IP, rather than attempt a lookup
-IP=`get_value "_ALCES_${NET}IP"`
+IP="<%= bmcip %>"
 
-HOST="${_ALCES_BASE_HOSTNAME}.${NETDOMAIN}"
+HOST="<%= alces.nodename %>.<%= bmcdomain %>"
 
 #No IP has been given, use the hosts file as a lookup table
 if [ -z "${IP}" ]; then
@@ -23,9 +20,9 @@ if [ -z "${IP}" ]; then
   IP=`getent hosts | grep $HOST | awk ' { print $1 }'`
 fi
 
-BMCPASSWORD=`get_value "_ALCES_${NET}PASSWORD"`
-BMCCHANNEL=`get_value "_ALCES_${NET}CHANNEL"`
-BMCUSER=`get_value "_ALCES_${NET}USER"`
+BMCPASSWORD="<%= bmcpassword %>"
+BMCCHANNEL="<%= bmcchannel %>"
+BMCUSER="<%= bmcuser %>"
 
 yum -y install ipmitool
 
