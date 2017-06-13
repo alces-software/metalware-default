@@ -1,5 +1,4 @@
 iptail: <%= alces.index + 100 %>
-q3: 1
 disk: vda
 # GENERATE with `openssl passwd -1 $PASSWD`.
 # This is 'password'.
