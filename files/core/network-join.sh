@@ -52,13 +52,13 @@ ZONE=trusted
 EOF
 fi
 
-if ! [ -z $GATEWAY ]; then
-  echo "GATEWAY=\"${GATEWAY}\"" >> $FILENAME
+if ! [ -z "$GATEWAY" ]; then
+  echo "GATEWAY=\"${GATEWAY}\"" >> "$FILENAME"
 fi
 
 if [ $TYPE == "Bond" ]; then
   echo "Setting up bond for $INTERFACE ($BONDOPTIONS) - $SLAVEINTERFACES"
-  echo "BONDING_OPTS=\"${BONDOPTIONS}\"" >> $FILENAME
+  echo "BONDING_OPTS=\"${BONDOPTIONS}\"" >> "$FILENAME"
   for i in $SLAVEINTERFACES; do
     FILENAME="${CONFIGDIR}ifcfg-${i}"
     echo "Writing: $FILENAME"
@@ -86,7 +86,7 @@ fi
 
 if [ $TYPE == "Bridge" ]; then
   echo "Setting up bridge for $INTERFACE - $SLAVEINTERFACES"
-  echo "STP=no" >> $FILENAME
+  echo "STP=no" >> "$FILENAME"
   for i in $SLAVEINTERFACES; do
     FILENAME="${CONFIGDIR}ifcfg-${i}"
     echo "Writing: $FILENAME"

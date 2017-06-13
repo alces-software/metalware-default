@@ -31,20 +31,20 @@ if ! [ -z "$HOST" ]; then
     echo "Setting up BMC for $HOST. IP: $IP NETMASK: $NETMASK GATEWAY: $GATEWAY CHANNEL: $BMCCHANNEL USER: $BMCUSER"
     service ipmi start
     sleep 1
-    ipmitool lan set $BMCCHANNEL ipsrc static
+    ipmitool lan set "$BMCCHANNEL" ipsrc static
     sleep 2
-    ipmitool lan set $BMCCHANNEL ipaddr $IP
+    ipmitool lan set "$BMCCHANNEL" ipaddr "$IP"
     sleep 2
-    ipmitool lan set $BMCCHANNEL netmask $NETMASK
+    ipmitool lan set "$BMCCHANNEL" netmask "$NETMASK"
     sleep 2
-    ipmitool lan set $BMCCHANNEL defgw ipaddr $GATEWAY
+    ipmitool lan set "$BMCCHANNEL" defgw ipaddr "$GATEWAY"
     sleep 2
-    ipmitool user set name $BMCUSER admin
+    ipmitool user set name "$BMCUSER" admin
     sleep 2
-    ipmitool user set password $BMCUSER $BMCPASSWORD
+    ipmitool user set password "$BMCUSER" "$BMCPASSWORD"
     sleep 2
-    ipmitool lan print $BMCCHANNEL
-    ipmitool user list $BMCUSER
+    ipmitool lan print "$BMCCHANNEL"
+    ipmitool user list "$BMCUSER"
     ipmitool mc reset cold
   fi
 fi
