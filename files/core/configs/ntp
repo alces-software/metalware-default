@@ -1,5 +1,4 @@
-# ntp.conf: Managed by puppet.
-#
+
 # Keep ntpd from panicking in the event of a large clock skew
 # when a VM guest is suspended and resumed.
 tinker panic 0
