@@ -1,12 +1,14 @@
+
+cluster: testcluster
 iptail: <%= alces.index + 100 %>
 disk: vda
 # GENERATE with `openssl passwd -1 $PASSWD`.
 # This is 'password'.
 encrypted_root_password: '$1$ljsJHJMq$aUpshtR7MKh3IjrFIUK9.1'
-
-localmirror: true
+localmirror: false
 yum_template: "<% if localmirror %>yum.local<% else %>yum.upstream<% end %>"
 profile: MASTER
+ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDhXUXuIDUG9BRva+m0BNSWg/E8OS7A153B1k0fUkSr2SNTUDRBIYNJ4XaX6l8HJNziugEeD2qhSX+qZT3jwr9t4tBcMh8hae72HXMaGPSQOFodNNAzaSAw8e5WYAbZAJnTMItrBkUO989ztwsAyfoeULxdW4ZRCpTECaqz1zklTEJxyUYwqJ3ar4n1cDdYsgXUldH2yopVSMx+EkH/NkQsg5GAqFJvP1yVvvhYgXBHF2tIA3iDWSU6HskAJpEIMjC0mxAWD0Gb3vNpPkp+1HbBPX1yp048EG4SF+jaLeJOrJqmMzngNuBJaUcNtP6UtsnCF7AVuCN1hAJxp1HKkY/v root@localhost.localdomain'
 
 # Generic networking properties.
 domain: testcluster.cluster.local

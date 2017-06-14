@@ -1,1 +1,1 @@
-ssh-rsa $_ALCES_SSHKEY
+ssh-rsa <%= ssh_key %>

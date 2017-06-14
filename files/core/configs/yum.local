@@ -1,6 +1,10 @@
+
+# XXX I don't think URLs in this file will work now as not serving these on
+# Controller?
+
 [centos]
 name=CentOS Base
-baseurl=http://$_ALCES_BUILDSERVER/$_ALCES_CLUSTER/repo/centos/
+baseurl=http://<%= alces.hostip %>/<%= cluster %>/repo/centos/
 enabled=1
 skip_if_unavailable=1
 gpgcheck=0
@@ -8,7 +12,7 @@ priority=10
 
 [centos-updates]
 name=CentOS Updates
-baseurl=http://$_ALCES_BUILDSERVER/$_ALCES_CLUSTER/repo/centos-updates/
+baseurl=http://<%= alces.hostip %>/<%= cluster %>/repo/centos-updates/
 enabled=1
 skip_if_unavailable=1
 gpgcheck=0
@@ -16,7 +20,7 @@ priority=10
 
 [centos-extras]
 name=CentOS Extras
-baseurl=http://$_ALCES_BUILDSERVER/$_ALCES_CLUSTER/repo/centos-extras/
+baseurl=http://<%= alces.hostip %>/<%= cluster %>/repo/centos-extras/
 enabled=1
 skip_if_unavailable=1
 gpgcheck=0
@@ -24,7 +28,7 @@ priority=10
 
 [custom]
 name=Custom
-baseurl=http://$_ALCES_BUILDSERVER/$_ALCES_CLUSTER/repo/custom
+baseurl=http://<%= alces.hostip %>/<%= cluster %>/repo/custom
 enabled=1
 skip_if_unavailable=1
 gpgcheck=0
@@ -32,7 +36,7 @@ priority=1
 
 [epel]
 name=Epel
-baseurl=http://$_ALCES_BUILDSERVER/$_ALCES_CLUSTER/repo/epel
+baseurl=http://<%= alces.hostip %>/<%= cluster %>/repo/epel
 enabled=0
 skip_if_unavailable=1
 gpgcheck=0
