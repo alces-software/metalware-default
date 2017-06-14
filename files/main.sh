@@ -2,16 +2,18 @@
 echo "Running main.sh on <%= alces.nodename %> at $(date)!"
 
 
-core=/tmp/metalware/core
-mkdir -p "$core"
+export CORE_DIR=/tmp/metalware/core
+mkdir -p "$CORE_DIR"
 
 run_script() {
-  bash "$core/$1.sh"
+  bash "$CORE_DIR/$1.sh"
 }
+export -f run_script
 
 install_file() {
-  cp "$core/$1" "$2"
+  cp "$CORE_DIR/$1" "$2"
 }
+export -f install_file
 
 
 echo
@@ -20,7 +22,7 @@ echo 'Requesting core setup files'
   <% if file.error %>
 echo '<%= file.name %>: <%= file.error %>'
   <% else %>
-curl "<%= file.url %>" > "$core/<%= file.name %>"
+curl "<%= file.url %>" > "$CORE_DIR/<%= file.name %>"
   <% end %>
 <% end %>
 
