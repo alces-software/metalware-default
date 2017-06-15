@@ -7,7 +7,7 @@ run_script network-base
 run_script network-ipmi
 
 <% networks.each do |name, network| %>
-
+<% if network.defined %>
 export NET="<%= name %>"
 export INTERFACE="<%= network.interface %>"
 export HOSTNAME="<%= network.hostname %>"
@@ -21,5 +21,5 @@ export SLAVEINTERFACES="<%= slave_interfaces %>"
 export TYPE="<%= network.type %>"
 
 run_script network-join
-
+<% end %>
 <% end %>
