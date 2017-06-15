@@ -1,2 +1,4 @@
 
-10.10.0.<%= iptail %>  <%= alces.nodename %>.prv.cluster.local <%= alces.nodename %>.prv <%= alces.nodename %>
+<% networks.each do |name, network| %>
+<%= network.ip %> <%= network.hostname  %> <%= network.short_hostname %> <%= network.primary ? alces.nodename : '' -%>
+<% end %>

@@ -6,8 +6,8 @@
 systemctl disable NetworkManager
 service NetworkManager stop
 
-echo "HOSTNAME=<%= alces.nodename %>.prv.<%= domain %>" >> /etc/sysconfig/network
-echo "<%= alces.nodename %>.prv.<%= domain %>" > /etc/hostname
+echo "HOSTNAME=<%= networks.prv.hostname %>" >> /etc/sysconfig/network
+echo "<%= networks.prv.hostname %>" > /etc/hostname
 
 systemctl disable firewalld
 

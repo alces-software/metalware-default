@@ -10,7 +10,7 @@ run_script network-ipmi
 
 export NET="<%= name %>"
 export INTERFACE="<%= network.interface %>"
-export DOMAIN="<%= network.domain %>"
+export HOSTNAME="<%= network.hostname %>"
 export IP="<%= network.ip %>"
 export NETMASK="<%= network.netmask %>"
 export NETWORK="<%= network.network %>"

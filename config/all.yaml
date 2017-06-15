@@ -20,17 +20,20 @@ internaldns: <%= alces.hostip %>
 networks:
   prv:
     interface: em1
-    domain: "<%= 'prv.' + domain %>"
-    ip:
+    hostname: "<%= alces.nodename %>.prv.<%= domain %>"
+    short_hostname: "<%= alces.nodename %>.prv"
+    ip: "10.10.0.<%= iptail %>"
     netmask: 255.255.0.0
     network: 10.10.0.0
     gateway: 10.10.0.11
     type:
+    primary: true
 
   mgt:
     interface: em2
-    domain: "<%= 'mgt.' + domain %>"
-    ip:
+    hostname: "<%= alces.nodename %>.mgt.<%= domain %>"
+    short_hostname: "<%= alces.nodename %>.mgt"
+    ip: "10.11.0.<%= iptail %>"
     netmask: 255.255.0.0
     network: 10.11.0.0
     gateway:
@@ -39,8 +42,9 @@ networks:
 
   ib:
     interface: ib0
-    domain: "<%= 'ib.' + domain %>"
-    ip:
+    hostname: "<%= alces.nodename %>.ib.<%= domain %>"
+    short_hostname: "<%= alces.nodename %>.ib"
+    ip: "10.12.0.<%= iptail %>"
     netmask: 255.255.0.0
     network: 10.12.0.0
     gateway:

@@ -6,14 +6,13 @@
 #If TYPE is 'Bond', you can set bonding options here
 BONDOPTIONS="<%= bond0_options %>"
 
-HOST="<%= alces.nodename %>.<%= domain %>"
-
+# XXX Is the following still needed now defining IPs in configs?
 #No IP has been given, use the hosts file as a lookup table
 if [ -z "${IP}" ]; then
-  IP="$(getent hosts | grep "$HOST" | awk ' { print $1 }')"
+  IP="$(getent hosts | grep "$HOSTNAME" | awk ' { print $1 }')"
 fi
 
-echo "Running network configuration for NET:$NET HOSTNAME:$HOST INTERFACE:$INTERFACE NETMASK:$NETMASK NETWORK:$NETWORK GATEWAY:$GATEWAY IP:$IP"
+echo "Running network configuration for NET:$NET HOSTNAME:$HOSTNAME INTERFACE:$INTERFACE NETMASK:$NETMASK NETWORK:$NETWORK GATEWAY:$GATEWAY IP:$IP"
 
 CONFIGDIR=/etc/sysconfig/network-scripts/
 FILENAME="${CONFIGDIR}ifcfg-${INTERFACE}"
