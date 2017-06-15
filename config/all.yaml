@@ -19,8 +19,8 @@ internaldns: <%= alces.hostip %>
 # Properties for specific networks.
 networks:
   prv:
-    interface: em1
     defined: true
+    interface: eth0
     hostname: "<%= alces.nodename %>.prv.<%= domain %>"
     short_hostname: "<%= alces.nodename %>.prv"
     ip: "10.10.0.<%= iptail %>"
@@ -31,8 +31,8 @@ networks:
     primary: true
 
   mgt:
-    interface: em2
     defined: true
+    interface: eth1
     hostname: "<%= alces.nodename %>.mgt.<%= domain %>"
     short_hostname: "<%= alces.nodename %>.mgt"
     ip: "10.11.0.<%= iptail %>"
