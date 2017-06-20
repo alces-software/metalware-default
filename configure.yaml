@@ -1,0 +1,113 @@
+
+questions:
+  cluster_name: &cluster_name
+    question: 'Cluster name'
+
+  domain: &domain
+    question: 'Cluster domain'
+
+  root_password: &root_password
+    question: 'Root user encrypted password'
+
+  root_ssh_key: &root_ssh_key
+    question: 'Root user SSH key'
+
+  genders_line: &genders_line
+    question: 'Line of the genders file for this group'
+
+
+  # Private network.
+  prv_network_domain: &prv_network_domain
+    question: 'Domain for the private network'
+    default: 'prv'
+
+  prv_network_ip: &prv_network_ip
+    question: 'IP for nodes on the private network'
+    # TODO: here and for other IPs, will need to make third quad distinct based
+    # on group, possibly using `groupindex` - need to consider more how this
+    # should work.
+    default: '10.10.100.<%= index %>'
+
+  prv_network_netmask: &prv_network_netmask
+    question: 'Netmask for the private network'
+    default: '255.255.255.0'
+
+  prv_network_interface: &prv_network_interface
+    question: 'Interface for the private network'
+    default: 'eth0'
+
+
+  # Management network.
+  mgt_network_domain: &mgt_network_domain
+    question: 'Domain for the management network'
+    default: 'mgt'
+
+  mgt_network_ip: &mgt_network_ip
+    question: 'IP for nodes on the management network'
+    default: '10.11.100.<%= index %>'
+
+  mgt_network_netmask: &mgt_network_netmask
+    question: 'Netmask for the management network'
+    default: '255.255.255.0'
+
+  mgt_network_interface: &mgt_network_interface
+    question: 'Interface for the management network'
+    default: 'eth0'
+
+
+  # InfiniBand network.
+  ib_network_domain: &ib_network_domain
+    question: 'Domain for the InfiniBand network'
+    default: 'ib'
+
+  ib_network_ip: &ib_network_ip
+    question: 'IP for nodes on the InfiniBand network'
+    default: '10.12.100.<%= index %>'
+
+  ib_network_netmask: &ib_network_netmask
+    question: 'Netmask for the InfiniBand network'
+    default: '255.255.255.0'
+
+  ib_network_interface: &ib_network_interface
+    question: 'Interface for the InfiniBand network'
+    default: 'eth2'
+
+
+domain:
+  cluster_name: *cluster_name
+  domain: *domain
+  root_password: *root_password
+  root_ssh_key: *root_ssh_key
+  prv_network_domain: *prv_network_domain
+  prv_network_ip: *prv_network_ip
+  prv_network_netmask: *prv_network_netmask
+  prv_network_interface: *prv_network_interface
+  mgt_network_domain: *mgt_network_domain
+  mgt_network_ip: *mgt_network_ip
+  mgt_network_netmask: *mgt_network_netmask
+  mgt_network_interface: *mgt_network_interface
+  ib_network_domain: *ib_network_domain
+  ib_network_ip: *ib_network_ip
+  ib_network_netmask: *ib_network_netmask
+  ib_network_interface: *ib_network_interface
+
+
+group:
+  genders_line: *genders_line
+  prv_network_ip: *prv_network_ip
+  prv_network_interface: *prv_network_interface
+  mgt_network_ip: *mgt_network_ip
+  mgt_network_interface: *mgt_network_interface
+  ib_network_ip: *ib_network_ip
+  ib_network_interface: *ib_network_interface
+
+
+node:
+  root_password: *root_password
+  prv_network_ip: *prv_network_ip
+  prv_network_interface: *prv_network_interface
+  mgt_network_ip: *mgt_network_ip
+  mgt_network_interface: *mgt_network_interface
+  ib_network_ip: *ib_network_ip
+  ib_network_interface: *ib_network_interface
+
