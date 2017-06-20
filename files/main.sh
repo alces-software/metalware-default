@@ -1,6 +1,39 @@
 
 echo "Running main.sh on <%= alces.nodename %> at $(date)!"
 
+
+export CORE_DIR=/tmp/metalware/core
+mkdir -p "$CORE_DIR"
+
+run_script() {
+  bash "$CORE_DIR/$1.sh"
+}
+export -f run_script
+
+install_file() {
+  cp "$CORE_DIR/$1" "$2"
+}
+export -f install_file
+
+
+echo
+echo 'Requesting core setup files'
+<% alces.files.core.each do |file| %>
+  <% if file.error %>
+echo '<%= file.name %>: <%= file.error %>'
+  <% else %>
+curl "<%= file.url %>" > "$CORE_DIR/<%= file.name %>"
+  <% end %>
+<% end %>
+
+
+echo 'Running Alces core setup'
+run_script base
+run_script networking
+
+
+# Below are examples for how users could make use of `files` feature.
+
 echo
 echo 'Running scripts:'
 <% alces.files.scripts.each do |script| %>
