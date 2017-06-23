@@ -12,7 +12,7 @@ ssh_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDhXUXuIDUG9BRva+m0BNSWg/E8OS7A153B1k0fUk
 
 # Generic networking properties.
 domain: <%= cluster %>.cluster.local
-search_domains: "prv.<%= domain %> mgt.<%= domain %> ib.<%= domain %> <%= domain %>"
+search_domains: "pri.<%= domain %> mgt.<%= domain %> ib.<%= domain %> <%= domain %>"
 externaldns: 10.101.0.1
 internaldns: <%= alces.hostip %>
 
@@ -20,11 +20,11 @@ internaldns: <%= alces.hostip %>
 # XXX Include bmc network here? If so also need to adjust `network-ipmi.sh` +
 # search for other usages.
 networks:
-  prv:
+  pri:
     defined: true
     interface: eth0
-    hostname: "<%= alces.nodename %>.prv.<%= domain %>"
-    short_hostname: "<%= alces.nodename %>.prv"
+    hostname: "<%= alces.nodename %>.pri.<%= domain %>"
+    short_hostname: "<%= alces.nodename %>.pri"
     ip: "10.10.0.<%= iptail %>"
     netmask: 255.255.0.0
     network: 10.10.0.0
