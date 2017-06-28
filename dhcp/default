@@ -2,7 +2,7 @@
 <% alces.hunter.each do |hostname, mac_address| %>
 host <%= hostname %> {
   hardware ethernet <%= mac_address %>;
-  option host-name "<%=hostname%><%= networks['pri'].hostname%>";
+  option host-name "<%= hostname %><%= networks.pri.hostname %>";
   option routers <%= alces.hostip %>;
   filename "/pxelinux.0";
   fixed-address <%= `gethostip -d #{hostname}`.chomp %>;
