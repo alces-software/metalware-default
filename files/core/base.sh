@@ -7,9 +7,6 @@ curl "<%= alces.hosts_url %>" > /etc/hosts
 
 yum -y install git vim emacs xauth xhost xdpyinfo xterm xclock tigervnc-server ntpdate wget vconfig bridge-utils patch tcl-devel gettext
 
-rm -rf /etc/yum.repos.d/*.repo
-install_file "<%= yum_template %>" /etc/yum.repos.d/cluster.repo
-
 yum -y install ntp
 install_file ntp /etc/ntp.conf
 systemctl enable ntpd
@@ -21,7 +18,7 @@ install_file authorized_keys /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 echo "StrictHostKeyChecking no" >> /root/.ssh/config
 
-yum -y install yum-plugin-priorities yum-utils
+yum -y install yum-utils
 
 yum -y install net-tools bind-utils ipmitool
 
