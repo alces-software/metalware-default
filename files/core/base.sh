@@ -18,8 +18,6 @@ install_file authorized_keys /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 echo "StrictHostKeyChecking no" >> /root/.ssh/config
 
-yum -y install yum-utils
-
 yum -y install net-tools bind-utils ipmitool
 
 yum -y update
