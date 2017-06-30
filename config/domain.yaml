@@ -71,8 +71,11 @@ bmcuser: 2
 files:
   main:
     - main.sh
-  earlyscripts:
-    - script-to-run-before-core.sh
+  setup:
+    - local-script.sh
+    - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
+    - non-existent-local-script.sh
+    - http://example.com/non-existent-remote-script.sh
   core:
     - core/base.sh
     - core/network-base.sh
@@ -83,13 +86,8 @@ files:
     - core/configs/yum.upstream
     - core/configs/authorized_keys
     - core/configs/ntp
-
   scripts:
     - local-script.sh
     - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
     - non-existent-local-script.sh
     - http://example.com/non-existent-remote-script.sh
-  latescripts:
-    - script-to-run-after-all-other-scripts.sh
-  configs:
-    - demo-config.conf
