@@ -4,7 +4,6 @@
 #Cluster: <%=cluster%>
 
 run_script network-base
-run_script network-ipmi
 
 <% networks.each do |name, network| %>
 <% if network.defined %>
@@ -20,6 +19,11 @@ export SLAVEINTERFACES="<%= slave_interfaces %>"
 #This is literally translated to the TYPE in redhat-sysconfig-network
 export TYPE="<%= network.type %>"
 
-run_script network-join
+if [ "${INTERFACE}" == 'bmc' ]
+then
+  run_script network-ipmi
+else
+  run_script network-join
+fi
 <% end %>
 <% end %>

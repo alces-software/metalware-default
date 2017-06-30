@@ -1,4 +1,6 @@
 
 <% networks.each do |name, network| %>
-<%= network.ip %> <%= network.hostname  %> <%= network.short_hostname %> <%= network.primary ? alces.nodename : '' -%>
+<%if network.defined -%>
+  <%= network.ip %> <%= network.hostname  %> <%= network.short_hostname %> <%= network.primary ? alces.nodename : '' -%>
+<%end-%>
 <% end %>
