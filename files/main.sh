@@ -26,6 +26,15 @@ curl "<%= file.url %>" > "$CORE_DIR/<%= file.name %>"
   <% end %>
 <% end %>
 
+echo
+echo 'Running early scripts:'
+<% alces.files.earlyscripts.each do |script| %>
+  <% if script.error %>
+echo '<%= script.name %>: <%= script.error %>'
+  <% else %>
+curl "<%= script.url %>" | /bin/bash
+  <% end %>
+<% end %>
 
 echo 'Running Alces core setup'
 run_script base
@@ -55,6 +64,16 @@ config_file=/tmp/configs/<%= config.name %>
 curl "<%= config.url %>" > "$config_file"
 echo "Config $config_file saved with contents:"
 cat "$config_file"
+  <% end %>
+<% end %>
+
+echo
+echo 'Running late scripts:'
+<% alces.files.latescripts.each do |script| %>
+  <% if script.error %>
+echo '<%= script.name %>: <%= script.error %>'
+  <% else %>
+curl "<%= script.url %>" | /bin/bash
   <% end %>
 <% end %>
 

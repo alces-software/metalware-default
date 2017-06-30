@@ -71,6 +71,8 @@ bmcuser: 2
 files:
   main:
     - main.sh
+  earlyscripts:
+    - script-to-run-before-core.sh
   core:
     - core/base.sh
     - core/network-base.sh
@@ -87,5 +89,7 @@ files:
     - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
     - non-existent-local-script.sh
     - http://example.com/non-existent-remote-script.sh
+  latescripts:
+    - script-to-run-after-all-other-scripts.sh
   configs:
     - demo-config.conf
