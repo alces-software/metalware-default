@@ -3,9 +3,9 @@
 #Job ID: <%=jobid%>
 #Cluster: <%=cluster%>
 
-BMCPASSWORD="<%= bmcpassword %>"
-BMCCHANNEL="<%= bmcchannel %>"
-BMCUSER="<%= bmcuser %>"
+BMCPASSWORD="<%= networks.bmc.bmcpassword %>"
+BMCCHANNEL="<%= networks.bmc.bmcchannel %>"
+BMCUSER="<%= networks.bmc.bmcuser %>"
 
 # XXX Is the following still needed now defining IPs in configs?
 #No IP has been given, use the hosts file as a lookup table
