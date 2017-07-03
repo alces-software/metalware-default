@@ -69,6 +69,11 @@ bmcuser: 2
 files:
   main:
     - main.sh
+  setup:
+    - local-script.sh
+    - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
+    - non-existent-local-script.sh
+    - http://example.com/non-existent-remote-script.sh
   core:
     - core/base.sh
     - core/network-base.sh
@@ -77,11 +82,8 @@ files:
     - core/networking.sh
     - core/configs/authorized_keys
     - core/configs/ntp
-
   scripts:
     - local-script.sh
     - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
     - non-existent-local-script.sh
     - http://example.com/non-existent-remote-script.sh
-  configs:
-    - demo-config.conf
