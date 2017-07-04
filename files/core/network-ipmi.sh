@@ -10,7 +10,7 @@ BMCUSER="<%= networks.bmc.bmcuser %>"
 # XXX Is the following still needed now defining IPs in configs?
 #No IP has been given, use the hosts file as a lookup table
 if [ -z "${IP}" ]; then
-  IP="$(getent hosts | grep "$HOST" | awk ' { print $1 }')"
+  IP="$(getent hosts | grep "$HOSTNAME" | awk ' { print $1 }')"
 fi
 
 yum -y install ipmitool
