@@ -63,7 +63,7 @@ networks:
     netmask: 255.255.0.0
     network: 10.11.0.0
     gateway: 0.0.0.0
-    bmcpassword: 'Scitjaf4'
+    bmcpassword: 'Pa55Word'
     bmcchannel: 1
     bmcuser: 2
 
