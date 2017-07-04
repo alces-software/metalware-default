@@ -67,6 +67,20 @@ networks:
     bmcchannel: 1
     bmcuser: 2
 
+disksetup: |
+  zerombr
+  bootloader --location=mbr --driveorder=<%= disk %> --append="$bootloaderappend"
+  clearpart --all --initlabel
+
+  #Disk partitioning information
+  part /boot --fstype ext4 --size=4096 --asprimary --ondisk <%= disk %>
+  part pv.01 --size=1 --grow --asprimary --ondisk <%= disk %>
+  volgroup system pv.01
+  logvol  /  --fstype ext4 --vgname=system  --size=16384 --name=root
+  logvol  /var --fstype ext4 --vgname=system --size=16384 --name=var
+  logvol  /tmp --fstype ext4 --vgname=system --size=1 --grow --name=tmp
+  logvol  swap  --fstype swap --vgname=system  --size=8096  --name=swap1
+
 bond0_options: 'mode=1 primary=p3p2 miimon=80'
 bond0_interfaces: 'em1 em2 p3p2' # XXX Needed?
 
