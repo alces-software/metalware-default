@@ -3,32 +3,21 @@
 #Job ID: <%=jobid%>
 #Cluster: <%=cluster%>
 
-# NET="BMC" # XXX Need to make this configurable?
-NETDOMAIN="<%= bmcdomain %>" # XXX Unused - needed?
-NETMASK="<%= bmcnetmask %>"
-NETWORK="<%=bmcnetwork %>" # XXX Unused - needed?
-GATEWAY="<%= bmcgateway %>"
+BMCPASSWORD="<%= networks.bmc.bmcpassword %>"
+BMCCHANNEL="<%= networks.bmc.bmcchannel %>"
+BMCUSER="<%= networks.bmc.bmcuser %>"
 
-#Force an IP, rather than attempt a lookup
-IP="<%= bmcip %>"
-
-HOST="<%= alces.nodename %>.<%= bmcdomain %>"
-
+# XXX Is the following still needed now defining IPs in configs?
 #No IP has been given, use the hosts file as a lookup table
 if [ -z "${IP}" ]; then
-  echo "Guessing IP using: $HOST"
-  IP="$(getent hosts | grep "$HOST" | awk ' { print $1 }')"
+  IP="$(getent hosts | grep "$HOSTNAME" | awk ' { print $1 }')"
 fi
-
-BMCPASSWORD="<%= bmcpassword %>"
-BMCCHANNEL="<%= bmcchannel %>"
-BMCUSER="<%= bmcuser %>"
 
 yum -y install ipmitool
 
-if ! [ -z "$HOST" ]; then
+if ! [ -z "$HOSTNAME" ]; then
   if ! [ -z "$IP" ]; then
-    echo "Setting up BMC for $HOST. IP: $IP NETMASK: $NETMASK GATEWAY: $GATEWAY CHANNEL: $BMCCHANNEL USER: $BMCUSER"
+    echo "Setting up BMC for $HOSTNAME. IP: $IP NETMASK: $NETMASK GATEWAY: $GATEWAY CHANNEL: $BMCCHANNEL USER: $BMCUSER"
     service ipmi start
     sleep 1
     ipmitool lan set "$BMCCHANNEL" ipsrc static

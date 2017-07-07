@@ -53,18 +53,22 @@ networks:
     gateway:
     type:
 
+  bmc:
+    defined: false
+    interface: bmc
+    hostname: "<%= alces.nodename %>.bmc.mgt.<%= domain %>"
+    short_hostname: "<%= alces.nodename %>.bmc"
+    #ip: "10.11.200.<%= alces.index %>"  # XXX uncomment this line when index is working
+    ip: 
+    netmask: 255.255.0.0
+    network: 10.11.0.0
+    gateway: 0.0.0.0
+    bmcpassword: 'Pa55Word'
+    bmcchannel: 1
+    bmcuser: 2
+
 bond0_options: 'mode=1 primary=p3p2 miimon=80'
 bond0_interfaces: 'em1 em2 p3p2' # XXX Needed?
-
-# BMC defined separately as different to other networks.
-bmcdomain: "<%= 'bmc.' + domain %>"
-bmcip:
-bmcnetmask: 255.255.248.0
-bmcnetwork: 172.16.139.0
-bmcgateway: 0.0.0.0
-bmcpassword: 'Scitjaf4'
-bmcchannel: 1
-bmcuser: 2
 
 files:
   main:
