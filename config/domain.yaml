@@ -22,7 +22,7 @@ networks:
     interface: eth0
     hostname: "<%= alces.nodename %>.pri.<%= domain %>"
     short_hostname: "<%= alces.nodename %>.pri"
-    ip: "10.10.0.<%= iptail %>"
+    ip: "10.10.<%= alces.group_index %>.<%= iptail %>"
     netmask: 255.255.0.0
     network: 10.10.0.0
     gateway: 10.10.0.11
@@ -34,7 +34,7 @@ networks:
     interface: eth1
     hostname: "<%= alces.nodename %>.mgt.<%= domain %>"
     short_hostname: "<%= alces.nodename %>.mgt"
-    ip: "10.11.0.<%= iptail %>"
+    ip: "10.11.<%= alces.group_index %>.<%= iptail %>"
     netmask: 255.255.0.0
     network: 10.11.0.0
     gateway:
@@ -46,7 +46,7 @@ networks:
     interface: ib0
     hostname: "<%= alces.nodename %>.ib.<%= domain %>"
     short_hostname: "<%= alces.nodename %>.ib"
-    ip: "10.12.0.<%= iptail %>"
+    ip: "10.12.<%= alces.group_index %>.<%= iptail %>"
     netmask: 255.255.0.0
     network: 10.12.0.0
     gateway:
