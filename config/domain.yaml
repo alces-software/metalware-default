@@ -1,7 +1,6 @@
 
 cluster: testcluster
 iptail: <%= alces.index + 100 %>
-disk: vda
 # GENERATE with `openssl passwd -1 $PASSWD`.
 # This is 'password'.
 encrypted_root_password: '$1$ljsJHJMq$aUpshtR7MKh3IjrFIUK9.1'
@@ -66,6 +65,44 @@ networks:
     bmcpassword: 'Pa55Word'
     bmcchannel: 1
     bmcuser: 2
+
+disksetup: |
+  zerombr
+  bootloader --location=mbr --driveorder=sda --append="$bootloaderappend"
+  clearpart --all --initlabel
+
+  #Disk partitioning information
+  part /boot --fstype ext4 --size=4096 --asprimary --ondisk sda
+  part pv.01 --size=1 --grow --asprimary --ondisk sda
+  volgroup system pv.01
+  logvol  /  --fstype ext4 --vgname=system  --size=16384 --name=root
+  logvol  /var --fstype ext4 --vgname=system --size=16384 --name=var
+  logvol  /tmp --fstype ext4 --vgname=system --size=1 --grow --name=tmp
+  logvol  swap  --fstype swap --vgname=system  --size=8096  --name=swap1
+
+#disksetup: |
+#  zerombr
+#
+#  bootloader --location=mbr --driveorder=sda --append="$bootloaderappend"
+#  clearpart --all --initlabel
+#
+#  #Disk partitioning information
+#  part /boot --fstype ext4 --size=1024 --asprimary --ondisk sda
+#  part /boot2 --fstype ext4 --size=1024 --asprimary --ondisk sdb
+#
+#  part raid.01 --size 60000 --ondisk sda --asprimary
+#  part raid.02 --size 60000 --ondisk sdb --asprimary
+#
+#  raid pv.01 --level=1 --fstype=ext4 --device=md0 raid.01 raid.02
+#  volgroup system pv.01
+#  logvol  /  --fstype ext4 --vgname=system  --size=1  --name=root --grow
+#  logvol  /var  --fstype ext4 --vgname=system  --size=16384  --name=var
+#  logvol  swap  --fstype swap --vgname=system  --size=16384  --name=swap1
+#
+#  part raid.03 --size=1 --ondisk sda --asprimary --grow
+#  part raid.04 --size=1 --ondisk sdb --asprimary --grow
+#
+#  raid /tmp --fstype ext4 --fstype=ext4 --device=md1 --level=0 raid.03 raid.04
 
 bond0_options: 'mode=1 primary=p3p2 miimon=80'
 bond0_interfaces: 'em1 em2 p3p2' # XXX Needed?
