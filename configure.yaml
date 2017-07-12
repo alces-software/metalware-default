@@ -12,9 +12,11 @@ questions:
   root_ssh_key: &root_ssh_key
     question: 'Root user SSH key'
 
-  genders_line: &genders_line
-    question: 'Line of the genders file for this group'
+  genders_host_range: &genders_host_range
+    question: "Genders host range specifier for this group, e.g. 'node01,node[05-08]'"
 
+  genders_additional_groups: &genders_additional_groups
+    question: "Additional genders groups for this group, e.g. 'gpunodes,nodes'; the group being configured is the primary group"
 
   # Primary network.
   pri_network_domain: &pri_network_domain
@@ -93,7 +95,8 @@ domain:
 
 
 group:
-  genders_line: *genders_line
+  genders_host_range: *genders_host_range
+  genders_additional_groups: *genders_additional_groups
   pri_network_ip: *pri_network_ip
   pri_network_interface: *pri_network_interface
   mgt_network_ip: *mgt_network_ip
