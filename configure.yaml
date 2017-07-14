@@ -19,6 +19,10 @@ questions:
     question: "Additional genders groups for this group, e.g. 'gpunodes,nodes'; the group being configured is the primary group"
 
   # Primary network.
+  pri_network_defined: &pri_network_defined
+    question: 'Setup primary network'
+    type: 'boolean'
+
   pri_network_domain: &pri_network_domain
     question: 'Domain for the primary network'
     default: 'pri'
@@ -38,8 +42,11 @@ questions:
     question: 'Interface for the primary network'
     default: 'eth0'
 
-
   # Management network.
+  mgt_network_defined: &mgt_network_defined
+    question: 'Setup management network'
+    type: 'boolean'
+
   mgt_network_domain: &mgt_network_domain
     question: 'Domain for the management network'
     default: 'mgt'
@@ -58,6 +65,10 @@ questions:
 
 
   # InfiniBand network.
+  ib_network_defined: &ib_network_defined
+    question: 'Setup InfiniBand network'
+    type: 'boolean'
+
   ib_network_domain: &ib_network_domain
     question: 'Domain for the InfiniBand network'
     default: 'ib'
@@ -80,14 +91,17 @@ domain:
   domain: *domain
   root_password: *root_password
   root_ssh_key: *root_ssh_key
+
   pri_network_domain: *pri_network_domain
   pri_network_ip: *pri_network_ip
   pri_network_netmask: *pri_network_netmask
   pri_network_interface: *pri_network_interface
+
   mgt_network_domain: *mgt_network_domain
   mgt_network_ip: *mgt_network_ip
   mgt_network_netmask: *mgt_network_netmask
   mgt_network_interface: *mgt_network_interface
+
   ib_network_domain: *ib_network_domain
   ib_network_ip: *ib_network_ip
   ib_network_netmask: *ib_network_netmask
@@ -97,20 +111,31 @@ domain:
 group:
   genders_host_range: *genders_host_range
   genders_additional_groups: *genders_additional_groups
+
+  pri_network_defined: *pri_network_defined
   pri_network_ip: *pri_network_ip
   pri_network_interface: *pri_network_interface
+
+  mgt_network_defined: *mgt_network_defined
   mgt_network_ip: *mgt_network_ip
   mgt_network_interface: *mgt_network_interface
+
+  ib_network_defined: *ib_network_defined
   ib_network_ip: *ib_network_ip
   ib_network_interface: *ib_network_interface
 
 
 node:
   root_password: *root_password
+
+  pri_network_defined: *pri_network_defined
   pri_network_ip: *pri_network_ip
   pri_network_interface: *pri_network_interface
+
+  mgt_network_defined: *mgt_network_defined
   mgt_network_ip: *mgt_network_ip
   mgt_network_interface: *mgt_network_interface
+
+  ib_network_defined: *ib_network_defined
   ib_network_ip: *ib_network_ip
   ib_network_interface: *ib_network_interface
-
