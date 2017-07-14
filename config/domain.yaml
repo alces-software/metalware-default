@@ -14,8 +14,6 @@ externaldns: 10.101.0.1
 internaldns: <%= alces.hostip %>
 
 # Properties for specific networks.
-# XXX Include bmc network here? If so also need to adjust `network-ipmi.sh` +
-# search for other usages.
 networks:
   pri:
     defined: true
