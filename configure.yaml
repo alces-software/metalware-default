@@ -5,6 +5,7 @@ questions:
 
   domain: &domain
     question: 'Cluster domain'
+    default: '<%= cluster %>.cluster.local'
 
   root_password: &root_password
     question: 'Root user encrypted password'
@@ -29,10 +30,7 @@ questions:
 
   pri_network_ip: &pri_network_ip
     question: 'IP for nodes on the primary network'
-    # TODO: here and for other IPs, will need to make third quad distinct based
-    # on group, possibly using `groupindex` - need to consider more how this
-    # should work.
-    default: '10.10.100.<%= index %>'
+    default: '10.10.<%= alces.group_index %>.<%= alces.index + 1 %>'
 
   pri_network_netmask: &pri_network_netmask
     question: 'Netmask for the primary network'
@@ -53,7 +51,7 @@ questions:
 
   mgt_network_ip: &mgt_network_ip
     question: 'IP for nodes on the management network'
-    default: '10.11.100.<%= index %>'
+    default: '10.11.<%= alces.group_index %>.<%= alces.index + 1 %>'
 
   mgt_network_netmask: &mgt_network_netmask
     question: 'Netmask for the management network'
@@ -75,7 +73,7 @@ questions:
 
   ib_network_ip: &ib_network_ip
     question: 'IP for nodes on the InfiniBand network'
-    default: '10.12.100.<%= index %>'
+    default: '10.12.<%= alces.group_index %>.<%= alces.index + 1 %>'
 
   ib_network_netmask: &ib_network_netmask
     question: 'Netmask for the InfiniBand network'
