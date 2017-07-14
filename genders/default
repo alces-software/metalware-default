@@ -1,0 +1,4 @@
+
+<% alces.groups do |group| -%>
+<%= group.answers.genders_host_range %>    <%= group.name %>,<%= group.answers.genders_additional_groups %>
+<% end %>
