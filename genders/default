@@ -1,0 +1,5 @@
+
+<% alces.groups do |group| -%>
+<% additional_groups = group.answers.genders_additional_groups.empty? ? '' : ',' + group.answers.genders_additional_groups -%>
+<%= group.answers.genders_host_range %>    <%= group.name %><%= additional_groups %>
+<% end %>

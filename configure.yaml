@@ -1,0 +1,140 @@
+
+questions:
+  cluster_name: &cluster_name
+    question: 'Cluster name'
+
+  domain: &domain
+    question: 'Cluster domain'
+    default: '<%= cluster %>.cluster.local'
+
+  root_password: &root_password
+    question: 'Root user encrypted password'
+
+  root_ssh_key: &root_ssh_key
+    question: 'Root user SSH key'
+
+  genders_host_range: &genders_host_range
+    question: "Genders host range specifier for this group, e.g. 'node01,node[05-08]'"
+
+  genders_additional_groups: &genders_additional_groups
+    question: "Additional genders groups for this group, e.g. 'gpunodes,nodes'; the group being configured is the primary group"
+    optional: true
+
+  # Primary network.
+  pri_network_defined: &pri_network_defined
+    question: 'Setup primary network'
+    type: 'boolean'
+
+  pri_network_domain: &pri_network_domain
+    question: 'Domain for the primary network'
+    default: 'pri'
+
+  pri_network_ip: &pri_network_ip
+    question: 'IP for nodes on the primary network'
+    default: '10.10.<%= alces.group_index %>.<%= alces.index + 1 %>'
+
+  pri_network_netmask: &pri_network_netmask
+    question: 'Netmask for the primary network'
+    default: '255.255.255.0'
+
+  pri_network_interface: &pri_network_interface
+    question: 'Interface for the primary network'
+    default: 'eth0'
+
+  # Management network.
+  mgt_network_defined: &mgt_network_defined
+    question: 'Setup management network'
+    type: 'boolean'
+
+  mgt_network_domain: &mgt_network_domain
+    question: 'Domain for the management network'
+    default: 'mgt'
+
+  mgt_network_ip: &mgt_network_ip
+    question: 'IP for nodes on the management network'
+    default: '10.11.<%= alces.group_index %>.<%= alces.index + 1 %>'
+
+  mgt_network_netmask: &mgt_network_netmask
+    question: 'Netmask for the management network'
+    default: '255.255.255.0'
+
+  mgt_network_interface: &mgt_network_interface
+    question: 'Interface for the management network'
+    default: 'eth0'
+
+
+  # InfiniBand network.
+  ib_network_defined: &ib_network_defined
+    question: 'Setup InfiniBand network'
+    type: 'boolean'
+
+  ib_network_domain: &ib_network_domain
+    question: 'Domain for the InfiniBand network'
+    default: 'ib'
+
+  ib_network_ip: &ib_network_ip
+    question: 'IP for nodes on the InfiniBand network'
+    default: '10.12.<%= alces.group_index %>.<%= alces.index + 1 %>'
+
+  ib_network_netmask: &ib_network_netmask
+    question: 'Netmask for the InfiniBand network'
+    default: '255.255.255.0'
+
+  ib_network_interface: &ib_network_interface
+    question: 'Interface for the InfiniBand network'
+    default: 'eth2'
+
+
+domain:
+  cluster_name: *cluster_name
+  domain: *domain
+  root_password: *root_password
+  root_ssh_key: *root_ssh_key
+
+  pri_network_domain: *pri_network_domain
+  pri_network_ip: *pri_network_ip
+  pri_network_netmask: *pri_network_netmask
+  pri_network_interface: *pri_network_interface
+
+  mgt_network_domain: *mgt_network_domain
+  mgt_network_ip: *mgt_network_ip
+  mgt_network_netmask: *mgt_network_netmask
+  mgt_network_interface: *mgt_network_interface
+
+  ib_network_domain: *ib_network_domain
+  ib_network_ip: *ib_network_ip
+  ib_network_netmask: *ib_network_netmask
+  ib_network_interface: *ib_network_interface
+
+
+group:
+  genders_host_range: *genders_host_range
+  genders_additional_groups: *genders_additional_groups
+
+  pri_network_defined: *pri_network_defined
+  pri_network_ip: *pri_network_ip
+  pri_network_interface: *pri_network_interface
+
+  mgt_network_defined: *mgt_network_defined
+  mgt_network_ip: *mgt_network_ip
+  mgt_network_interface: *mgt_network_interface
+
+  ib_network_defined: *ib_network_defined
+  ib_network_ip: *ib_network_ip
+  ib_network_interface: *ib_network_interface
+
+
+node:
+  root_password: *root_password
+
+  pri_network_defined: *pri_network_defined
+  pri_network_ip: *pri_network_ip
+  pri_network_interface: *pri_network_interface
+
+  mgt_network_defined: *mgt_network_defined
+  mgt_network_ip: *mgt_network_ip
+  mgt_network_interface: *mgt_network_interface
+
+  ib_network_defined: *ib_network_defined
+  ib_network_ip: *ib_network_ip
+  ib_network_interface: *ib_network_interface
