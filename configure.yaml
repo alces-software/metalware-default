@@ -60,7 +60,7 @@ questions:
 
   mgt_network_interface: &mgt_network_interface
     question: 'Interface for the management network'
-    default: 'eth0'
+    default: 'eth1'
 
 
   # InfiniBand network.
