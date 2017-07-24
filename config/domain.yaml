@@ -9,7 +9,7 @@ ssh_key: '<%= alces.answers.root_ssh_key %>'
 
 # Generic networking properties.
 domain: <%= alces.answers.domain %>
-search_domains: "<%= alces.answers.pri_network_domain %>.<%= domain %> <%= alces.answers.mgt_network_domain %>.<%= domain %> <%= alces.answers.ib_network_domain %>.<%= domain %> <%= domain %>"
+search_domains: "<%= networks.pri.domain %>.<%= domain %> <%= networks.mgt.domain %>.<%= domain %> <%= networks.ib.domain %>.<%= domain %> <%= domain %>"
 externaldns: 10.101.0.1
 internaldns: <%= alces.hostip %>
 
@@ -19,7 +19,8 @@ networks:
     defined: <%= alces.answers.pri_network_defined %>
     interface: "<%= alces.answers.pri_network_interface %>"
     hostname: "<%= networks.pri.short_hostname %>.<%= domain %>"
-    short_hostname: "<%= alces.nodename %>.<%= alces.answers.pri_network_domain %>"
+    domain: "<%= alces.answers.pri_network_domain %>"
+    short_hostname: "<%= alces.nodename %>.<%= networks.pri.domain %>"
     ip: "<%= alces.answers.pri_network_ip %>"
     netmask: "<%= alces.answers.pri_network_netmask %>"
     network: 10.10.0.0
@@ -31,7 +32,8 @@ networks:
     defined: <%= alces.answers.mgt_network_defined %>
     interface: "<%= alces.answers.mgt_network_interface %>"
     hostname: "<%= networks.mgt.short_hostname %>.<%= domain %>"
-    short_hostname: "<%= alces.nodename %>.<%= alces.answers.mgt_network_domain %>"
+    domain: "<%= alces.answers.mgt_network_domain %>"
+    short_hostname: "<%= alces.nodename %>.<%= networks.mgt.domain %>"
     ip: "<%= alces.answers.mgt_network_ip %>"
     netmask: "<%= alces.answers.mgt_network_netmask %>"
     network: 10.11.0.0
@@ -43,7 +45,8 @@ networks:
     defined: <%= alces.answers.ib_network_defined %>
     interface: "<%= alces.answers.ib_network_interface %>"
     hostname: "<%= networks.ib.short_hostname %>.<%= domain %>"
-    short_hostname: "<%= alces.nodename %>.<%= alces.answers.ib_network_domain %>"
+    domain: "<%= alces.answers.ib_network_domain %>"
+    short_hostname: "<%= alces.nodename %>.<%= networks.ib.domain %>"
     ip: "<%= alces.answers.ib_network_ip %>"
     netmask: "<%= alces.answers.ib_network_netmask %>"
     network: 10.12.0.0
@@ -53,7 +56,7 @@ networks:
   bmc:
     defined: false
     interface: bmc
-    hostname: "<%= alces.nodename %>.bmc.<%= alces.answers.mgt_network_domain %>.<%= domain %>"
+    hostname: "<%= alces.nodename %>.bmc.<%= networks.mgt.domain %>.<%= domain %>"
     short_hostname: "<%= alces.nodename %>.bmc"
     ip: "10.11.200.<%= alces.index %>"
     netmask: 255.255.0.0
