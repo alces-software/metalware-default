@@ -26,6 +26,15 @@ curl "<%= file.url %>" > "$CORE_DIR/<%= file.name %>"
   <% end %>
 <% end %>
 
+echo
+echo 'Running platform setup scripts:'
+<% alces.files.platform.each do |script| %>
+  <% if script.error %>
+echo '<%= script.name %>: <%= script.error %>'
+  <% else %>
+curl "<%= script.url %>" | /bin/bash
+  <% end %>
+<% end %>
 
 echo
 echo 'Running user setup scripts:'
