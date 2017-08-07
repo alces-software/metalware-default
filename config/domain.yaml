@@ -107,6 +107,10 @@ disksetup: |
 bond0_options: 'mode=1 primary=p3p2 miimon=80'
 bond0_interfaces: 'em1 em2 p3p2' # XXX Needed?
 
+templates:
+  kickstart: <%= alces.answers.kickstart_template %>
+  pxelinux: <%= alces.answers.pxelinux_template %>
+
 files:
   platform:
     - /opt/alces/install/scripts/aws.sh

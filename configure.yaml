@@ -20,6 +20,14 @@ questions:
     question: "Additional genders groups for this group, e.g. 'gpunodes,nodes'; the group being configured is the primary group"
     optional: true
 
+  kickstart_template: &kickstart_template
+    question: 'Kickstart template to use'
+    default: 'default'
+
+  pxelinux_template: &pxelinux_template
+    question: 'PXELINUX template to use'
+    default: 'default'
+
   # Primary network.
   pri_network_defined: &pri_network_defined
     question: 'Setup primary network'
@@ -111,6 +119,9 @@ group:
   genders_host_range: *genders_host_range
   genders_additional_groups: *genders_additional_groups
 
+  kickstart_template: *kickstart_template
+  pxelinux_template: *pxelinux_template
+
   pri_network_defined: *pri_network_defined
   pri_network_ip: *pri_network_ip
   pri_network_interface: *pri_network_interface
@@ -126,6 +137,9 @@ group:
 
 node:
   root_password: *root_password
+
+  kickstart_template: *kickstart_template
+  pxelinux_template: *pxelinux_template
 
   pri_network_defined: *pri_network_defined
   pri_network_ip: *pri_network_ip
