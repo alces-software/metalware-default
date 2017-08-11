@@ -1,0 +1,31 @@
+<% networks.each do |zone, net| -%>
+cat << EOF > /var/named/<%= zone %>.<%= domain %>
+\$TTL 300
+@                       IN      SOA     <%=alces.hostip%>. nobody.example.com. (
+                                        <%= Time.now.to_i %>   ; Serial
+                                        600         ; Refresh
+                                        1800         ; Retry
+                                        604800       ; Expire
+                                        300          ; TTL
+                                        )
+
+                        IN      NS      <%= alces.hostip %>.
+@       IN MX   <%= networks[zone].network.split(/\./).first %>  <%= networks[zone].hostname %>.
+
+IN NS <%= alces.hostip %>.
+
+<%     alces.groups do |group| -%>
+<%         group.nodes do |node| -%>
+<%             node.networks.each do |name, network| -%>
+<%                 if network.defined -%>
+<%                     if name.to_s == zone.to_s -%>
+<%= node.alces.nodename %> IN A <%= network.ip %>;
+<%                     end -%>
+<%                 end -%>
+<%             end -%>
+<%         end -%>
+<%     end -%>
+
+EOF
+
+<% end -%>

@@ -1,0 +1,19 @@
+<% networks.each do |zone, net| -%>
+<%     if net.defined -%>
+zone "<%= zone %>.<%= domain %>." {
+    type master;
+    file "<%= zone %>.<%= domain %>";
+};
+<%     end -%>
+<% end -%>
+
+<% networks.each do |zone, net| -%>
+<%     if net.defined -%>
+<%         next if zone.to_s == 'bmc' -%>
+<%         split_net = net.network.split(/\./) -%>
+zone "<%= split_net[1] %>.<%= split_net[0] %>.in-addr.arpa." {
+    type master;
+    file "<%= split_net[1] %>.<%= split_net[0] %>";
+};
+<%     end -%>
+<% end -%>
