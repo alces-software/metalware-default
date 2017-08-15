@@ -2,7 +2,7 @@
 <%     if net.defined -%>
 zone "<%= zone %>.<%= domain %>." {
     type master;
-    file "<%= zone %>.<%= domain %>";
+    file "<%= alces_named.net.named_fwd_zone %>";
 };
 <%     end -%>
 <% end -%>
@@ -13,7 +13,7 @@ zone "<%= zone %>.<%= domain %>." {
 <%         split_net = net.network.split(/\./) -%>
 zone "<%= split_net[1] %>.<%= split_net[0] %>.in-addr.arpa." {
     type master;
-    file "<%= split_net[1] %>.<%= split_net[0] %>";
+    file "<%= alces_named.net.named_rev_zone %>";
 };
 <%     end -%>
 <% end -%>

@@ -27,6 +27,8 @@ networks:
     gateway: 10.10.0.11
     type:
     primary: true
+    named_fwd_zone: "<%= networks.pri.domain %>.<%= domain %>"
+    named_rev_zone: "<% split_net = networks.pri.network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>"
 
   mgt:
     defined: <%= alces.answers.mgt_network_defined %>
@@ -40,6 +42,8 @@ networks:
     gateway:
     type:
     slave_interfaces: 'em3'
+    named_fwd_zone: "<%= networks.mgt.domain %>.<%= domain %>"
+    named_rev_zone: "<% split_net = networks.mgt.network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>"
 
   ib:
     defined: <%= alces.answers.ib_network_defined %>
@@ -52,6 +56,8 @@ networks:
     network: 10.12.0.0
     gateway:
     type:
+    named_fwd_zone: "<%= networks.ib.domain %>.<%= domain %>"
+    named_rev_zone: "<% split_net = networks.ib.network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>"
 
   bmc:
     defined: false
@@ -65,6 +71,7 @@ networks:
     bmcpassword: 'Pa55Word'
     bmcchannel: 1
     bmcuser: 2
+    named_fwd_zone: "<%= networks.bmc.domain %>.<%= domain %>"
 
 disksetup: |
   zerombr
