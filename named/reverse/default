@@ -1,5 +1,4 @@
-<% split_net = alces_named.net.network.split(/\./) -%>
-\$TTL 300
+$TTL 300
 @                       IN      SOA     <%=alces.hostip%>. nobody.example.com. (
                                         <%= Time.now.to_i %>   ; Serial
                                         600         ; Refresh
