@@ -18,7 +18,7 @@ questions:
 
   genders_additional_groups: &genders_additional_groups
     question: "Additional genders groups for this group, e.g. 'gpunodes,nodes'; the group being configured is the primary group"
-    optional: true
+    default: ''
 
   kickstart_template: &kickstart_template
     question: 'Kickstart template to use'
