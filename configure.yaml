@@ -39,7 +39,7 @@ questions:
 
   pri_network_ip: &pri_network_ip
     question: 'IP for nodes on the primary network'
-    default: '10.10.<%= alces.group_index %>.<%= alces.index + 1 %>'
+    default: '10.10.<%= alces.group_index %>.<%= alces.index %>'
 
   pri_network_netmask: &pri_network_netmask
     question: 'Netmask for the primary network'
@@ -60,7 +60,7 @@ questions:
 
   mgt_network_ip: &mgt_network_ip
     question: 'IP for nodes on the management network'
-    default: '10.11.<%= alces.group_index %>.<%= alces.index + 1 %>'
+    default: '10.11.<%= alces.group_index %>.<%= alces.index %>'
 
   mgt_network_netmask: &mgt_network_netmask
     question: 'Netmask for the management network'
@@ -82,7 +82,7 @@ questions:
 
   ib_network_ip: &ib_network_ip
     question: 'IP for nodes on the InfiniBand network'
-    default: '10.12.<%= alces.group_index %>.<%= alces.index + 1 %>'
+    default: '10.12.<%= alces.group_index %>.<%= alces.index %>'
 
   ib_network_netmask: &ib_network_netmask
     question: 'Netmask for the InfiniBand network'
