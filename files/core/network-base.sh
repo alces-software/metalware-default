@@ -11,14 +11,14 @@ echo "<%= networks.pri.hostname %>" > /etc/hostname
 
 systemctl disable firewalld
 
-if ! [ "<%= profile %>" = "MASTER" ]; then
+#if ! [ "<%= profile %>" = "MASTER" ]; then
 cat << EOF > /etc/resolv.conf
 search <%= search_domains %>
 nameserver <%= internaldns %>
 EOF
-else
-cat << EOF > /etc/resolv.conf
-search <%= search_domains %>
-nameserver <%= externaldns %>
-EOF
-fi
+#else
+#cat << EOF > /etc/resolv.conf
+#search <%= search_domains %>
+#nameserver <%= externaldns %>
+#EOF
+#fi
