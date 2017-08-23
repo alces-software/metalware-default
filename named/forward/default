@@ -8,7 +8,7 @@ $TTL 300
                                         )
 
                         IN      NS      <%= alces.hostip %>.
-@       IN MX   <%= alces_named.net.network.split(/\./).first %>  <%= alces_named.net.hostname[1..-1] %>.
+@       IN MX   <%= alces.named.net.network.split(/\./).first %>  <%= alces.named.net.hostname[1..-1] %>.
 
 IN NS <%= alces.hostip %>.
 
@@ -16,7 +16,7 @@ IN NS <%= alces.hostip %>.
 <%         group.nodes do |node| -%>
 <%             node.networks.each do |name, network| -%>
 <%                 if network.defined -%>
-<%                     if name.to_s == alces_named.zone.to_s -%>
+<%                     if name.to_s == alces.named.zone.to_s -%>
 <%= node.alces.nodename %> IN A <%= network.ip %>;
 <%                     end -%>
 <%                 end -%>
