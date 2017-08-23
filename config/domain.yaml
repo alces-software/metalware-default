@@ -12,6 +12,8 @@ domain: <%= alces.answers.domain %>
 search_domains: "<%= networks.pri.domain %>.<%= domain %> <%= networks.mgt.domain %>.<%= domain %> <%= networks.ib.domain %>.<%= domain %> <%= domain %>"
 externaldns: 10.101.0.1
 internaldns: <%= alces.hostip %>
+kernelappendoptions: ""
+jobid: ""
 
 # Properties for specific networks.
 networks:
