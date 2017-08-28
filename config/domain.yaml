@@ -25,8 +25,8 @@ networks:
     short_hostname: "<%= alces.nodename %>.<%= networks.pri.domain %>"
     ip: "<%= alces.answers.pri_network_ip %>"
     netmask: "<%= alces.answers.pri_network_netmask %>"
-    network: 10.10.0.0
-    gateway: 10.10.0.11
+    network: "<%= alces.answers.pri_network_network %>"
+    gateway: 
     type:
     primary: true
     named_fwd_zone: "<%= networks.pri.domain %>.<%= domain %>"
@@ -40,10 +40,9 @@ networks:
     short_hostname: "<%= alces.nodename %>.<%= networks.mgt.domain %>"
     ip: "<%= alces.answers.mgt_network_ip %>"
     netmask: "<%= alces.answers.mgt_network_netmask %>"
-    network: 10.11.0.0
+    network: "<%= alces.answers.mgt_network_network %>"
     gateway:
     type:
-    slave_interfaces: 'em3'
     named_fwd_zone: "<%= networks.mgt.domain %>.<%= domain %>"
     named_rev_zone: <% split_net = networks.mgt.network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
 
@@ -55,22 +54,22 @@ networks:
     short_hostname: "<%= alces.nodename %>.<%= networks.ib.domain %>"
     ip: "<%= alces.answers.ib_network_ip %>"
     netmask: "<%= alces.answers.ib_network_netmask %>"
-    network: 10.12.0.0
+    network: "<%= alces.answers.ib_network_network %>"
     gateway:
     type:
     named_fwd_zone: "<%= networks.ib.domain %>.<%= domain %>"
     named_rev_zone: <% split_net = networks.ib.network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
 
   bmc:
-    defined: false
+    defined: <%= alces.answers.bmc_network_defined %>
     interface: bmc
     hostname: "<%= alces.nodename %>.bmc.<%= networks.mgt.domain %>.<%= domain %>"
     short_hostname: "<%= alces.nodename %>.bmc"
-    ip: "10.11.200.<%= alces.index %>"
-    netmask: 255.255.0.0
-    network: 10.11.0.0
+    ip: "<%= alces.answers.bmc_network_ip %>"
+    netmask: "<%= alces.answers.mgt_network_netmask %>"
+    network: "<%= alces.answers.mgt_network_network %>"
     gateway: 0.0.0.0
-    bmcpassword: 'Pa55Word'
+    bmcpassword: "<%= alces.answers.bmc_password %>"
     bmcchannel: 1
     bmcuser: 2
     named_fwd_zone: "<%= networks.bmc.domain %>.<%= domain %>"

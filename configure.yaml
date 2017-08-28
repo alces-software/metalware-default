@@ -45,6 +45,10 @@ questions:
     question: 'Netmask for the primary network'
     default: '255.255.0.0'
 
+  pri_network_network: &pri_network_network
+    question: 'Network IP for the primary network'
+    default: '10.10.0.0'
+
   pri_network_interface: &pri_network_interface
     question: 'Interface for the primary network'
     default: 'eth0'
@@ -66,10 +70,26 @@ questions:
     question: 'Netmask for the management network'
     default: '255.255.0.0'
 
+  mgt_network_network: &mgt_network_network
+    question: 'Network IP for the management network'
+    default: '10.11.0.0'
+
   mgt_network_interface: &mgt_network_interface
     question: 'Interface for the management network'
     default: 'eth1'
 
+  # BMC network
+  bmc_network_defined: &bmc_network_defined
+    question: 'Setup BMC management network'
+    type: 'boolean'
+
+  bmc_network_ip: &bmc_network_ip
+    question: 'IP for nodes on the bmc network'
+    default: '10.11.<%= alces.group_index.to_i + 100%>.<%= alces.index %>' 
+  
+  bmc_password: &bmc_password
+    question: 'Password for BMC device over LAN'
+    default: 'Pa55Word'
 
   # InfiniBand network.
   ib_network_defined: &ib_network_defined
@@ -88,6 +108,10 @@ questions:
     question: 'Netmask for the InfiniBand network'
     default: '255.255.0.0'
 
+  ib_network_network: &ib_network_network
+    question: 'Network IP for the InfiniBand network'
+    default: '10.12.0.0'
+
   ib_network_interface: &ib_network_interface
     question: 'Interface for the InfiniBand network'
     default: 'eth2'
@@ -102,16 +126,22 @@ domain:
   pri_network_domain: *pri_network_domain
   pri_network_ip: *pri_network_ip
   pri_network_netmask: *pri_network_netmask
+  pri_network_network: *pri_network_network
   pri_network_interface: *pri_network_interface
 
   mgt_network_domain: *mgt_network_domain
   mgt_network_ip: *mgt_network_ip
+  mgt_network_network: *mgt_network_network
   mgt_network_netmask: *mgt_network_netmask
   mgt_network_interface: *mgt_network_interface
+
+  bmc_network_ip: *bmc_network_ip
+  bmc_password: *bmc_password
 
   ib_network_domain: *ib_network_domain
   ib_network_ip: *ib_network_ip
   ib_network_netmask: *ib_network_netmask
+  ib_network_network: *ib_network_network
   ib_network_interface: *ib_network_interface
 
 
@@ -129,6 +159,10 @@ group:
   mgt_network_defined: *mgt_network_defined
   mgt_network_ip: *mgt_network_ip
   mgt_network_interface: *mgt_network_interface
+
+  bmc_network_defined: *bmc_network_defined
+  bmc_network_ip: *bmc_network_ip
+  bmc_password: *bmc_password
 
   ib_network_defined: *ib_network_defined
   ib_network_ip: *ib_network_ip
@@ -148,6 +182,10 @@ node:
   mgt_network_defined: *mgt_network_defined
   mgt_network_ip: *mgt_network_ip
   mgt_network_interface: *mgt_network_interface
+
+  bmc_network_defined: *bmc_network_defined
+  bmc_network_ip: *bmc_network_ip
+  bmc_password: *bmc_password
 
   ib_network_defined: *ib_network_defined
   ib_network_ip: *ib_network_ip
