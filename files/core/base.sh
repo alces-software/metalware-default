@@ -7,12 +7,6 @@ curl "<%= alces.hosts_url %>" > /etc/hosts
 
 yum -y install git vim emacs xauth xhost xdpyinfo xterm xclock tigervnc-server ntpdate wget vconfig bridge-utils patch tcl-devel gettext
 
-yum -y install ntp
-install_file ntp /etc/ntp.conf
-systemctl enable ntpd
-systemctl restart ntpd
-systemctl disable chronyd
-
 mkdir -m 0700 /root/.ssh
 install_file authorized_keys /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
