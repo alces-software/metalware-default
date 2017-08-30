@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+exec 1>/tmp/metalware-default-output 2>&1
+
+/bin/bash /var/lib/metalware/rendered/self/main.sh
+
+touch /var/lib/metalware/cache/built-nodes/metalwarebooter.self
