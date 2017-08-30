@@ -85,8 +85,8 @@ questions:
 
   bmc_network_ip: &bmc_network_ip
     question: 'IP for nodes on the bmc network'
-    default: '10.11.<%= alces.group_index.to_i + 100%>.<%= alces.index %>' 
-  
+    default: '10.11.<%= alces.group_index.to_i + 100%>.<%= alces.index %>'
+
   bmc_password: &bmc_password
     question: 'Password for BMC device over LAN'
     default: 'Pa55Word'

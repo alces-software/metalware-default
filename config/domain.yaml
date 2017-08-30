@@ -26,7 +26,7 @@ networks:
     ip: "<%= alces.answers.pri_network_ip %>"
     netmask: "<%= alces.answers.pri_network_netmask %>"
     network: "<%= alces.answers.pri_network_network %>"
-    gateway: 
+    gateway:
     type:
     primary: true
     named_fwd_zone: "<%= networks.pri.domain %>.<%= domain %>"
