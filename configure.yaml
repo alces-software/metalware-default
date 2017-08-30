@@ -13,6 +13,14 @@ questions:
   root_ssh_key: &root_ssh_key
     question: 'Root user SSH key'
 
+  dns_type: &dns_type
+    question: 'DNS type to use for cluster'
+    default: hosts
+    type: choice
+    choices:
+      - hosts
+      - named
+
   genders_host_range: &genders_host_range
     question: "Genders host range specifier for this group, e.g. 'node01,node[05-08]'"
 
@@ -122,6 +130,7 @@ domain:
   domain: *domain
   root_password: *root_password
   root_ssh_key: *root_ssh_key
+  dns_type: *dns_type
 
   pri_network_domain: *pri_network_domain
   pri_network_ip: *pri_network_ip
