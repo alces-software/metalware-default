@@ -1,2 +1,21 @@
-
-build_method: basic
+networks:
+  pri:
+    ip: <%= alces.answers.pri_network_ip %>
+    short_hostname: <%= alces.answers.pri_network_hostname %>
+build_method: self
+files:
+  setup:
+    - setup/xinetd.sh
+    - setup/dhcp.sh
+    - setup/http.sh
+    - setup/repo.sh
+  main:
+    - setup/main.sh
+  core:
+    - core/network-base.sh
+    - core/network-ipmi.sh
+    - core/network-join.sh
+    - core/networking.sh
+    - core/configs/authorized_keys
+build:
+  pxeboot_path: /var/lib/tftpboot/boot
