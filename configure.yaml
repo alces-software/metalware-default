@@ -61,6 +61,10 @@ questions:
     question: 'Interface for the primary network'
     default: 'eth0'
 
+  pri_network_short_hostname: &pri_network_short_hostname
+    question: 'Hostname for node'
+    default: 'controller.<%= networks.pri.domain %>'
+
   # Management network.
   mgt_network_defined: &mgt_network_defined
     question: 'Setup management network'
@@ -199,3 +203,8 @@ node:
   ib_network_defined: *ib_network_defined
   ib_network_ip: *ib_network_ip
   ib_network_interface: *ib_network_interface
+
+self:
+  pri_network_ip: *pri_network_ip
+  pri_network_short_hostname: *pri_network_short_hostname
+
