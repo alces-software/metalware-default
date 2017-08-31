@@ -1,7 +1,7 @@
 networks:
   pri:
     ip: <%= alces.answers.pri_network_ip %>
-    short_hostname: <%= alces.answers.pri_network_hostname %>
+    short_hostname: <%= alces.answers.pri_network_short_hostname %>
 build_method: self
 files:
   setup:
@@ -19,3 +19,5 @@ files:
     - core/configs/authorized_keys
 build:
   pxeboot_path: /var/lib/tftpboot/boot
+ntp:
+  is_server: true
