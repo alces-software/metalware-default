@@ -1,4 +1,4 @@
-yum -y install tftp xinetd tftp-server syslinux syslinux-tftpboot
+yum -y install tftp xinetd tftp-server syslinux syslinux-tftpboot php
 
 mkdir -p <%= build.pxeboot_path %>
 curl http://mirror.ox.ac.uk/sites/mirror.centos.org/7/os/x86_64/images/pxeboot/initrd.img > "<%= build.pxeboot_path %>/centos7-initrd.img"
