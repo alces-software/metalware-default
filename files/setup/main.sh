@@ -1,7 +1,7 @@
 echo "Running main.sh on <%= alces.nodename %> at $(date)!"
 
 
-export CORE_DIR=/var/lib/metalware/rendered/self/
+export CORE_DIR=/var/lib/metalware/rendered/self/core/
 #mkdir -p "$CORE_DIR"
 
 run_script() {
@@ -17,12 +17,12 @@ export -f install_file
 echo
 
 echo 'Running platform setup scripts:'
-for script in $CORE_DIR/platform ; do
+for script in $CORE_DIR/../platform/* ; do
     bash $script
 done
 
 echo 'Running user setup scripts:'
-for script in $CORE_DIR/setup ; do
+for script in $CORE_DIR/../setup/* ; do
     bash $script
 done
 
@@ -31,6 +31,6 @@ run_script base
 run_script networking
 
 echo 'Running user scripts:'
-for script in $CORE_DIR/scripts ; do
+for script in $CORE_DIR/../scripts/* ; do
     bash $script
 done
