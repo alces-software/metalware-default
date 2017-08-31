@@ -62,13 +62,6 @@ allow <%= networks.pri.network %>/<% require 'ipaddr'; netmask=IPAddr.new(networ
 EOF
 <% else -%>
 cat << EOF > /etc/chrony.conf
-tinker panic 0
-
-restrict default kod nomodify notrap nopeer noquery
-restrict -6 default kod nomodify notrap nopeer noquery
-restrict 127.0.0.1
-restrict -6 ::1
-
 server <%= ntp.server %> iburst
 server 0.centos.pool.ntp.org iburst
 server 1.centos.pool.ntp.org iburst
