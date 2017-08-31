@@ -42,5 +42,7 @@ subnet <%= networks.pri.network %> netmask <%= networks.pri.netmask %> {
 }
 EOF
 
+touch /etc/dhcp/dhcpd.hosts
+
 systemctl enable dhcpd
 systemctl restart dhcpd
