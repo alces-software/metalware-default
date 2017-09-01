@@ -196,6 +196,12 @@ node:
   ib_network_interface: *ib_network_interface
 
 self:
+  pri_network_defined: *pri_network_defined
   pri_network_ip: *pri_network_ip
   pri_network_short_hostname: *pri_network_short_hostname
 
+  mgt_network_defined: *mgt_network_defined
+
+  bmc_network_defined: *bmc_network_defined
+
+  ib_network_defined: *ib_network_defined
