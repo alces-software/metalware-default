@@ -39,6 +39,15 @@ subnet <%= networks.pri.network %> netmask <%= networks.pri.netmask %> {
 
   option subnet-mask <%= networks.pri.netmask %>;
   option routers <%= networks.pri.ip %>;
+  class "pxeclients" {
+          match if substring (option vendor-class-identifier, 0, 9) = "PXEClient";
+          if option arch = 00:07 {
+                          filename "efi/grubx64.efi";
+                  } else {
+                          filename "pxelinux.0";
+                  }
+        }
+
 }
 EOF
 
