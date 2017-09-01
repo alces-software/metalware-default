@@ -1,7 +1,14 @@
 networks:
   pri:
+    defined: <%= alces.answers.pri_network_defined %>
     ip: <%= alces.answers.pri_network_ip %>
     short_hostname: <%= alces.answers.pri_network_short_hostname %>
+  mgt:
+    defined: <%= alces.answers.mgt_network_defined %>
+  bmc:
+    defined: <%= alces.answers.bmc_network_defined %>
+  ib:
+    defined: <%= alces.answers.ib_network_defined %>
 build_method: self
 files:
   setup:
