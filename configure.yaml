@@ -7,6 +7,9 @@ questions:
     question: 'Cluster domain'
     default: '<%= cluster %>.cluster.local'
 
+  externaldns:
+    question: 'External DNS server IP'
+
   root_password: &root_password
     question: 'Root user encrypted password'
 
@@ -149,6 +152,7 @@ questions:
 domain:
   cluster_name: *cluster_name
   domain: *domain
+  externaldns: *externaldns
   root_password: *root_password
   root_ssh_key: *root_ssh_key
 
