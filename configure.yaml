@@ -249,3 +249,4 @@ self:
   ext_network_network: *ext_network_network
   ext_network_netmask: *ext_network_netmask
   ext_network_interface: *ext_network_interface
+  ext_network_gateway: *ext_network_gateway
