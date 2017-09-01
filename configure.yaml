@@ -148,6 +148,8 @@ questions:
     question: 'Interface for the external network'
     default: 'eth2'
 
+  ext_network_gateway: &ext_network_gateway
+    question: 'Gateway for the external network'
 
 domain:
   cluster_name: *cluster_name

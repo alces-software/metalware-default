@@ -21,11 +21,13 @@ networks:
     ip: <%= alces.answers.ext_network_ip %>
     network: <%= alces.answers.ext_network_network %>
     netmask: <%= alces.answers.ext_network_netmask %>
+    gateway: <%= alces.answers.ext_network_gateway %>
     interface: <%= alces.answers.ext_network_interface %>
     firewallpolicy: external
 build_method: self
 files:
   setup:
+    - setup/dns.sh
     - setup/xinetd.sh
     - setup/dhcp.sh
     - setup/http.sh
