@@ -126,6 +126,31 @@ questions:
 
   ib_network_interface: &ib_network_interface
     question: 'Interface for the InfiniBand network'
+    default: 'ib0'
+
+  # External network. (for self only)
+  ext_network_defined: &ext_network_defined
+    question: 'Setup external network'
+    type: 'boolean'
+
+  ext_network_domain: &ext_network_domain
+    question: 'Domain for the external network'
+    default: 'ext'
+
+  ext_network_ip: &ext_network_ip
+    question: 'IP for nodes on the external network'
+    default: '10.101.<%= alces.group_index %>.<%= alces.index %>'
+
+  ext_network_netmask: &ext_network_netmask
+    question: 'Netmask for the external network'
+    default: '255.255.0.0'
+
+  ext_network_network: &ext_network_network
+    question: 'Network IP for the external network'
+    default: '10.101.0.0'
+
+  ext_network_interface: &ext_network_interface
+    question: 'Interface for the external network'
     default: 'eth2'
 
 
@@ -214,3 +239,10 @@ self:
   bmc_network_defined: *bmc_network_defined
 
   ib_network_defined: *ib_network_defined
+
+  ext_network_defined: *ext_network_defined
+  ext_network_domain: *ext_network_domain
+  ext_network_ip: *ext_network_ip
+  ext_network_network: *ext_network_network
+  ext_network_netmask: *ext_network_netmask
+  ext_network_interface: *ext_network_interface
