@@ -4,7 +4,6 @@ host <%= hostname %> {
   hardware ethernet <%= mac_address %>;
   option host-name "<%= hostname %>.<%= networks.pri.domain %>.<%= domain %>";
   option routers <%= alces.hostip %>;
-  filename "/pxelinux.0";
   fixed-address <%= `gethostip -d #{hostname}`.chomp %>;
 }
 <% end %>
