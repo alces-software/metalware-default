@@ -9,6 +9,14 @@ networks:
     defined: <%= alces.answers.bmc_network_defined %>
   ib:
     defined: <%= alces.answers.ib_network_defined %>
+  ext:
+    defined: <%= alces.answers.ext_network_defined %>
+    domain: <%= alces.answers.ext_network_domain %>
+    ip: <%= alces.answers.ext_network_ip %>
+    network: <%= alces.answers.ext_network_network %>
+    netmask: <%= alces.answers.ext_network_netmask %>
+    interface: <%= alces.answers.ext_network_interface %>
+    firewallpolicy: external
 build_method: self
 files:
   setup:
