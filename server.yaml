@@ -1,3 +1,3 @@
 
 # Interface to build cluster on.
-build_interface: "<%= networks.pri.interface %>"
+build_interface: "eth0"
