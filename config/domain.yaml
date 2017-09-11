@@ -76,7 +76,7 @@ networks:
     bmcpassword: "<%= alces.answers.bmc_password %>"
     bmcchannel: 1
     bmcuser: 2
-    named_fwd_zone: "<%= networks.bmc.domain %>.<%= domain %>"
+    named_fwd_zone: "bmc.<%= domain %>"
     firewallpolicy: management
 
 disksetup: |
