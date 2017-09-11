@@ -7,7 +7,7 @@ questions:
     question: 'Cluster domain'
     default: '<%= cluster %>.cluster.local'
 
-  externaldns:
+  externaldns: &externaldns
     question: 'External DNS server IP'
 
   root_password: &root_password
