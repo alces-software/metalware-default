@@ -1,22 +1,28 @@
 
 questions:
-  cluster_name: &cluster_name
+  - &cluster_name
+    identifier: cluster_name
     question: 'Cluster name'
 
-  domain: &domain
+  - &domain
+    identifier: domain
     question: 'Cluster domain'
     default: '<%= cluster %>.cluster.local'
 
-  externaldns: &externaldns
+  - &externaldns
+    identifier: externaldns
     question: 'External DNS server IP'
 
-  root_password: &root_password
+  - &root_password
+    identifier: root_password
     question: 'Root user encrypted password'
 
-  root_ssh_key: &root_ssh_key
+  - &root_ssh_key
+    identifier: root_ssh_key
     question: 'Root user SSH key'
 
-  dns_type: &dns_type
+  - &dns_type
+    identifier: dns_type
     question: 'DNS type to use for cluster'
     default: hosts
     type: choice
@@ -24,238 +30,271 @@ questions:
       - hosts
       - named
 
-  genders_host_range: &genders_host_range
+  - &genders_host_range
+    identifier: genders_host_range
     question: "Genders host range specifier for this group, e.g. 'node01,node[05-08]'"
 
-  genders_additional_groups: &genders_additional_groups
+  - &genders_additional_groups
+    identifier: genders_additional_groups
     question: "Additional genders groups for this group, e.g. 'gpunodes,nodes'; the group being configured is the primary group"
     default: ''
 
-  kickstart_template: &kickstart_template
+  - &kickstart_template
+    identifier: kickstart_template
     question: 'Kickstart template to use'
     default: 'default'
 
-  pxelinux_template: &pxelinux_template
+  - &pxelinux_template
+    identifier: pxelinux_template
     question: 'PXELINUX template to use'
     default: 'default'
 
   # Primary network.
-  pri_network_defined: &pri_network_defined
+  - &pri_network_defined
+    identifier: pri_network_defined
     question: 'Setup primary network'
     type: 'boolean'
 
-  pri_network_domain: &pri_network_domain
+  - &pri_network_domain
+    identifier: pri_network_domain
     question: 'Domain for the primary network'
     default: 'pri'
 
-  pri_network_ip: &pri_network_ip
+  - &pri_network_ip
+    identifier: pri_network_ip
     question: 'IP for nodes on the primary network'
     default: '10.10.<%= alces.group_index %>.<%= alces.index %>'
 
-  pri_network_netmask: &pri_network_netmask
+  - &pri_network_netmask
+    identifier: pri_network_netmask
     question: 'Netmask for the primary network'
     default: '255.255.0.0'
 
-  pri_network_network: &pri_network_network
+  - &pri_network_network
+    identifier: pri_network_network
     question: 'Network IP for the primary network'
     default: '10.10.0.0'
 
-  pri_network_interface: &pri_network_interface
+  - &pri_network_interface
+    identifier: pri_network_interface
     question: 'Interface for the primary network'
     default: 'eth0'
 
-  pri_network_short_hostname: &pri_network_short_hostname
+  - &pri_network_short_hostname
+    identifier: pri_network_short_hostname
     question: 'Hostname for node'
     default: 'controller.<%= networks.pri.domain %>'
 
   # Management network.
-  mgt_network_defined: &mgt_network_defined
+  - &mgt_network_define
+    identifier: mgt_network_defined
     question: 'Setup management network'
     type: 'boolean'
 
-  mgt_network_domain: &mgt_network_domain
+  - &mgt_network_domain
+    identifier: mgt_network_domain
     question: 'Domain for the management network'
     default: 'mgt'
 
-  mgt_network_ip: &mgt_network_ip
+  - &mgt_network_ip
+    identifier: mgt_network_ip
     question: 'IP for nodes on the management network'
     default: '10.11.<%= alces.group_index %>.<%= alces.index %>'
 
-  mgt_network_netmask: &mgt_network_netmask
+  - &mgt_network_netmask
+    identifier: mgt_network_netmask
     question: 'Netmask for the management network'
     default: '255.255.0.0'
 
-  mgt_network_network: &mgt_network_network
+  - &mgt_network_network
+    identifier: mgt_network_network
     question: 'Network IP for the management network'
     default: '10.11.0.0'
 
-  mgt_network_interface: &mgt_network_interface
+  - &mgt_network_interface
+    identifier: mgt_network_interface
     question: 'Interface for the management network'
     default: 'eth1'
 
   # BMC network
-  bmc_network_defined: &bmc_network_defined
+  - &bmc_network_defined
+    identifier: bmc_network_defined
     question: 'Setup BMC management network'
     type: 'boolean'
 
-  bmc_network_ip: &bmc_network_ip
+  - &bmc_network_ip
+    identifier: bmc_network_ip
     question: 'IP for nodes on the bmc network'
     default: '10.11.<%= alces.group_index.to_i + 100%>.<%= alces.index %>'
 
-  bmc_password: &bmc_password
+  - &bmc_password
+    identifier: bmc_password
     question: 'Password for BMC device over LAN'
     default: 'Pa55Word'
 
   # InfiniBand network.
-  ib_network_defined: &ib_network_defined
+  - &ib_network_defined
+    identifier: ib_network_defined
     question: 'Setup InfiniBand network'
     type: 'boolean'
 
-  ib_network_domain: &ib_network_domain
+  - &ib_network_domain
+    identifier: ib_network_domain
     question: 'Domain for the InfiniBand network'
     default: 'ib'
 
-  ib_network_ip: &ib_network_ip
+  - &ib_network_ip
+    identifier: ib_network_ip
     question: 'IP for nodes on the InfiniBand network'
     default: '10.12.<%= alces.group_index %>.<%= alces.index %>'
 
-  ib_network_netmask: &ib_network_netmask
+  - &ib_network_netmask
+    identifier: ib_network_netmask
     question: 'Netmask for the InfiniBand network'
     default: '255.255.0.0'
 
-  ib_network_network: &ib_network_network
+  - &ib_network_network
+    identifier: ib_network_network
     question: 'Network IP for the InfiniBand network'
     default: '10.12.0.0'
 
-  ib_network_interface: &ib_network_interface
+  - &ib_network_interface
+    identifier: ib_network_interface
     question: 'Interface for the InfiniBand network'
     default: 'ib0'
 
   # External network. (for self only)
-  ext_network_defined: &ext_network_defined
+  - &ext_network_defined
+    identifier: ext_network_defined
     question: 'Setup external network'
     type: 'boolean'
 
-  ext_network_domain: &ext_network_domain
+  - &ext_network_domain
+    identifier: ext_network_domain
     question: 'Domain for the external network'
     default: 'ext'
 
-  ext_network_ip: &ext_network_ip
+  - &ext_network_ip
+    identifier: ext_network_ip
     question: 'IP for nodes on the external network'
     default: '10.101.<%= alces.group_index %>.<%= alces.index %>'
 
-  ext_network_netmask: &ext_network_netmask
+  - &ext_network_netmask
+    identifier: ext_network_netmask
     question: 'Netmask for the external network'
     default: '255.255.0.0'
 
-  ext_network_network: &ext_network_network
+  - &ext_network_network
+    identifier: ext_network_network
     question: 'Network IP for the external network'
     default: '10.101.0.0'
 
-  ext_network_interface: &ext_network_interface
+  - &ext_network_interface
+    identifier: ext_network_interface
     question: 'Interface for the external network'
     default: 'eth2'
 
-  ext_network_gateway: &ext_network_gateway
+  - &ext_network_gateway
+    identifier: ext_network_gateway
     question: 'Gateway for the external network'
 
 domain:
-  cluster_name: *cluster_name
-  domain: *domain
-  externaldns: *externaldns
-  root_password: *root_password
-  root_ssh_key: *root_ssh_key
-  dns_type: *dns_type
+  - *cluster_name
+  - *domain
+  - *externaldns
+  - *root_password
+  - *root_ssh_key
+  - *dns_type
 
-  pri_network_domain: *pri_network_domain
-  pri_network_ip: *pri_network_ip
-  pri_network_netmask: *pri_network_netmask
-  pri_network_network: *pri_network_network
-  pri_network_interface: *pri_network_interface
+  - *pri_network_domain
+  - *pri_network_ip
+  - *pri_network_netmask
+  - *pri_network_network
+  - *pri_network_interface
 
-  mgt_network_domain: *mgt_network_domain
-  mgt_network_ip: *mgt_network_ip
-  mgt_network_network: *mgt_network_network
-  mgt_network_netmask: *mgt_network_netmask
-  mgt_network_interface: *mgt_network_interface
+  - *mgt_network_domain
+  - *mgt_network_ip
+  - *mgt_network_network
+  - *mgt_network_netmask
+  - *mgt_network_interface
 
-  bmc_network_ip: *bmc_network_ip
-  bmc_password: *bmc_password
+  - *bmc_network_ip
+  - *bmc_password
 
-  ib_network_domain: *ib_network_domain
-  ib_network_ip: *ib_network_ip
-  ib_network_netmask: *ib_network_netmask
-  ib_network_network: *ib_network_network
-  ib_network_interface: *ib_network_interface
+  - *ib_network_domain
+  - *ib_network_ip
+  - *ib_network_netmask
+  - *ib_network_network
+  - *ib_network_interface
 
 
 group:
-  genders_host_range: *genders_host_range
-  genders_additional_groups: *genders_additional_groups
+  - *genders_host_range
+  - *genders_additional_groups
 
-  kickstart_template: *kickstart_template
-  pxelinux_template: *pxelinux_template
+  - *kickstart_template
+  - *pxelinux_template
 
-  pri_network_defined: *pri_network_defined
-  pri_network_ip: *pri_network_ip
-  pri_network_interface: *pri_network_interface
+  - *pri_network_defined
+  - *pri_network_ip
+  - *pri_network_interface
 
-  mgt_network_defined: *mgt_network_defined
-  mgt_network_ip: *mgt_network_ip
-  mgt_network_interface: *mgt_network_interface
+  - *mgt_network_defined
+  - *mgt_network_ip
+  - *mgt_network_interface
 
-  bmc_network_defined: *bmc_network_defined
-  bmc_network_ip: *bmc_network_ip
-  bmc_password: *bmc_password
+  - *bmc_network_defined
+  - *bmc_network_ip
+  - *bmc_password
 
-  ib_network_defined: *ib_network_defined
-  ib_network_ip: *ib_network_ip
-  ib_network_interface: *ib_network_interface
+  - *ib_network_defined
+  - *ib_network_ip
+  - *ib_network_interface
 
 
 node:
-  root_password: *root_password
+  - *root_password
 
-  kickstart_template: *kickstart_template
-  pxelinux_template: *pxelinux_template
+  - *kickstart_template
+  - *pxelinux_template
 
-  pri_network_defined: *pri_network_defined
-  pri_network_ip: *pri_network_ip
-  pri_network_interface: *pri_network_interface
+  - *pri_network_defined
+  - *pri_network_ip
+  - *pri_network_interface
 
-  mgt_network_defined: *mgt_network_defined
-  mgt_network_ip: *mgt_network_ip
-  mgt_network_interface: *mgt_network_interface
+  - *mgt_network_defined
+  - *mgt_network_ip
+  - *mgt_network_interface
 
-  bmc_network_defined: *bmc_network_defined
-  bmc_network_ip: *bmc_network_ip
-  bmc_password: *bmc_password
+  - *bmc_network_defined
+  - *bmc_network_ip
+  - *bmc_password
 
-  ib_network_defined: *ib_network_defined
-  ib_network_ip: *ib_network_ip
-  ib_network_interface: *ib_network_interface
+  - *ib_network_defined
+  - *ib_network_ip
+  - *ib_network_interface
 
 self:
-  pri_network_defined: *pri_network_defined
-  pri_network_ip: *pri_network_ip
-  pri_network_short_hostname: *pri_network_short_hostname
+  - *pri_network_defined
+  - *pri_network_ip
+  - *pri_network_short_hostname
 
-  mgt_network_defined: *mgt_network_defined
-  mgt_network_ip: *mgt_network_ip
-  mgt_network_interface: *mgt_network_interface
+  - *mgt_network_defined
+  - *mgt_network_ip
+  - *mgt_network_interface
 
-  bmc_network_defined: *bmc_network_defined
-  bmc_network_ip: *bmc_network_ip
-  bmc_password: *bmc_password
+  - *bmc_network_defined
+  - *bmc_network_ip
+  - *bmc_password
 
-  ib_network_defined: *ib_network_defined
-  ib_network_ip: *ib_network_ip
-  ib_network_interface: *ib_network_interface
+  - *ib_network_defined
+  - *ib_network_ip
+  - *ib_network_interface
 
-  ext_network_defined: *ext_network_defined
-  ext_network_domain: *ext_network_domain
-  ext_network_ip: *ext_network_ip
-  ext_network_network: *ext_network_network
-  ext_network_netmask: *ext_network_netmask
-  ext_network_interface: *ext_network_interface
-  ext_network_gateway: *ext_network_gateway
+  - *ext_network_defined
+  - *ext_network_domain
+  - *ext_network_ip
+  - *ext_network_network
+  - *ext_network_netmask
+  - *ext_network_interface
+  - *ext_network_gateway
