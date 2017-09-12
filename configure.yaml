@@ -24,11 +24,10 @@ questions:
   - &dns_type
     identifier: dns_type
     question: 'DNS type to use for cluster'
-    default: hosts
-    type: choice
+    default: 'hosts'
     choices:
-      - hosts
-      - named
+      - 'hosts'
+      - 'named'
 
   - &genders_host_range
     identifier: genders_host_range
@@ -86,7 +85,7 @@ questions:
     default: 'controller.<%= networks.pri.domain %>'
 
   # Management network.
-  - &mgt_network_define
+  - &mgt_network_defined
     identifier: mgt_network_defined
     question: 'Setup management network'
     type: 'boolean'
