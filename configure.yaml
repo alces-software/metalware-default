@@ -7,6 +7,9 @@ questions:
     question: 'Cluster domain'
     default: '<%= cluster %>.cluster.local'
 
+  externaldns: &externaldns
+    question: 'External DNS server IP'
+
   root_password: &root_password
     question: 'Root user encrypted password'
 
@@ -60,6 +63,10 @@ questions:
   pri_network_interface: &pri_network_interface
     question: 'Interface for the primary network'
     default: 'eth0'
+
+  pri_network_short_hostname: &pri_network_short_hostname
+    question: 'Hostname for node'
+    default: 'controller.<%= networks.pri.domain %>'
 
   # Management network.
   mgt_network_defined: &mgt_network_defined
@@ -122,12 +129,40 @@ questions:
 
   ib_network_interface: &ib_network_interface
     question: 'Interface for the InfiniBand network'
+    default: 'ib0'
+
+  # External network. (for self only)
+  ext_network_defined: &ext_network_defined
+    question: 'Setup external network'
+    type: 'boolean'
+
+  ext_network_domain: &ext_network_domain
+    question: 'Domain for the external network'
+    default: 'ext'
+
+  ext_network_ip: &ext_network_ip
+    question: 'IP for nodes on the external network'
+    default: '10.101.<%= alces.group_index %>.<%= alces.index %>'
+
+  ext_network_netmask: &ext_network_netmask
+    question: 'Netmask for the external network'
+    default: '255.255.0.0'
+
+  ext_network_network: &ext_network_network
+    question: 'Network IP for the external network'
+    default: '10.101.0.0'
+
+  ext_network_interface: &ext_network_interface
+    question: 'Interface for the external network'
     default: 'eth2'
 
+  ext_network_gateway: &ext_network_gateway
+    question: 'Gateway for the external network'
 
 domain:
   cluster_name: *cluster_name
   domain: *domain
+  externaldns: *externaldns
   root_password: *root_password
   root_ssh_key: *root_ssh_key
   dns_type: *dns_type
@@ -199,3 +234,28 @@ node:
   ib_network_defined: *ib_network_defined
   ib_network_ip: *ib_network_ip
   ib_network_interface: *ib_network_interface
+
+self:
+  pri_network_defined: *pri_network_defined
+  pri_network_ip: *pri_network_ip
+  pri_network_short_hostname: *pri_network_short_hostname
+
+  mgt_network_defined: *mgt_network_defined
+  mgt_network_ip: *mgt_network_ip
+  mgt_network_interface: *mgt_network_interface
+
+  bmc_network_defined: *bmc_network_defined
+  bmc_network_ip: *bmc_network_ip
+  bmc_password: *bmc_password
+
+  ib_network_defined: *ib_network_defined
+  ib_network_ip: *ib_network_ip
+  ib_network_interface: *ib_network_interface
+
+  ext_network_defined: *ext_network_defined
+  ext_network_domain: *ext_network_domain
+  ext_network_ip: *ext_network_ip
+  ext_network_network: *ext_network_network
+  ext_network_netmask: *ext_network_netmask
+  ext_network_interface: *ext_network_interface
+  ext_network_gateway: *ext_network_gateway
