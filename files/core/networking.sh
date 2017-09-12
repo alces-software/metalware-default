@@ -18,6 +18,7 @@ export GATEWAY="<%= network.gateway %>"
 export SLAVEINTERFACES="<%= slave_interfaces %>"
 #This is literally translated to the TYPE in redhat-sysconfig-network
 export TYPE="<%= network.type %>"
+export ZONE="<%= network.firewallpolicy %>"
 
 if [ "${INTERFACE}" == 'bmc' ]
 then

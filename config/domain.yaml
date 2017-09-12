@@ -10,7 +10,7 @@ ssh_key: '<%= alces.answers.root_ssh_key %>'
 # Generic networking properties.
 domain: <%= alces.answers.domain %>
 search_domains: "<%= networks.pri.domain %>.<%= domain %> <%= networks.mgt.domain %>.<%= domain %> <%= networks.ib.domain %>.<%= domain %> <%= domain %>"
-externaldns: 10.101.0.1
+externaldns: <%= alces.answers.externaldns %>
 internaldns: <%= alces.hostip %>
 kernelappendoptions: ""
 jobid: ""
@@ -31,6 +31,7 @@ networks:
     primary: true
     named_fwd_zone: "<%= networks.pri.domain %>.<%= domain %>"
     named_rev_zone: <% split_net = networks.pri.network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
+    firewallpolicy: internal
 
   mgt:
     defined: <%= alces.answers.mgt_network_defined %>
@@ -45,6 +46,7 @@ networks:
     type:
     named_fwd_zone: "<%= networks.mgt.domain %>.<%= domain %>"
     named_rev_zone: <% split_net = networks.mgt.network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
+    firewallpolicy: internal
 
   ib:
     defined: <%= alces.answers.ib_network_defined %>
@@ -59,6 +61,7 @@ networks:
     type:
     named_fwd_zone: "<%= networks.ib.domain %>.<%= domain %>"
     named_rev_zone: <% split_net = networks.ib.network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
+    firewallpolicy: internal
 
   bmc:
     defined: <%= alces.answers.bmc_network_defined %>
@@ -72,7 +75,8 @@ networks:
     bmcpassword: "<%= alces.answers.bmc_password %>"
     bmcchannel: 1
     bmcuser: 2
-    named_fwd_zone: "<%= networks.bmc.domain %>.<%= domain %>"
+    named_fwd_zone: "bmc.<%= domain %>"
+    firewallpolicy: management
 
 disksetup: |
   zerombr
@@ -142,3 +146,16 @@ files:
     - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
     - non-existent-local-script.sh
     - http://example.com/non-existent-remote-script.sh
+
+ntp:
+  is_server: false
+  server: controller.<%= networks.pri.domain %>.<%= domain %>
+
+firewall:
+  enabled: true
+  internal:
+    services: 'ssh http dhcp dns https mountd nfs ntp rpc-bind smtp syslog tftp tftp-client'
+  external:
+    services: 'ssh'
+  management:
+    services: 'ssh snmp'
