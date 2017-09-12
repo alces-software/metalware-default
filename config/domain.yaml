@@ -10,6 +10,7 @@ ssh_key: '<%= alces.answers.root_ssh_key %>'
 # Generic networking properties.
 domain: <%= alces.answers.domain %>
 search_domains: "<%= networks.pri.domain %>.<%= domain %> <%= networks.mgt.domain %>.<%= domain %> <%= networks.ib.domain %>.<%= domain %> <%= domain %>"
+dns_type: "<%= alces.answers.dns_type %>"
 externaldns: <%= alces.answers.externaldns %>
 internaldns: <%= alces.hostip %>
 kernelappendoptions: ""
@@ -26,7 +27,7 @@ networks:
     ip: "<%= alces.answers.pri_network_ip %>"
     netmask: "<%= alces.answers.pri_network_netmask %>"
     network: "<%= alces.answers.pri_network_network %>"
-    gateway: 
+    gateway:
     type:
     primary: true
     named_fwd_zone: "<%= networks.pri.domain %>.<%= domain %>"

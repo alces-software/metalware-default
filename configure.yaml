@@ -16,6 +16,14 @@ questions:
   root_ssh_key: &root_ssh_key
     question: 'Root user SSH key'
 
+  dns_type: &dns_type
+    question: 'DNS type to use for cluster'
+    default: hosts
+    type: choice
+    choices:
+      - hosts
+      - named
+
   genders_host_range: &genders_host_range
     question: "Genders host range specifier for this group, e.g. 'node01,node[05-08]'"
 
@@ -92,8 +100,8 @@ questions:
 
   bmc_network_ip: &bmc_network_ip
     question: 'IP for nodes on the bmc network'
-    default: '10.11.<%= alces.group_index.to_i + 100%>.<%= alces.index %>' 
-  
+    default: '10.11.<%= alces.group_index.to_i + 100%>.<%= alces.index %>'
+
   bmc_password: &bmc_password
     question: 'Password for BMC device over LAN'
     default: 'Pa55Word'
@@ -157,6 +165,7 @@ domain:
   externaldns: *externaldns
   root_password: *root_password
   root_ssh_key: *root_ssh_key
+  dns_type: *dns_type
 
   pri_network_domain: *pri_network_domain
   pri_network_ip: *pri_network_ip
