@@ -2,11 +2,11 @@
 questions:
   - &cluster_name
     identifier: cluster_name
-    question: 'Cluster name'
+    question: 'Name of the cluster'
 
   - &domain
     identifier: domain
-    question: 'Cluster domain'
+    question: 'Fully-qualified domain name for cluster nodes'
     default: '<%= cluster %>.cluster.local'
 
   - &externaldns
@@ -51,7 +51,7 @@ questions:
   # Primary network.
   - &pri_network_defined
     identifier: pri_network_defined
-    question: 'Setup primary network'
+    question: 'Setup primary network?'
     type: 'boolean'
 
   - &pri_network_domain
@@ -87,7 +87,7 @@ questions:
   # Management network.
   - &mgt_network_defined
     identifier: mgt_network_defined
-    question: 'Setup management network'
+    question: 'Setup management network?'
     type: 'boolean'
 
   - &mgt_network_domain
@@ -118,7 +118,7 @@ questions:
   # BMC network
   - &bmc_network_defined
     identifier: bmc_network_defined
-    question: 'Setup BMC management network'
+    question: 'Setup BMC management network?'
     type: 'boolean'
 
   - &bmc_network_ip
@@ -134,7 +134,7 @@ questions:
   # InfiniBand network.
   - &ib_network_defined
     identifier: ib_network_defined
-    question: 'Setup InfiniBand network'
+    question: 'Setup InfiniBand network?'
     type: 'boolean'
 
   - &ib_network_domain
@@ -165,7 +165,7 @@ questions:
   # External network. (for self only)
   - &ext_network_defined
     identifier: ext_network_defined
-    question: 'Setup external network'
+    question: 'Setup external network?'
     type: 'boolean'
 
   - &ext_network_domain
