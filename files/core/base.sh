@@ -75,7 +75,7 @@ systemctl enable chronyd
 
 # Syslog
 yum -y install rsyslog
-<% if networks.pri.ip == alces.hostip -%>
+<% if rsyslog.is_server -%>
 cat << EOF > /etc/rsyslog.d/metalware.conf
 \$template remoteMessage, "/var/log/slave/%FROMHOST%/messages.log"
 :fromhost-ip, !isequal, "127.0.0.1" ?remoteMessage
@@ -98,8 +98,11 @@ cat << EOF > /etc/logrotate.d/rsyslog-remote
     endscript
 }
 EOF
+firewall-cmd --add-port 514/udp --zone internal --permanent
+firewall-cmd --add-port 514/tcp --zone internal --permanent
+fiewall-cmd --reload
 <% else -%>
-echo '*.* @<%= alces.hostip %>:514' >> /etc/rsyslog.conf
+echo '*.* @<%= rsyslog.server %>:514' >> /etc/rsyslog.conf
 <% end -%>
 
 systemctl enable rsyslog

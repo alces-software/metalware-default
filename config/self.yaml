@@ -44,3 +44,5 @@ build:
   pxeboot_path: /var/lib/tftpboot/boot
 ntp:
   is_server: true
+rsyslog:
+  is_server: true
