@@ -152,6 +152,10 @@ ntp:
   is_server: false
   server: controller.<%= networks.pri.domain %>.<%= domain %>
 
+rsyslog:
+  is_server: false
+  server: controller.<%= networks.pri.domain %>.<%= domain %>
+
 firewall:
   enabled: true
   internal:
