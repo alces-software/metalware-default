@@ -197,6 +197,20 @@ questions:
     identifier: ext_network_gateway
     question: 'Gateway for the external network'
 
+  # Mail relay
+  - &mail_relay_defined
+    identifier: mail_relay_defined
+    question: 'Configure mail relay server?'
+
+  - &mail_relay_internal_server
+    identifier: mail_relay_internal_server
+    question: 'Server within cluster for clients to forward mail to'
+    default: controller.<%= networks.pri.domain %>.<%= domain %>
+
+  - &mail_relay_external_server
+    identifier: mail_relay_external_server
+    question: 'Server for the cluster mail server to forward to'
+
 domain:
   - *cluster_name
   - *domain

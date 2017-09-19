@@ -107,3 +107,84 @@ echo '*.* @<%= rsyslog.server %>:514' >> /etc/rsyslog.conf
 
 systemctl enable rsyslog
 systemctl restart rsyslog
+
+# Mail Relay
+<% if mailrelay.defined -%>
+yum -y install postfix mailx
+
+<%     if mailrelay.is_server -%>
+cat << EOF > /etc/postfix/main.cf
+queue_directory = /var/spool/postfix
+command_directory = /usr/sbin
+daemon_directory = /usr/libexec/postfix
+data_directory = /var/lib/postfix
+mail_owner = postfix
+myhostname = <%= alces.networks.pri.hostname %>
+inet_interfaces = <%= alces.networks.pri.ip %>, localhost
+inet_protocols = all
+mydestination = <%= mailrelay.internal_server %>, localhost.<%= domain %>, localhost
+unknown_local_recipient_reject_code = 550
+relayhost = <%= mailrelay.external_server %>
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+
+
+debug_peer_level = 2
+debugger_command =
+     PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+          ddd \$daemon_directory/\$process_name \$process_id & sleep 5
+          sendmail_path = /usr/sbin/sendmail.postfix
+          newaliases_path = /usr/bin/newaliases.postfix
+          mailq_path = /usr/bin/mailq.postfix
+          setgid_group = postdrop
+          html_directory = no
+          manpage_directory = /usr/share/man
+          sample_directory = /usr/share/doc/postfix-2.10.1/samples
+          readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES
+          sender_canonical_maps = regexp:/etc/postfix/master-rewrite-sender
+          local_header_rewrite_clients = static:all
+EOF
+
+cat << EOF > /etc/postfix/rewrite-sender
+#Rewrite all mail from domain to noreply@domain
+#/^(.*@)(.*)$/     noreply@${2}
+#Rewrite all mail from user to user@newdomain.com
+#/^(.*@)(.*)$/     ${1}<%= domain %>
+#Rewrite all mail to newuser@newdomain.com
+/^.*$/  mail@<%= domain %>
+EOF
+
+<%     else -%>
+cat << EOF > /etc/postfix/main.cf
+queue_directory = /var/spool/postfix
+command_directory = /usr/sbin
+daemon_directory = /usr/libexec/postfix
+data_directory = /var/lib/postfix
+mail_owner = postfix
+inet_interfaces = localhost
+inet_protocols = all
+mydestination = <%= alces.nodename %>, localhost.<%= domain %>, localhost
+unknown_local_recipient_reject_code = 550
+relayhost = <%= mailrelay.internal_server %>
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+
+
+debug_peer_level = 2
+debugger_command =
+     PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+          ddd \$daemon_directory/\$process_name \$process_id & sleep 5
+          sendmail_path = /usr/sbin/sendmail.postfix
+          newaliases_path = /usr/bin/newaliases.postfix
+          mailq_path = /usr/bin/mailq.postfix
+          setgid_group = postdrop
+          html_directory = no
+          manpage_directory = /usr/share/man
+          sample_directory = /usr/share/doc/postfix-2.10.1/samples
+          readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES
+EOF
+<%     end -%>
+
+systemctl enable postfix
+systemctl restart postfix
+<% end -%>
