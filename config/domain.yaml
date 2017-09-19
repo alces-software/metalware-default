@@ -164,3 +164,9 @@ firewall:
     services: 'ssh'
   management:
     services: 'ssh snmp'
+
+mailrelay:
+  defined: <%= alces.answers.mail_relay_defined %>
+  is_server: false
+  internal_server: <%= alces.answers.mail_relay_internal_server %>
+  external_server: <%= alces.answers.mail_relay_external_server %>
