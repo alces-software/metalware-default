@@ -277,6 +277,7 @@ self:
   - *pri_network_defined
   - *pri_network_ip
   - *pri_network_short_hostname
+  - *pri_network_interface
 
   - *mgt_network_defined
   - *mgt_network_ip
