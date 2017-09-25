@@ -1,9 +1,3 @@
-<% alces.self.config.networks.each do |name, network| -%>
-<% if network.defined -%>
-<%= network.ip %> <%= network.hostname  %> <%= network.short_hostname %> <%= network.prim
-ary ? network.short_hostname.split(/\./).first : '' %>
-<% end -%>
-<% end -%>
 
 <% alces.groups do |group| -%>
 <% group.nodes do |node| -%>
