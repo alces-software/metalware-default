@@ -9,6 +9,15 @@ $TTL 300
 
                         IN      NS      <%= alces.hostip %>.
 
+<% alces.self.config.networks.each do |name, network| -%>
+<%     if network.defined -%>
+<%         if network.network.to_s == alces.named.net.network.to_s -%>
+<% ip_split = network.ip.split(/\./) -%>
+<%= ip_split[3] %>.<%= ip_split[2] %> IN PTR <%= network.short_hostname.split(/\./).first %>.<%= name %>.<%= domain %>.;
+<%         end -%>
+<%     end -%>
+<% end -%>
+
 <%     alces.groups do |group| -%>
 <%         group.nodes do |node| -%>
 <%             node.networks.each do |name, network| -%>
