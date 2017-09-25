@@ -7,6 +7,7 @@ networks:
   mgt:
     defined: <%= alces.answers.mgt_network_defined %>
     ip: <%= alces.answers.mgt_network_ip %>
+    short_hostname: <%= alces.answers.mgt_network_short_hostname %>
     interface: <%= alces.answers.mgt_network_interface %>
   bmc:
     defined: <%= alces.answers.bmc_network_defined %>
@@ -14,6 +15,7 @@ networks:
   ib:
     defined: <%= alces.answers.ib_network_defined %>
     ip: <%= alces.answers.ib_network_ip %>
+    short_hostname: <%= alces.answers.ib_network_short_hostname %>
     interface: <%= alces.answers.ib_network_interface %>
   ext:
     defined: <%= alces.answers.ext_network_defined %>
@@ -22,6 +24,7 @@ networks:
     network: <%= alces.answers.ext_network_network %>
     netmask: <%= alces.answers.ext_network_netmask %>
     gateway: <%= alces.answers.ext_network_gateway %>
+    short_hostname: <%= alces.answers.ext_network_short_hostname %>
     interface: <%= alces.answers.ext_network_interface %>
     firewallpolicy: external
 build_method: self

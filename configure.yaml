@@ -81,7 +81,7 @@ questions:
 
   - &pri_network_short_hostname
     identifier: pri_network_short_hostname
-    question: 'Hostname for node'
+    question: 'Hostname for node PRI'
     default: 'controller.<%= networks.pri.domain %>'
 
   # Management network.
@@ -114,6 +114,11 @@ questions:
     identifier: mgt_network_interface
     question: 'Interface for the management network'
     default: 'eth1'
+
+  - &mgt_network_short_hostname
+    identifier: mgt_network_short_hostname
+    question: 'Hostname for node MGT'
+    default: 'controller.<%= networks.mgt.domain %>'
 
   # BMC network
   - &bmc_network_defined
@@ -162,6 +167,11 @@ questions:
     question: 'Interface for the InfiniBand network'
     default: 'ib0'
 
+  - &ib_network_short_hostname
+    identifier: ib_network_short_hostname
+    question: 'Hostname for node IB'
+    default: 'controller.<%= networks.ib.domain %>'
+
   # External network. (for self only)
   - &ext_network_defined
     identifier: ext_network_defined
@@ -196,6 +206,11 @@ questions:
   - &ext_network_gateway
     identifier: ext_network_gateway
     question: 'Gateway for the external network'
+
+  - &ext_network_short_hostname
+    identifier: ext_network_short_hostname
+    question: 'Hostname for node EXT'
+    default: 'controller.<%= networks.ext.domain %>'
 
 domain:
   - *cluster_name
@@ -282,6 +297,7 @@ self:
   - *mgt_network_defined
   - *mgt_network_ip
   - *mgt_network_interface
+  - *mgt_network_short_hostname
 
   - *bmc_network_defined
   - *bmc_network_ip
@@ -290,6 +306,7 @@ self:
   - *ib_network_defined
   - *ib_network_ip
   - *ib_network_interface
+  - *ib_network_short_hostname
 
   - *ext_network_defined
   - *ext_network_domain
@@ -298,3 +315,4 @@ self:
   - *ext_network_netmask
   - *ext_network_interface
   - *ext_network_gateway
+  - *ext_network_short_hostname

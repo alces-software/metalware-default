@@ -1,3 +1,8 @@
+<% alces.self.networks.each do |name, network| -%>
+<% if network.defined -%>
+<%= network.ip %> <%= network.hostname  %> <%= network.short_hostname %>
+<% end -%>
+<% end -%>
 
 <% alces.groups do |group| -%>
 <% group.nodes do |node| -%>
