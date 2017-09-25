@@ -12,6 +12,14 @@ $TTL 300
 
 IN NS <%= alces.hostip %>.
 
+% alces.self.networks.each do |name, network| -%>
+<%     if network.defined -%>
+<%         if name.to_s == alces.named.zone.to_s -%>
+<%= network.short_hostname.split(/\./).first %> IN A <%= network.ip %>;
+<%         end -%>
+<%     end -%>
+<% end -%>
+
 <%     alces.groups do |group| -%>
 <%         group.nodes do |node| -%>
 <%             node.networks.each do |name, network| -%>
