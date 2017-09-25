@@ -1,4 +1,4 @@
-<% alces.self.networks.each do |name, network| -%>
+<% alces.self.config.networks.each do |name, network| -%>
 <% if network.defined -%>
 <%= network.ip %> <%= network.hostname  %> <%= network.short_hostname %>
 <% end -%>
