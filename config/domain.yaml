@@ -165,7 +165,7 @@ firewall:
   management:
     services: 'ssh snmp'
 
-repo:
+repoconfig:
   # Repostiroy URL for kickstart builds 
   build_url: http://mirror.ox.ac.uk/sites/mirror.centos.org/7/os/x86_64/
   is_server: false

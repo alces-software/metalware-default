@@ -24,7 +24,7 @@ lang en_GB
 timezone  Europe/London
 
 #REPOS
-url --url=<%= repo.build_url %>
+url --url=<%= config.repoconfig.build_url %>
 
 #DISK
 %include /tmp/disk.part
