@@ -164,3 +164,13 @@ firewall:
     services: 'ssh'
   management:
     services: 'ssh snmp'
+
+repo:
+  # Repostiroy URL for kickstart builds 
+  build_url: http://mirror.ox.ac.uk/sites/mirror.centos.org/7/os/x86_64/
+  is_server: false
+  # Repoman source files for repository mirror server to use (comma separate)
+  mirrorrepos: base.upstream
+  # The file for clients to curl containing repository information [OPTIONAL]
+  # clientrepofile: http://myrepo.com/repo/client.repo
+  clientrepofile: false
