@@ -168,9 +168,12 @@ firewall:
 repoconfig:
   # Repostiroy URL for kickstart builds 
   build_url: http://mirror.ox.ac.uk/sites/mirror.centos.org/7/os/x86_64/
+  # If true, this server will host a client config file for the network
   is_server: false
+  # If true, this server will mirror source_repos locally and generate a local repo config
+  is_mirror: false
   # Repoman source files for repository mirror server to use (comma separate)
-  mirrorrepos: base.upstream
+  source_repos: base.upstream
   # The file for clients to curl containing repository information [OPTIONAL]
   # clientrepofile: http://myrepo.com/repo/client.repo
   clientrepofile: false
