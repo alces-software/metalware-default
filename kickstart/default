@@ -59,6 +59,7 @@ bridge-utils
 patch
 tcl-devel
 gettext
+wget
 
 %end
 
