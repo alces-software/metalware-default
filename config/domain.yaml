@@ -154,7 +154,7 @@ ntp:
 
 rsyslog:
   is_server: false
-  server: controller.<%= networks.pri.domain %>.<%= domain %>
+  server: controller
 
 firewall:
   enabled: true
