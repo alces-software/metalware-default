@@ -34,7 +34,6 @@ files:
     - setup/xinetd.sh
     - setup/dhcp.sh
     - setup/http.sh
-    - setup/repo.sh
   main:
     - setup/main.sh
   core:
