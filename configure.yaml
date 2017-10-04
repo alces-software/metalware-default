@@ -62,7 +62,7 @@ questions:
   - &pri_network_ip
     identifier: pri_network_ip
     question: 'IP for nodes on the primary network'
-    default: '10.10.<%= alces.group_index %>.<%= alces.index %>'
+    default: '10.10.GROUP_INDEX.NODE_INDEX'
 
   - &pri_network_netmask
     identifier: pri_network_netmask

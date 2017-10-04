@@ -2,8 +2,7 @@ I am a little template
 <% alces.nodes.each do |node| -%>
 <% node.config.networks.each do |name, network| -%>
 <% if network.defined -%>
-<% STDERR.puts network.short_hostname %>
-<%-#= network.ip %><%-#= network.hostname  %><%= network.short_hostname -%><%-#= network.primary ? node.name : '' %>
+<%= network.ip %> <%= network.hostname  %> <%= network.short_hostname -%> <%= network.primary ? node.name : '' %>
 <% end -%>
 <% end -%>
 <% end -%>
