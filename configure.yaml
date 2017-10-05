@@ -7,7 +7,7 @@ questions:
   - &domain
     identifier: domain
     question: 'Fully-qualified domain name for cluster nodes'
-    default: '<%= cluster %>.cluster.local'
+    default: '<%= domain.config.cluster %>.cluster.local'
 
   - &externaldns
     identifier: externaldns
@@ -62,7 +62,7 @@ questions:
   - &pri_network_ip
     identifier: pri_network_ip
     question: 'IP for nodes on the primary network'
-    default: '10.10.GROUP_INDEX.NODE_INDEX'
+    default: '10.10.<%= node.group.index %>.<%= node.index %>'
 
   - &pri_network_netmask
     identifier: pri_network_netmask
@@ -98,7 +98,7 @@ questions:
   - &mgt_network_ip
     identifier: mgt_network_ip
     question: 'IP for nodes on the management network'
-    default: '10.11.<%= alces.group_index %>.<%= alces.index %>'
+    default: '10.11.<%= node.group.index %>.<%= node.index %>'
 
   - &mgt_network_netmask
     identifier: mgt_network_netmask
@@ -118,7 +118,7 @@ questions:
   - &mgt_network_short_hostname
     identifier: mgt_network_short_hostname
     question: 'Hostname for node MGT'
-    default: 'controller.<%= networks.mgt.domain %>'
+    default: 'controller.<%= config.networks.mgt.domain %>'
 
   # BMC network
   - &bmc_network_defined
@@ -129,7 +129,7 @@ questions:
   - &bmc_network_ip
     identifier: bmc_network_ip
     question: 'IP for nodes on the bmc network'
-    default: '10.11.<%= alces.group_index.to_i + 100%>.<%= alces.index %>'
+    default: '10.11.<%= node.group.index.to_i + 100%>.<%= node.index %>'
 
   - &bmc_password
     identifier: bmc_password
@@ -150,7 +150,7 @@ questions:
   - &ib_network_ip
     identifier: ib_network_ip
     question: 'IP for nodes on the InfiniBand network'
-    default: '10.12.<%= alces.group_index %>.<%= alces.index %>'
+    default: '10.12.<%= node.group.index %>.<%= node.index %>'
 
   - &ib_network_netmask
     identifier: ib_network_netmask
@@ -170,7 +170,7 @@ questions:
   - &ib_network_short_hostname
     identifier: ib_network_short_hostname
     question: 'Hostname for node IB'
-    default: 'controller.<%= networks.ib.domain %>'
+    default: 'controller.<%= config.networks.ib.domain %>'
 
   # External network. (for self only)
   - &ext_network_defined
@@ -186,7 +186,7 @@ questions:
   - &ext_network_ip
     identifier: ext_network_ip
     question: 'IP for nodes on the external network'
-    default: '10.101.<%= alces.group_index %>.<%= alces.index %>'
+    default: '10.101.<%= node.group.index %>.<%= node.index %>'
 
   - &ext_network_netmask
     identifier: ext_network_netmask
@@ -210,7 +210,7 @@ questions:
   - &ext_network_short_hostname
     identifier: ext_network_short_hostname
     question: 'Hostname for node EXT'
-    default: 'controller.<%= networks.ext.domain %>'
+    default: 'controller.<%= config.networks.ext.domain %>'
 
 domain:
   - *cluster_name
