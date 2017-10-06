@@ -1,9 +1,11 @@
 #!/bin/bash
 #(c)2017 Alces Software Ltd. HPC Consulting Build Suite
-#Job ID: <%= config.jobid %>
-#Cluster: <%= config.cluster %>
+#Job ID: <%= domain.config.jobid %>
+#Cluster: <%= domain.config.cluster %>
 
+<% unless node.name == 'local' -%>
 curl "<%= domain.hosts_url %>" > /etc/hosts
+<% end -%>
 
 yum -y install git vim emacs xauth xhost xdpyinfo xterm xclock tigervnc-server ntpdate wget vconfig bridge-utils patch tcl-devel gettext
 
