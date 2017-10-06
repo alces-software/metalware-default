@@ -5,6 +5,8 @@
 
 <% if alces.nodename != 'self' -%>
 curl "<%= alces.hosts_url %>" > /etc/hosts
+<% else -%>
+echo "<%= networks.pri.ip %> <%= networks.pri.hostname %>" >> /etc/hosts
 <% end -%>
 
 yum -y install git vim emacs xauth xhost xdpyinfo xterm xclock tigervnc-server ntpdate wget vconfig bridge-utils patch tcl-devel gettext
