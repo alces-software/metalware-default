@@ -12,7 +12,7 @@ domain: <%= alces.answers.domain %>
 search_domains: "<%= networks.pri.domain %>.<%= domain %> <%= networks.mgt.domain %>.<%= domain %> <%= networks.ib.domain %>.<%= domain %> <%= domain %>"
 dns_type: "<%= alces.answers.dns_type %>"
 externaldns: <%= alces.answers.externaldns %>
-internaldns: <%= alces.hostip %>
+internaldns: <%= alces.answers.internaldns %>
 kernelappendoptions: ""
 jobid: ""
 

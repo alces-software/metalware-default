@@ -13,6 +13,10 @@ questions:
     identifier: externaldns
     question: 'External DNS server IP'
 
+  - &internaldns
+    identifier: internaldns
+    question: "Internal DNS server IP (usually the controller's primary IP)"
+
   - &root_password
     identifier: root_password
     question: 'Root user encrypted password'
@@ -216,6 +220,7 @@ domain:
   - *cluster_name
   - *domain
   - *externaldns
+  - *internaldns
   - *root_password
   - *root_ssh_key
   - *dns_type
