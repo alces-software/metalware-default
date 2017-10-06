@@ -5,6 +5,8 @@
 
 <% unless node.name == 'local' -%>
 curl "<%= domain.hosts_url %>" > /etc/hosts
+<% else -%>
+echo "<%= config.networks.pri.ip %> <%= config.networks.pri.hostname %>" >> /etc/hosts
 <% end -%>
 
 yum -y install git vim emacs xauth xhost xdpyinfo xterm xclock tigervnc-server ntpdate wget vconfig bridge-utils patch tcl-devel gettext
