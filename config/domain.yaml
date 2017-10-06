@@ -12,7 +12,7 @@ domain: <%= answer.domain %>
 search_domains: "<%= config.networks.pri.domain %>.<%= config.domain %> <%= config.networks.mgt.domain %>.<%= config.domain %> <%= config.networks.ib.domain %>.<%= config.domain %> <%= config.domain %>"
 dns_type: "<%= answer.dns_type %>"
 externaldns: <%= answer.externaldns %>
-internaldns: <%= domain.hostip %>
+internaldns: <%= answer.internaldns %>
 kernelappendoptions: ""
 jobid: ""
 
