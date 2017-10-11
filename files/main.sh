@@ -1,5 +1,5 @@
 
-echo "Running main.sh on <%= alces.nodename %> at $(date)!"
+echo "Running main.sh on <%= node.name %> at $(date)!"
 
 
 export CORE_DIR=/tmp/metalware/core

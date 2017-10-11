@@ -7,7 +7,7 @@ TOTALTIMEOUT 5
 
 LABEL INSTALL
      KERNEL boot/centos7-kernel
-        APPEND initrd=boot/centos7-initrd.img ks=<%= alces.kickstart_url %> network ks.sendmac _ALCES_BASE_HOSTNAME=<%= alces.nodename %> inst.syslog=<%= rsyslog.server %> inst.loglevel=debug <%= kernelappendoptions %>
+        APPEND initrd=boot/centos7-initrd.img ks=<%= node.kickstart_url %> network ks.sendmac _ALCES_BASE_HOSTNAME=<%= node.name %> inst.syslog=<%= rsyslog.server %> inst.loglevel=debug <%= kernelappendoptions %>
         IPAPPEND 2
 
 LABEL local

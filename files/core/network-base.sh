@@ -9,7 +9,7 @@ service NetworkManager stop
 echo "HOSTNAME=<%= networks.pri.hostname %>" >> /etc/sysconfig/network
 echo "<%= networks.pri.hostname %>" > /etc/hostname
 
-<% if dns_type == 'named' || alces.nodename != 'self'  %>
+<% if dns_type == 'named' || node.name != 'self'  %>
 cat << EOF > /etc/resolv.conf
 search <%= search_domains %>
 nameserver <%= internaldns %>
