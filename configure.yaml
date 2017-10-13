@@ -172,7 +172,7 @@ questions:
     question: 'Hostname for node IB'
     default: 'controller.<%= config.networks.ib.domain %>'
 
-  # External network. (for self only)
+  # External network. (for local only)
   - &ext_network_defined
     identifier: ext_network_defined
     question: 'Setup external network?'
@@ -288,7 +288,7 @@ node:
   - *ib_network_ip
   - *ib_network_interface
 
-self:
+local:
   - *pri_network_defined
   - *pri_network_ip
   - *pri_network_interface
