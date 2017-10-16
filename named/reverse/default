@@ -9,8 +9,8 @@ $TTL 300
 
                         IN      NS      <%= alces.hostip %>.
 
-<%     groups do |group| -%>
-<%         group.nodes do |node| -%>
+<%     groups.each do |group| -%>
+<%         group.nodes.each do |node| -%>
 <%             node.networks.each do |name, network| -%>
 <%                 if network.defined -%>
 <%                     if network.network.to_s == alces.named.net.network.to_s -%>
