@@ -1,4 +1,4 @@
-<% alces.groups.each do |group| -%>
+<% groups.each do |group| -%>
 <% if group.name == 'local' -%>
 local    local
 <% else -%>

@@ -12,7 +12,7 @@ $TTL 300
 
 IN NS <%= alces.hostip %>.
 
-<%     alces.groups do |group| -%>
+<%     groups do |group| -%>
 <%         group.nodes do |node| -%>
 <%             node.networks.each do |name, network| -%>
 <%                 if network.defined -%>
