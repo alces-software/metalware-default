@@ -82,7 +82,7 @@ questions:
   - &pri_network_short_hostname
     identifier: pri_network_short_hostname
     question: 'Hostname for node PRI'
-    default: 'controller.<%= networks.pri.domain %>'
+    default: 'controller.<%= config.networks.pri.domain %>'
 
   # Management network.
   - &mgt_network_defined

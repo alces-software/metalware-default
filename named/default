@@ -1,4 +1,4 @@
-<% networks.each do |zone, net| -%>
+<% config.networks.each do |zone, net| -%>
 <%     if net.defined -%>
 zone "<%= zone %>.<%= domain %>." {
     type master;
@@ -7,7 +7,7 @@ zone "<%= zone %>.<%= domain %>." {
 <%     end -%>
 <% end -%>
 
-<% networks.each do |zone, net| -%>
+<% config.networks.each do |zone, net| -%>
 <%     if net.defined -%>
 <%         next if zone.to_s == 'bmc' -%>
 <%         split_net = net.network.split(/\./) -%>

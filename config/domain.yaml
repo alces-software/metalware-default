@@ -9,65 +9,65 @@ ssh_key: '<%= answer.root_ssh_key %>'
 
 # Generic networking properties.
 domain: <%= answer.domain %>
-search_domains: "<%= networks.pri.domain %>.<%= config.domain %> <%= networks.mgt.domain %>.<%= config.domain %> <%= networks.ib.domain %>.<%= config.domain %> <%= config.domain %>"
+search_domains: "<%= config.networks.pri.domain %>.<%= config.domain %> <%= config.networks.mgt.domain %>.<%= config.domain %> <%= config.networks.ib.domain %>.<%= config.domain %> <%= config.domain %>"
 dns_type: "<%= answer.dns_type %>"
 externaldns: <%= answer.externaldns %>
 internaldns: <%= alces.hostip %>
 kernelappendoptions: ""
 jobid: ""
 
-# Properties for specific networks.
+# Properties for specific config.networks.
 networks:
   pri:
     defined: <%= answer.pri_network_defined %>
     interface: "<%= answer.pri_network_interface %>"
-    hostname: "<%= networks.pri.short_hostname %>.<%= config.domain %>"
+    hostname: "<%= config.networks.pri.short_hostname %>.<%= config.domain %>"
     domain: "<%= answer.pri_network_domain %>"
-    short_hostname: "<%= alces.node.name %>.<%= networks.pri.domain %>"
+    short_hostname: "<%= alces.node.name %>.<%= config.networks.pri.domain %>"
     ip: "<%= answer.pri_network_ip %>"
     netmask: "<%= answer.pri_network_netmask %>"
     network: "<%= answer.pri_network_network %>"
     gateway:
     type:
     primary: true
-    named_fwd_zone: "<%= networks.pri.domain %>.<%= config.domain %>"
+    named_fwd_zone: "<%= config.networks.pri.domain %>.<%= config.domain %>"
     named_rev_zone: <% split_net = answer.pri_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
     firewallpolicy: internal
 
   mgt:
     defined: <%= answer.mgt_network_defined %>
     interface: "<%= answer.mgt_network_interface %>"
-    hostname: "<%= networks.mgt.short_hostname %>.<%= config.domain %>"
+    hostname: "<%= config.networks.mgt.short_hostname %>.<%= config.domain %>"
     domain: "<%= answer.mgt_network_domain %>"
-    short_hostname: "<%= alces.node.name %>.<%= networks.mgt.domain %>"
+    short_hostname: "<%= alces.node.name %>.<%= config.networks.mgt.domain %>"
     ip: "<%= answer.mgt_network_ip %>"
     netmask: "<%= answer.mgt_network_netmask %>"
     network: "<%= answer.mgt_network_network %>"
     gateway:
     type:
-    named_fwd_zone: "<%= networks.mgt.domain %>.<%= config.domain %>"
+    named_fwd_zone: "<%= config.networks.mgt.domain %>.<%= config.domain %>"
     named_rev_zone: <% split_net = answer.mgt_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
     firewallpolicy: internal
 
   ib:
     defined: <%= answer.ib_network_defined %>
     interface: "<%= answer.ib_network_interface %>"
-    hostname: "<%= networks.ib.short_hostname %>.<%= config.domain %>"
+    hostname: "<%= config.networks.ib.short_hostname %>.<%= config.domain %>"
     domain: "<%= answer.ib_network_domain %>"
-    short_hostname: "<%= alces.node.name %>.<%= networks.ib.domain %>"
+    short_hostname: "<%= alces.node.name %>.<%= config.networks.ib.domain %>"
     ip: "<%= answer.ib_network_ip %>"
     netmask: "<%= answer.ib_network_netmask %>"
     network: "<%= answer.ib_network_network %>"
     gateway:
     type:
-    named_fwd_zone: "<%= networks.ib.domain %>.<%= config.domain %>"
+    named_fwd_zone: "<%= config.networks.ib.domain %>.<%= config.domain %>"
     named_rev_zone: <% split_net = answer.ib_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
     firewallpolicy: internal
 
   bmc:
     defined: <%= answer.bmc_network_defined %>
     interface: bmc
-    hostname: "<%= alces.node.name %>.bmc.<%= networks.mgt.domain %>.<%= config.domain %>"
+    hostname: "<%= alces.node.name %>.bmc.<%= config.networks.mgt.domain %>.<%= config.domain %>"
     short_hostname: "<%= alces.node.name %>.bmc"
     ip: "<%= answer.bmc_network_ip %>"
     netmask: "<%= answer.mgt_network_netmask %>"
@@ -150,7 +150,7 @@ files:
 
 ntp:
   is_server: false
-  server: controller.<%= networks.pri.domain %>.<%= config.domain %>
+  server: controller.<%= config.networks.pri.domain %>.<%= config.domain %>
 
 rsyslog:
   is_server: false

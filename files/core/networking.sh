@@ -5,7 +5,7 @@
 
 run_script network-base
 
-<% networks.each do |name, network| %>
+<% config.networks.each do |name, network| %>
 <% if network.defined %>
 export NET="<%= name %>"
 export INTERFACE="<%= network.interface %>"

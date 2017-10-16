@@ -6,8 +6,8 @@
 systemctl disable NetworkManager
 service NetworkManager stop
 
-echo "HOSTNAME=<%= networks.pri.hostname %>" >> /etc/sysconfig/network
-echo "<%= networks.pri.hostname %>" > /etc/hostname
+echo "HOSTNAME=<%= config.networks.pri.hostname %>" >> /etc/sysconfig/network
+echo "<%= config.networks.pri.hostname %>" > /etc/hostname
 
 <% if dns_type == 'named' || node.name != 'self'  %>
 cat << EOF > /etc/resolv.conf
@@ -41,7 +41,7 @@ firewall-cmd --add-service <%= service %> --zone <%= zone %> --permanent
 firewall-cmd --reload
 
 # Add interfaces to zones
-<%     networks.each do |network, info| -%>
+<%     config.networks.each do |network, info| -%>
 <%         if info.defined -%>
 firewall-cmd --add-interface <%= info.interface %> --zone <%= info.firewallpolicy %> --permanent
 <%         end -%>

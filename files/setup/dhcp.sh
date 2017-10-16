@@ -7,9 +7,9 @@ omapi-port 7911;
 default-lease-time 43200;
 max-lease-time 86400;
 ddns-update-style none;
-option domain-name "<%= networks.pri.domain %>.<%= domain %>";
-option domain-name-servers <%= networks.pri.ip %>;
-option ntp-servers <%= networks.pri.ip %>;
+option domain-name "<%= config.networks.pri.domain %>.<%= domain %>";
+option domain-name-servers <%= config.networks.pri.ip %>;
+option ntp-servers <%= config.networks.pri.ip %>;
 
 allow booting;
 allow bootp;
@@ -27,7 +27,7 @@ option PXE.mtftp-delay code 5 = unsigned integer 8;
 option arch code 93 = unsigned integer 16; # RFC4578
 
 # PXE Handoff.
-next-server <%= networks.pri.ip %>;
+next-server <%= config.networks.pri.ip %>;
 filename "pxelinux.0";
 
 log-facility local7;
@@ -37,14 +37,14 @@ group {
 #################################
 # private network
 #################################
-subnet <%= networks.pri.network %> netmask <%= networks.pri.netmask %> {
+subnet <%= config.networks.pri.network %> netmask <%= config.networks.pri.netmask %> {
 #  pool
 #  {
 #    range 10.10.200.100 10.10.200.200;
 #  }
 
-  option subnet-mask <%= networks.pri.netmask %>;
-  option routers <%= networks.pri.ip %>;
+  option subnet-mask <%= config.networks.pri.netmask %>;
+  option routers <%= config.networks.pri.ip %>;
   class "pxeclients" {
           match if substring (option vendor-class-identifier, 0, 9) = "PXEClient";
           if option arch = 00:07 {

@@ -58,7 +58,7 @@ logchange 0.5
 
 logdir /var/log/chrony
 
-allow <%= networks.pri.network %>/<% require 'ipaddr'; netmask=IPAddr.new(networks.pri.netmask).to_i.to_s(2).count('1') %><%= netmask %>
+allow <%= config.networks.pri.network %>/<% require 'ipaddr'; netmask=IPAddr.new(networks.pri.netmask).to_i.to_s(2).count('1') %><%= netmask %>
 EOF
 <% else -%>
 cat << EOF > /etc/chrony.conf

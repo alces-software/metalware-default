@@ -6,7 +6,7 @@ cat << EOF > /etc/httpd/conf.d/deployment.conf
     AllowOverride None
     Require all granted
     Order Allow,Deny
-    Allow from <%= networks.pri.network %>/<%= networks.pri.netmask %>
+    Allow from <%= config.networks.pri.network %>/<%= config.networks.pri.netmask %>
     Allow from 127.0.0.1/8
 </Directory>
 Alias /metalware /var/lib/metalware/rendered/
@@ -18,7 +18,7 @@ cat << EOF > /etc/httpd/conf.d/installer.conf
     AllowOverride None
     Require all granted
     Order Allow,Deny
-    Allow from <%= networks.pri.network %>/<%= networks.pri.netmask %>
+    Allow from <%= config.networks.pri.network %>/<%= config.networks.pri.netmask %>
 </Directory>
 Alias /installers /opt/alces/installers
 EOF
