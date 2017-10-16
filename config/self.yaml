@@ -1,31 +1,31 @@
 networks:
   pri:
-    defined: <%= alces.answers.pri_network_defined %>
-    ip: <%= alces.answers.pri_network_ip %>
-    short_hostname: <%= alces.answers.pri_network_short_hostname %>
-    interface: <%= alces.answers.pri_network_interface %>
+    defined: <%= answer.pri_network_defined %>
+    ip: <%= answer.pri_network_ip %>
+    short_hostname: <%= answer.pri_network_short_hostname %>
+    interface: <%= answer.pri_network_interface %>
   mgt:
-    defined: <%= alces.answers.mgt_network_defined %>
-    ip: <%= alces.answers.mgt_network_ip %>
-    short_hostname: <%= alces.answers.mgt_network_short_hostname %>
-    interface: <%= alces.answers.mgt_network_interface %>
+    defined: <%= answer.mgt_network_defined %>
+    ip: <%= answer.mgt_network_ip %>
+    short_hostname: <%= answer.mgt_network_short_hostname %>
+    interface: <%= answer.mgt_network_interface %>
   bmc:
-    defined: <%= alces.answers.bmc_network_defined %>
-    ip: <%= alces.answers.bmc_network_ip %>
+    defined: <%= answer.bmc_network_defined %>
+    ip: <%= answer.bmc_network_ip %>
   ib:
-    defined: <%= alces.answers.ib_network_defined %>
-    ip: <%= alces.answers.ib_network_ip %>
-    short_hostname: <%= alces.answers.ib_network_short_hostname %>
-    interface: <%= alces.answers.ib_network_interface %>
+    defined: <%= answer.ib_network_defined %>
+    ip: <%= answer.ib_network_ip %>
+    short_hostname: <%= answer.ib_network_short_hostname %>
+    interface: <%= answer.ib_network_interface %>
   ext:
-    defined: <%= alces.answers.ext_network_defined %>
-    domain: <%= alces.answers.ext_network_domain %>
-    ip: <%= alces.answers.ext_network_ip %>
-    network: <%= alces.answers.ext_network_network %>
-    netmask: <%= alces.answers.ext_network_netmask %>
-    gateway: <%= alces.answers.ext_network_gateway %>
-    short_hostname: <%= alces.answers.ext_network_short_hostname %>
-    interface: <%= alces.answers.ext_network_interface %>
+    defined: <%= answer.ext_network_defined %>
+    domain: <%= answer.ext_network_domain %>
+    ip: <%= answer.ext_network_ip %>
+    network: <%= answer.ext_network_network %>
+    netmask: <%= answer.ext_network_netmask %>
+    gateway: <%= answer.ext_network_gateway %>
+    short_hostname: <%= answer.ext_network_short_hostname %>
+    interface: <%= answer.ext_network_interface %>
     firewallpolicy: external
 build_method: self
 files:
