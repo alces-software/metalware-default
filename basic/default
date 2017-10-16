@@ -8,4 +8,4 @@ exec 1>/tmp/metalware-default-output 2>&1
 # rendered files.
 curl <%= node.files.main.first.url %> | /bin/bash
 
-curl <%= alces.build_complete_url %>
+curl <%= node.build_complete_url %>
