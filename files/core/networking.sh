@@ -15,7 +15,7 @@ export NETMASK="<%= network.netmask %>"
 export NETWORK="<%= network.network %>"
 export GATEWAY="<%= network.gateway %>"
 #If TYPE is 'Bond' or 'Bridge', we'll also need these set to setup the slaves
-export SLAVEINTERFACES="<%= slave_interfaces %>"
+export SLAVEINTERFACES="<%= config.slave_interfaces %>"
 #This is literally translated to the TYPE in redhat-sysconfig-network
 export TYPE="<%= network.type %>"
 export ZONE="<%= network.firewallpolicy %>"

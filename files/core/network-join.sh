@@ -4,7 +4,7 @@
 #Cluster: <%= config.cluster %>
 
 #If TYPE is 'Bond', you can set bonding options here
-BONDOPTIONS="<%= bond0_options %>"
+BONDOPTIONS="<%= config.bond0_options %>"
 
 # XXX Is the following still needed now defining IPs in configs?
 #No IP has been given, use the hosts file as a lookup table
