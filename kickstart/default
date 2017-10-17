@@ -16,7 +16,7 @@ selinux --disabled
 #AUTH
 auth  --useshadow  --enablemd5
 #GENERATE with openssl passwd -1 $PASSWD
-rootpw --iscrypted <%= encrypted_root_password %>
+rootpw --iscrypted <%= config.encrypted_root_password %>
 
 #LOCALIZATION
 keyboard uk
