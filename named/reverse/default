@@ -1,5 +1,5 @@
 $TTL 300
-@                       IN      SOA     <%=alces.hostip%>. nobody.example.com. (
+@                       IN      SOA     <%=domain.hostip%>. nobody.example.com. (
                                         <%= Time.now.to_i %>   ; Serial
                                         600         ; Refresh
                                         1800         ; Retry
@@ -7,7 +7,7 @@ $TTL 300
                                         300          ; TTL
                                         )
 
-                        IN      NS      <%= alces.hostip %>.
+                        IN      NS      <%= domain.hostip %>.
 
 <%     groups.each do |group| -%>
 <%         group.nodes.each do |node| -%>

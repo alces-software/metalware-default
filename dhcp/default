@@ -3,7 +3,7 @@
 host <%= hostname %> {
   hardware ethernet <%= mac_address %>;
   option host-name "<%= hostname %>.<%= config.networks.pri.domain %>.<%= domain %>";
-  option routers <%= alces.hostip %>;
+  option routers <%= domain.hostip %>;
   fixed-address <%= `gethostip -d #{hostname}`.chomp %>;
 }
 <% end %>
