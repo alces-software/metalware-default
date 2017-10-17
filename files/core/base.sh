@@ -28,7 +28,7 @@ fi
 
 # NTP/Chrony
 yum -y install chrony
-<% if ntp.is_server -%>
+<% if config.ntp.is_server -%>
 cat << EOF > /etc/chrony.conf
 server 0.centos.pool.ntp.org iburst
 server 1.centos.pool.ntp.org iburst
@@ -62,7 +62,7 @@ allow <%= config.networks.pri.network %>/<% require 'ipaddr'; netmask=IPAddr.new
 EOF
 <% else -%>
 cat << EOF > /etc/chrony.conf
-server <%= ntp.server %> iburst
+server <%= config.ntp.server %> iburst
 server 0.centos.pool.ntp.org iburst
 server 1.centos.pool.ntp.org iburst
 server 2.centos.pool.ntp.org iburst
