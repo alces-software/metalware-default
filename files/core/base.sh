@@ -3,7 +3,7 @@
 #Job ID: <%= config.jobid %>
 #Cluster: <%= config.cluster %>
 
-curl "<%= alces.hosts_url %>" > /etc/hosts
+curl "<%= domain.hosts_url %>" > /etc/hosts
 
 yum -y install git vim emacs xauth xhost xdpyinfo xterm xclock tigervnc-server ntpdate wget vconfig bridge-utils patch tcl-devel gettext
 
