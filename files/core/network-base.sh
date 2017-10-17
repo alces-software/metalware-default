@@ -1,7 +1,7 @@
 #!/bin/bash
 #(c)2017 Alces Software Ltd. HPC Consulting Build Suite
 #Job ID: <%= config.jobid %>
-#Cluster: <%=cluster%>
+#Cluster: <%= config.cluster %>
 
 systemctl disable NetworkManager
 service NetworkManager stop

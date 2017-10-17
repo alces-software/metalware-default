@@ -1,7 +1,7 @@
 #!/bin/bash
 #(c)2017 Alces Software Ltd. HPC Consulting Build Suite
 #Job ID: <%= config.jobid %>
-#Cluster: <%=cluster%>
+#Cluster: <%= config.cluster %>
 
 #If TYPE is 'Bond', you can set bonding options here
 BONDOPTIONS="<%= bond0_options %>"

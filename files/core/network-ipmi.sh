@@ -1,7 +1,7 @@
 #!/bin/bash
 #(c)2017 Alces Software Ltd. HPC Consulting Build Suite
 #Job ID: <%= config.jobid %>
-#Cluster: <%=cluster%>
+#Cluster: <%= config.cluster %>
 
 BMCPASSWORD="<%= config.networks.bmc.bmcpassword %>"
 BMCCHANNEL="<%= config.networks.bmc.bmcchannel %>"
