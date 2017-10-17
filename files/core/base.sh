@@ -17,7 +17,7 @@ yum -y install net-tools bind-utils ipmitool
 yum -y update
 
 #Branch for profile
-if [ "<%= profile %>" == 'INFRA' ]; then
+if [ "<%= config.profile %>" == 'INFRA' ]; then
   yum -y install device-mapper-multipath sg3_utils
   yum -y groupinstall "Gnome Desktop"
   mpathconf
