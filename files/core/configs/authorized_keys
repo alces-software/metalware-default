@@ -1,1 +1,1 @@
-ssh-rsa <%= ssh_key %>
+ssh-rsa <%= config.ssh_key %>
