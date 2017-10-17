@@ -21,11 +21,11 @@ nameserver <%= externaldns %>
 EOF
 <% end %>
 
-<% if firewall.enabled -%>
+<% if config.firewall.enabled -%>
 systemctl enable firewalld
 systemctl start firewalld
 
-<%     firewall.each do |zone, info| -%>
+<%     config.firewall.each do |zone, info| -%>
 <%     next if zone.to_s == 'enabled' -%>
 # Create zone
 firewall-cmd --info-zone=<%= zone %> >> /dev/null
