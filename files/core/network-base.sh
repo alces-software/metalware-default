@@ -11,12 +11,12 @@ echo "<%= config.networks.pri.hostname %>" > /etc/hostname
 
 <% if config.dns_type == 'named' || node.name != 'self'  %>
 cat << EOF > /etc/resolv.conf
-search <%= search_domains %>
+search <%= config.search_domains %>
 nameserver <%= internaldns %>
 EOF
 <% else %>
 cat << EOF > /etc/resolv.conf
-search <%= search_domains %>
+search <%= config.search_domains %>
 nameserver <%= externaldns %>
 EOF
 <% end %>
