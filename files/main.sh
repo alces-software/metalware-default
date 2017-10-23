@@ -1,5 +1,5 @@
 
-echo "Running main.sh on <%= alces.nodename %> at $(date)!"
+echo "Running main.sh on <%= node.name %> at $(date)!"
 
 
 export CORE_DIR=/tmp/metalware/core
@@ -18,7 +18,7 @@ export -f install_file
 
 echo
 echo 'Requesting core setup files'
-<% alces.files.core.each do |file| %>
+<% node.files.core.each do |file| %>
   <% if file.error %>
 echo '<%= file.name %>: <%= file.error %>'
   <% else %>
@@ -28,7 +28,7 @@ curl "<%= file.url %>" > "$CORE_DIR/<%= file.name %>"
 
 echo
 echo 'Running platform setup scripts:'
-<% alces.files.platform.each do |script| %>
+<% node.files.platform.each do |script| %>
   <% if script.error %>
 echo '<%= script.name %>: <%= script.error %>'
   <% else %>
@@ -38,7 +38,7 @@ curl "<%= script.url %>" | /bin/bash
 
 echo
 echo 'Running user setup scripts:'
-<% alces.files.setup.each do |script| %>
+<% node.files.setup.each do |script| %>
   <% if script.error %>
 echo '<%= script.name %>: <%= script.error %>'
   <% else %>
@@ -54,7 +54,7 @@ run_script networking
 
 echo
 echo 'Running user scripts:'
-<% alces.files.scripts.each do |script| %>
+<% node.files.scripts.each do |script| %>
   <% if script.error %>
 echo '<%= script.name %>: <%= script.error %>'
   <% else %>

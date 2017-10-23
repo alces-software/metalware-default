@@ -1,11 +1,7 @@
-
-<% alces.groups do |group| -%>
-<% group.nodes do |node| -%>
-<% node.networks.each do |name, network| -%>
+<% nodes.each do |node| -%>
+<% node.config.networks.each do |name, network| -%>
 <% if network.defined -%>
-<%= network.ip %> <%= network.hostname  %> <%= network.short_hostname %> <%= network.primary ? node.alces.nodename : '' %>
+<%= network.ip %> <%= network.hostname  %> <%= network.short_hostname -%> <%= network.primary ? node.name : '' %>
 <% end -%>
-<% end -%>
-
-<% end -%>
+<% end %>
 <% end -%>

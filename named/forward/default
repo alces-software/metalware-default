@@ -1,5 +1,5 @@
 $TTL 300
-@                       IN      SOA     <%=alces.hostip%>. nobody.example.com. (
+@                       IN      SOA     <%=domain.hostip%>. nobody.example.com. (
                                         <%= Time.now.to_i %>   ; Serial
                                         600         ; Refresh
                                         1800         ; Retry
@@ -7,17 +7,17 @@ $TTL 300
                                         300          ; TTL
                                         )
 
-                        IN      NS      <%= alces.hostip %>.
+                        IN      NS      <%= domain.hostip %>.
 @       IN MX   <%= alces.named.net.network.split(/\./).first %>  <%= alces.named.net.hostname[1..-1] %>.
 
-IN NS <%= alces.hostip %>.
+IN NS <%= domain.hostip %>.
 
-<%     alces.groups do |group| -%>
-<%         group.nodes do |node| -%>
+<%     groups.each do |group| -%>
+<%         group.nodes.each do |node| -%>
 <%             node.networks.each do |name, network| -%>
 <%                 if network.defined -%>
 <%                     if name.to_s == alces.named.zone.to_s -%>
-<%= node.alces.nodename %> IN A <%= network.ip %>;
+<%= node.node.name %> IN A <%= network.ip %>;
 <%                     end -%>
 <%                 end -%>
 <%             end -%>

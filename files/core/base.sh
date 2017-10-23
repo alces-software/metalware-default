@@ -1,9 +1,9 @@
 #!/bin/bash
 #(c)2017 Alces Software Ltd. HPC Consulting Build Suite
-#Job ID: <%=jobid%>
-#Cluster: <%=cluster%>
+#Job ID: <%= config.jobid %>
+#Cluster: <%= config.cluster %>
 
-curl "<%= alces.hosts_url %>" > /etc/hosts
+curl "<%= domain.hosts_url %>" > /etc/hosts
 
 yum -y install git vim emacs xauth xhost xdpyinfo xterm xclock tigervnc-server ntpdate wget vconfig bridge-utils patch tcl-devel gettext
 
@@ -17,7 +17,7 @@ yum -y install net-tools bind-utils ipmitool
 yum -y update
 
 #Branch for profile
-if [ "<%= profile %>" == 'INFRA' ]; then
+if [ "<%= config.profile %>" == 'INFRA' ]; then
   yum -y install device-mapper-multipath sg3_utils
   yum -y groupinstall "Gnome Desktop"
   mpathconf
@@ -28,7 +28,7 @@ fi
 
 # NTP/Chrony
 yum -y install chrony
-<% if ntp.is_server -%>
+<% if config.ntp.is_server -%>
 cat << EOF > /etc/chrony.conf
 server 0.centos.pool.ntp.org iburst
 server 1.centos.pool.ntp.org iburst
@@ -58,11 +58,11 @@ logchange 0.5
 
 logdir /var/log/chrony
 
-allow <%= networks.pri.network %>/<% require 'ipaddr'; netmask=IPAddr.new(networks.pri.netmask).to_i.to_s(2).count('1') %><%= netmask %>
+allow <%= config.networks.pri.network %>/<% require 'ipaddr'; netmask=IPAddr.new(config.networks.pri.netmask).to_i.to_s(2).count('1') %><%= netmask %>
 EOF
 <% else -%>
 cat << EOF > /etc/chrony.conf
-server <%= ntp.server %> iburst
+server <%= config.ntp.server %> iburst
 server 0.centos.pool.ntp.org iburst
 server 1.centos.pool.ntp.org iburst
 server 2.centos.pool.ntp.org iburst
@@ -75,7 +75,7 @@ systemctl enable chronyd
 
 # Syslog
 yum -y install rsyslog
-<% if rsyslog.is_server -%>
+<% if config.rsyslog.is_server -%>
 cat << EOF > /etc/rsyslog.d/metalware.conf
 \$template remoteMessage, "/var/log/slave/%FROMHOST%/messages.log"
 :fromhost-ip, !isequal, "127.0.0.1" ?remoteMessage
@@ -102,7 +102,7 @@ firewall-cmd --add-port 514/udp --zone internal --permanent
 firewall-cmd --add-port 514/tcp --zone internal --permanent
 fiewall-cmd --reload
 <% else -%>
-echo '*.* @<%= rsyslog.server %>:514' >> /etc/rsyslog.conf
+echo '*.* @<%= config.rsyslog.server %>:514' >> /etc/rsyslog.conf
 <% end -%>
 
 systemctl enable rsyslog

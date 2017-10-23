@@ -1,31 +1,31 @@
 #!/bin/bash
 #(c)2017 Alces Software Ltd. HPC Consulting Build Suite
-#Job ID: <%=jobid%>
-#Cluster: <%=cluster%>
+#Job ID: <%= config.jobid %>
+#Cluster: <%= config.cluster %>
 
 systemctl disable NetworkManager
 service NetworkManager stop
 
-echo "HOSTNAME=<%= networks.pri.hostname %>" >> /etc/sysconfig/network
-echo "<%= networks.pri.hostname %>" > /etc/hostname
+echo "HOSTNAME=<%= config.networks.pri.hostname %>" >> /etc/sysconfig/network
+echo "<%= config.networks.pri.hostname %>" > /etc/hostname
 
-<% if dns_type == 'named' || alces.nodename != 'self'  %>
+<% if config.dns_type == 'named' || node.name != 'self'  %>
 cat << EOF > /etc/resolv.conf
-search <%= search_domains %>
-nameserver <%= internaldns %>
+search <%= config.search_domains %>
+nameserver <%= config.internaldns %>
 EOF
 <% else %>
 cat << EOF > /etc/resolv.conf
-search <%= search_domains %>
+search <%= config.search_domains %>
 nameserver <%= externaldns %>
 EOF
 <% end %>
 
-<% if firewall.enabled -%>
+<% if config.firewall.enabled -%>
 systemctl enable firewalld
 systemctl start firewalld
 
-<%     firewall.each do |zone, info| -%>
+<%     config.firewall.each do |zone, info| -%>
 <%     next if zone.to_s == 'enabled' -%>
 # Create zone
 firewall-cmd --info-zone=<%= zone %> >> /dev/null
@@ -41,7 +41,7 @@ firewall-cmd --add-service <%= service %> --zone <%= zone %> --permanent
 firewall-cmd --reload
 
 # Add interfaces to zones
-<%     networks.each do |network, info| -%>
+<%     config.networks.each do |network, info| -%>
 <%         if info.defined -%>
 firewall-cmd --add-interface <%= info.interface %> --zone <%= info.firewallpolicy %> --permanent
 <%         end -%>

@@ -2,8 +2,8 @@
 <% alces.hunter.each do |hostname, mac_address| %>
 host <%= hostname %> {
   hardware ethernet <%= mac_address %>;
-  option host-name "<%= hostname %>.<%= networks.pri.domain %>.<%= domain %>";
-  option routers <%= alces.hostip %>;
+  option host-name "<%= hostname %>.<%= config.networks.pri.domain %>.<%= domain %>";
+  option routers <%= domain.hostip %>;
   fixed-address <%= `gethostip -d #{hostname}`.chomp %>;
 }
 <% end %>

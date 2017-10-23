@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "Running remote-script.sh on <%= alces.nodename %> at $(date)!"
+echo "Running remote-script.sh on <%= node.name %> at $(date)!"

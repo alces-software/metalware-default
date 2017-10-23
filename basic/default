@@ -6,6 +6,6 @@ exec 1>/tmp/metalware-default-output 2>&1
 
 # Example of using rendered Metalware file; this file itself also uses other
 # rendered files.
-curl <%= alces.files.main.first.url %> | /bin/bash
+curl <%= node.files.main.first.url %> | /bin/bash
 
-curl <%= alces.build_complete_url %>
+curl <%= node.build_complete_url %>

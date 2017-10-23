@@ -1,82 +1,82 @@
 
-cluster: '<%= alces.answers.cluster_name %>'
+cluster: '<%= answer.cluster_name %>'
 # GENERATE with `openssl passwd -1 $PASSWD`.
 # XXX Change this so admin enters plain text root password, and we generate
 # encrypted password here?
-encrypted_root_password: '<%= alces.answers.root_password %>'
+encrypted_root_password: '<%= answer.root_password %>'
 profile: MASTER
-ssh_key: '<%= alces.answers.root_ssh_key %>'
+ssh_key: '<%= answer.root_ssh_key %>'
 
 # Generic networking properties.
-domain: <%= alces.answers.domain %>
-search_domains: "<%= networks.pri.domain %>.<%= domain %> <%= networks.mgt.domain %>.<%= domain %> <%= networks.ib.domain %>.<%= domain %> <%= domain %>"
-dns_type: "<%= alces.answers.dns_type %>"
-externaldns: <%= alces.answers.externaldns %>
-internaldns: <%= alces.hostip %>
+domain: <%= answer.domain %>
+search_domains: "<%= config.networks.pri.domain %>.<%= config.domain %> <%= config.networks.mgt.domain %>.<%= config.domain %> <%= config.networks.ib.domain %>.<%= config.domain %> <%= config.domain %>"
+dns_type: "<%= answer.dns_type %>"
+externaldns: <%= answer.externaldns %>
+internaldns: <%= domain.hostip %>
 kernelappendoptions: ""
 jobid: ""
 
-# Properties for specific networks.
+# Properties for specific config.networks.
 networks:
   pri:
-    defined: <%= alces.answers.pri_network_defined %>
-    interface: "<%= alces.answers.pri_network_interface %>"
-    hostname: "<%= networks.pri.short_hostname %>.<%= domain %>"
-    domain: "<%= alces.answers.pri_network_domain %>"
-    short_hostname: "<%= alces.nodename %>.<%= networks.pri.domain %>"
-    ip: "<%= alces.answers.pri_network_ip %>"
-    netmask: "<%= alces.answers.pri_network_netmask %>"
-    network: "<%= alces.answers.pri_network_network %>"
+    defined: <%= answer.pri_network_defined %>
+    interface: "<%= answer.pri_network_interface %>"
+    hostname: "<%= config.networks.pri.short_hostname %>.<%= config.domain %>"
+    domain: "<%= answer.pri_network_domain %>"
+    short_hostname: "<%= node.name %>.<%= config.networks.pri.domain %>"
+    ip: "<%= answer.pri_network_ip %>"
+    netmask: "<%= answer.pri_network_netmask %>"
+    network: "<%= answer.pri_network_network %>"
     gateway:
     type:
     primary: true
-    named_fwd_zone: "<%= networks.pri.domain %>.<%= domain %>"
-    named_rev_zone: <% split_net = alces.answers.pri_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
+    named_fwd_zone: "<%= config.networks.pri.domain %>.<%= config.domain %>"
+    named_rev_zone: <% split_net = answer.pri_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
     firewallpolicy: internal
 
   mgt:
-    defined: <%= alces.answers.mgt_network_defined %>
-    interface: "<%= alces.answers.mgt_network_interface %>"
-    hostname: "<%= networks.mgt.short_hostname %>.<%= domain %>"
-    domain: "<%= alces.answers.mgt_network_domain %>"
-    short_hostname: "<%= alces.nodename %>.<%= networks.mgt.domain %>"
-    ip: "<%= alces.answers.mgt_network_ip %>"
-    netmask: "<%= alces.answers.mgt_network_netmask %>"
-    network: "<%= alces.answers.mgt_network_network %>"
+    defined: <%= answer.mgt_network_defined %>
+    interface: "<%= answer.mgt_network_interface %>"
+    hostname: "<%= config.networks.mgt.short_hostname %>.<%= config.domain %>"
+    domain: "<%= answer.mgt_network_domain %>"
+    short_hostname: "<%= node.name %>.<%= config.networks.mgt.domain %>"
+    ip: "<%= answer.mgt_network_ip %>"
+    netmask: "<%= answer.mgt_network_netmask %>"
+    network: "<%= answer.mgt_network_network %>"
     gateway:
     type:
-    named_fwd_zone: "<%= networks.mgt.domain %>.<%= domain %>"
-    named_rev_zone: <% split_net = alces.answers.mgt_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
+    named_fwd_zone: "<%= config.networks.mgt.domain %>.<%= config.domain %>"
+    named_rev_zone: <% split_net = answer.mgt_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
     firewallpolicy: internal
 
   ib:
-    defined: <%= alces.answers.ib_network_defined %>
-    interface: "<%= alces.answers.ib_network_interface %>"
-    hostname: "<%= networks.ib.short_hostname %>.<%= domain %>"
-    domain: "<%= alces.answers.ib_network_domain %>"
-    short_hostname: "<%= alces.nodename %>.<%= networks.ib.domain %>"
-    ip: "<%= alces.answers.ib_network_ip %>"
-    netmask: "<%= alces.answers.ib_network_netmask %>"
-    network: "<%= alces.answers.ib_network_network %>"
+    defined: <%= answer.ib_network_defined %>
+    interface: "<%= answer.ib_network_interface %>"
+    hostname: "<%= config.networks.ib.short_hostname %>.<%= config.domain %>"
+    domain: "<%= answer.ib_network_domain %>"
+    short_hostname: "<%= node.name %>.<%= config.networks.ib.domain %>"
+    ip: "<%= answer.ib_network_ip %>"
+    netmask: "<%= answer.ib_network_netmask %>"
+    network: "<%= answer.ib_network_network %>"
     gateway:
     type:
-    named_fwd_zone: "<%= networks.ib.domain %>.<%= domain %>"
-    named_rev_zone: <% split_net = alces.answers.ib_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
+    named_fwd_zone: "<%= config.networks.ib.domain %>.<%= config.domain %>"
+    named_rev_zone: <% split_net = answer.ib_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
     firewallpolicy: internal
 
   bmc:
-    defined: <%= alces.answers.bmc_network_defined %>
+    defined: <%= answer.bmc_network_defined %>
     interface: bmc
-    hostname: "<%= alces.nodename %>.bmc.<%= networks.mgt.domain %>.<%= domain %>"
-    short_hostname: "<%= alces.nodename %>.bmc"
-    ip: "<%= alces.answers.bmc_network_ip %>"
-    netmask: "<%= alces.answers.mgt_network_netmask %>"
-    network: "<%= alces.answers.mgt_network_network %>"
+    hostname: "<%= node.name %>.bmc.<%= config.networks.mgt.domain %>.<%= config.domain %>"
+    short_hostname: "<%= node.name %>.bmc"
+    ip: "<%= answer.bmc_network_ip %>"
+    netmask: "<%= answer.mgt_network_netmask %>"
+    network: "<%= answer.mgt_network_network %>"
     gateway: 0.0.0.0
-    bmcpassword: "<%= alces.answers.bmc_password %>"
+    bmcpassword: "<%= answer.bmc_password %>"
     bmcchannel: 1
     bmcuser: 2
-    named_fwd_zone: "bmc.<%= domain %>"
+    named_fwd_zone: "bmc.<%= config.domain %>"
     firewallpolicy: management
 
 disksetup: |
@@ -121,8 +121,8 @@ bond0_options: 'mode=1 primary=p3p2 miimon=80'
 bond0_interfaces: 'em1 em2 p3p2' # XXX Needed?
 
 templates:
-  kickstart: <%= alces.answers.kickstart_template %>
-  pxelinux: <%= alces.answers.pxelinux_template %>
+  kickstart: <%= answer.kickstart_template %>
+  pxelinux: <%= answer.pxelinux_template %>
 
 files:
   platform:
@@ -150,7 +150,7 @@ files:
 
 ntp:
   is_server: false
-  server: controller.<%= networks.pri.domain %>.<%= domain %>
+  server: controller.<%= config.networks.pri.domain %>.<%= config.domain %>
 
 rsyslog:
   is_server: false

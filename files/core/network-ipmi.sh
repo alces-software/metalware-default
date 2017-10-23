@@ -1,11 +1,11 @@
 #!/bin/bash
 #(c)2017 Alces Software Ltd. HPC Consulting Build Suite
-#Job ID: <%=jobid%>
-#Cluster: <%=cluster%>
+#Job ID: <%= config.jobid %>
+#Cluster: <%= config.cluster %>
 
-BMCPASSWORD="<%= networks.bmc.bmcpassword %>"
-BMCCHANNEL="<%= networks.bmc.bmcchannel %>"
-BMCUSER="<%= networks.bmc.bmcuser %>"
+BMCPASSWORD="<%= config.networks.bmc.bmcpassword %>"
+BMCCHANNEL="<%= config.networks.bmc.bmcchannel %>"
+BMCUSER="<%= config.networks.bmc.bmcuser %>"
 
 # XXX Is the following still needed now defining IPs in configs?
 #No IP has been given, use the hosts file as a lookup table

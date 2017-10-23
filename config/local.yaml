@@ -1,0 +1,50 @@
+networks:
+  pri:
+    defined: <%= answer.pri_network_defined %>
+    ip: <%= answer.pri_network_ip %>
+    short_hostname: <%= answer.pri_network_short_hostname %>
+    interface: <%= answer.pri_network_interface %>
+  mgt:
+    defined: <%= answer.mgt_network_defined %>
+    ip: <%= answer.mgt_network_ip %>
+    short_hostname: <%= answer.mgt_network_short_hostname %>
+    interface: <%= answer.mgt_network_interface %>
+  bmc:
+    defined: <%= answer.bmc_network_defined %>
+    ip: <%= answer.bmc_network_ip %>
+  ib:
+    defined: <%= answer.ib_network_defined %>
+    ip: <%= answer.ib_network_ip %>
+    short_hostname: <%= answer.ib_network_short_hostname %>
+    interface: <%= answer.ib_network_interface %>
+  ext:
+    defined: <%= answer.ext_network_defined %>
+    domain: <%= answer.ext_network_domain %>
+    ip: <%= answer.ext_network_ip %>
+    network: <%= answer.ext_network_network %>
+    netmask: <%= answer.ext_network_netmask %>
+    gateway: <%= answer.ext_network_gateway %>
+    short_hostname: <%= answer.ext_network_short_hostname %>
+    interface: <%= answer.ext_network_interface %>
+    firewallpolicy: external
+build_method: self
+files:
+  setup:
+    - setup/dns.sh
+    - setup/xinetd.sh
+    - setup/dhcp.sh
+    - setup/http.sh
+  main:
+    - setup/main.sh
+  core:
+    - core/network-base.sh
+    - core/network-ipmi.sh
+    - core/network-join.sh
+    - core/networking.sh
+    - core/configs/authorized_keys
+build:
+  pxeboot_path: /var/lib/tftpboot/boot
+ntp:
+  is_server: true
+rsyslog:
+  is_server: true

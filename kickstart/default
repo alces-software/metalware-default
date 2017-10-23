@@ -16,7 +16,7 @@ selinux --disabled
 #AUTH
 auth  --useshadow  --enablemd5
 #GENERATE with openssl passwd -1 $PASSWD
-rootpw --iscrypted <%= encrypted_root_password %>
+rootpw --iscrypted <%= config.encrypted_root_password %>
 
 #LOCALIZATION
 keyboard uk
@@ -38,7 +38,7 @@ exec 1>/tmp/ks-pre.log 2>&1
 DISKFILE=/tmp/disk.part
 bootloaderappend="console=tty0 console=ttyS1,115200n8"
 cat > $DISKFILE << EOF
-<%= disksetup %>
+<%= config.disksetup %>
 EOF
 %end
 
@@ -77,8 +77,8 @@ exec 1>/root/ks-post.log 2>&1
 
 # Example of using rendered Metalware file; this file itself also uses other
 # rendered files.
-curl <%= alces.files.main.first.url %> | /bin/bash | tee /tmp/metalware-default-output
+curl <%= node.files.main.first.url %> | /bin/bash | tee /tmp/metalware-default-output
 
-curl <%= alces.build_complete_url %>
+curl <%= node.build_complete_url %>
 
 %end
