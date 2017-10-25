@@ -18,7 +18,7 @@ options {
 
           forward first;
           forwarders {
-              <%= externaldns %>;
+              <%= config.externaldns %>;
           };
 
 };
