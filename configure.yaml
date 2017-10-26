@@ -78,6 +78,10 @@ questions:
     question: 'Network IP for the primary network'
     default: '10.10.0.0'
 
+  - &pri_network_gateway
+    identifier: pri_network_gateway
+    question: "Gateway IP for the primary network (usually the controller's primary IP)"
+
   - &pri_network_interface
     identifier: pri_network_interface
     question: 'Interface for the primary network'
@@ -113,6 +117,11 @@ questions:
     identifier: mgt_network_network
     question: 'Network IP for the management network'
     default: '10.11.0.0'
+
+  - &mgt_network_gateway
+    identifier: mgt_network_gateway
+    question: "Gateway IP for the management network"
+    default: ''
 
   - &mgt_network_interface
     identifier: mgt_network_interface
@@ -165,6 +174,11 @@ questions:
     identifier: ib_network_network
     question: 'Network IP for the InfiniBand network'
     default: '10.12.0.0'
+
+  - &ib_network_gateway
+    identifier: ib_network_gateway
+    question: "Gateway IP for the Infiniband network"
+    default: ''
 
   - &ib_network_interface
     identifier: ib_network_interface
