@@ -144,6 +144,11 @@ questions:
     question: 'IP for nodes on the bmc network'
     default: '10.11.<%= alces.group_index.to_i + 100%>.<%= alces.index %>'
 
+  - &bmc_network_vlan
+    identifier: bmc_network_vlan
+    question: 'BMC network VLAN channel ID (if applicable)'
+    default: ''
+
   - &bmc_password
     identifier: bmc_password
     question: 'Password for BMC device over LAN'
