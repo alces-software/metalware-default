@@ -67,9 +67,6 @@ EOF
 <% else -%>
 cat << EOF > /etc/chrony.conf
 server <%= ntp.server %> iburst
-server 0.centos.pool.ntp.org iburst
-server 1.centos.pool.ntp.org iburst
-server 2.centos.pool.ntp.org iburst
 
 driftfile /var/lib/ntp/drift
 EOF
