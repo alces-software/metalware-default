@@ -52,6 +52,11 @@ questions:
     question: 'PXELINUX template to use'
     default: 'default'
 
+  - &postfix_relay
+    identifier: postfix_relay
+    question: 'Postfix relay server for mail (usually the controller)'
+    default: 'controller.<%= networks.pri.domain %>.<%= domain %>'
+
   # Primary network.
   - &pri_network_defined
     identifier: pri_network_defined
@@ -243,6 +248,7 @@ domain:
   - *root_password
   - *root_ssh_key
   - *dns_type
+  - *postfix_relay
 
   - *pri_network_domain
   - *pri_network_ip

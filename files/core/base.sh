@@ -111,3 +111,11 @@ echo '*.* @<%= rsyslog.server %>:514' >> /etc/rsyslog.conf
 
 systemctl enable rsyslog
 systemctl restart rsyslog
+
+# Postfix setup
+yum -y install postfix
+<% if alces.nodename != 'self' -%>
+sed -n -e '/^relayhost\s*=/!p' -e '$arelayhost=[<%=postfix.relayhost%>]' /etc/postfix/main.cf -i
+<% end -%>
+systemctl enable postfix
+systemctl restart postfix

@@ -176,3 +176,6 @@ repoconfig:
   # The file for clients to curl containing repository information [OPTIONAL]
   # clientrepofile: http://myrepo.com/repo/client.repo
   clientrepofile: false
+
+postfix:
+  relayhost: "<%= alces.answers.postfix_relay %>"
