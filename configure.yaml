@@ -248,12 +248,14 @@ domain:
   - *pri_network_ip
   - *pri_network_netmask
   - *pri_network_network
+  - *pri_network_gateway
   - *pri_network_interface
 
   - *mgt_network_domain
   - *mgt_network_ip
   - *mgt_network_network
   - *mgt_network_netmask
+  - *mgt_network_gateway
   - *mgt_network_interface
 
   - *bmc_network_ip
@@ -263,6 +265,7 @@ domain:
   - *ib_network_ip
   - *ib_network_netmask
   - *ib_network_network
+  - *ib_network_gateway
   - *ib_network_interface
 
 
@@ -284,6 +287,7 @@ group:
   - *bmc_network_defined
   - *bmc_network_ip
   - *bmc_password
+  - *bmc_network_vlan
 
   - *ib_network_defined
   - *ib_network_ip
@@ -307,6 +311,7 @@ node:
   - *bmc_network_defined
   - *bmc_network_ip
   - *bmc_password
+  - *bmc_network_vlan
 
   - *ib_network_defined
   - *ib_network_ip
@@ -326,6 +331,7 @@ self:
   - *bmc_network_defined
   - *bmc_network_ip
   - *bmc_password
+  - *bmc_network_vlan
 
   - *ib_network_defined
   - *ib_network_ip
