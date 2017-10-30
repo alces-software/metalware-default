@@ -4,6 +4,6 @@ IFS=$'\n\t'
 
 exec 1>/tmp/metalware-default-output 2>&1
 
-/bin/bash /var/lib/metalware/rendered/self/main/main.sh
+/bin/bash /var/lib/metalware/rendered/local/main/main.sh
 
 touch <%= local.build_complete_path %>
