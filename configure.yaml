@@ -123,11 +123,6 @@ questions:
     question: 'Network IP for the management network'
     default: '10.11.0.0'
 
-  - &mgt_network_gateway
-    identifier: mgt_network_gateway
-    question: "Gateway IP for the management network"
-    default: ''
-
   - &mgt_network_interface
     identifier: mgt_network_interface
     question: 'Interface for the management network'
@@ -184,11 +179,6 @@ questions:
     identifier: ib_network_network
     question: 'Network IP for the InfiniBand network'
     default: '10.12.0.0'
-
-  - &ib_network_gateway
-    identifier: ib_network_gateway
-    question: "Gateway IP for the Infiniband network"
-    default: ''
 
   - &ib_network_interface
     identifier: ib_network_interface
@@ -261,7 +251,6 @@ domain:
   - *mgt_network_ip
   - *mgt_network_network
   - *mgt_network_netmask
-  - *mgt_network_gateway
   - *mgt_network_interface
 
   - *bmc_network_ip
@@ -271,7 +260,6 @@ domain:
   - *ib_network_ip
   - *ib_network_netmask
   - *ib_network_network
-  - *ib_network_gateway
   - *ib_network_interface
 
 
@@ -284,6 +272,7 @@ group:
 
   - *pri_network_defined
   - *pri_network_ip
+  - *pri_network_gateway
   - *pri_network_interface
 
   - *mgt_network_defined

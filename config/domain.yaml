@@ -43,7 +43,7 @@ networks:
     ip: "<%= alces.answers.mgt_network_ip %>"
     netmask: "<%= alces.answers.mgt_network_netmask %>"
     network: "<%= alces.answers.mgt_network_network %>"
-    gateway: "<%= alces.answers.mgt_network_gateway %>"
+    gateway:
     type:
     named_fwd_zone: "<%= networks.mgt.domain %>.<%= domain %>"
     named_rev_zone: <% split_net = alces.answers.mgt_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
@@ -58,7 +58,7 @@ networks:
     ip: "<%= alces.answers.ib_network_ip %>"
     netmask: "<%= alces.answers.ib_network_netmask %>"
     network: "<%= alces.answers.ib_network_network %>"
-    gateway: "<%= alces.answers.ib_network_gateway %>"
+    gateway:
     type:
     named_fwd_zone: "<%= networks.ib.domain %>.<%= domain %>"
     named_rev_zone: <% split_net = alces.answers.ib_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
