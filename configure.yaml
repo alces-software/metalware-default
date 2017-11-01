@@ -86,6 +86,7 @@ questions:
   - &pri_network_gateway
     identifier: pri_network_gateway
     question: "Gateway IP for the primary network (usually the controller's primary IP)"
+    default: '10.10.0.1'
 
   - &pri_network_interface
     identifier: pri_network_interface
