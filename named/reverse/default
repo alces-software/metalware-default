@@ -15,7 +15,7 @@ $TTL 300
 <%                 if network.defined -%>
 <%                     if network.network.to_s == alces.named.net.network.to_s -%>
 <% ip_split = network.ip.split(/\./) -%>
-<%= ip_split[3] %>.<%= ip_split[2] %> IN PTR <%= node.alces.nodename %>.<%= name %>.<%= domain %>.;
+<%= ip_split[3] %>.<%= ip_split[2] %> IN PTR <%= node.networks[name].hostname %>.;
 <%                     end -%>
 <%                 end -%>
 <%             end -%>

@@ -67,8 +67,9 @@ networks:
   bmc:
     defined: <%= alces.answers.bmc_network_defined %>
     interface: bmc
-    hostname: "<%= alces.nodename %>.bmc.<%= networks.mgt.domain %>.<%= domain %>"
-    short_hostname: "<%= alces.nodename %>.bmc"
+    hostname: "<%= alces.nodename %>.<%= networks.bmc.domain %>.<%= networks.mgt.domain %>.<%= domain %>"
+    domain: 'bmc'
+    short_hostname: "<%= alces.nodename %>.<%= networks.bmc.domain %>"
     ip: "<%= alces.answers.bmc_network_ip %>"
     netmask: "<%= alces.answers.mgt_network_netmask %>"
     network: "<%= alces.answers.mgt_network_network %>"
@@ -77,7 +78,6 @@ networks:
     bmcchannel: 1
     bmcuser: 2
     bmcvlan: <%= alces.answers.bmc_network_vlan %>
-    named_fwd_zone: "bmc.<%= domain %>"
     firewallpolicy: management
 
 disksetup: |

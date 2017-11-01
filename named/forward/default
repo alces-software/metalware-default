@@ -16,8 +16,8 @@ IN NS <%= alces.hostip %>.
 <%         group.nodes do |node| -%>
 <%             node.networks.each do |name, network| -%>
 <%                 if network.defined -%>
-<%                     if name.to_s == alces.named.zone.to_s -%>
-<%= node.alces.nodename %> IN A <%= network.ip %>;
+<%                     if network.network.to_s == alces.named.net.network.to_s -%>
+<%= node.alces.nodename %><%= if name.to_s == 'bmc' then '.bmc' else '' end %> IN A <%= network.ip %>;
 <%                     end -%>
 <%                 end -%>
 <%             end -%>

@@ -1,5 +1,6 @@
 <% networks.each do |zone, net| -%>
 <%     if net.defined -%>
+<%         next if zone.to_s == 'bmc' -%>
 zone "<%= zone %>.<%= domain %>." {
     type master;
     file "<%= net.named_fwd_zone %>";
