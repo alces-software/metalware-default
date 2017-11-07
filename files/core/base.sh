@@ -101,7 +101,7 @@ cat << EOF > /etc/logrotate.d/rsyslog-remote
 EOF
 firewall-cmd --add-port 514/udp --zone internal --permanent
 firewall-cmd --add-port 514/tcp --zone internal --permanent
-fiewall-cmd --reload
+firewall-cmd --reload
 <% else -%>
 echo '*.* @<%= rsyslog.server %>:514' >> /etc/rsyslog.conf
 <% end -%>

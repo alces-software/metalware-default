@@ -38,7 +38,6 @@ firewall-cmd --add-service <%= service %> --zone <%= zone %> --permanent
 <%         end -%>
 
 <%     end -%>
-firewall-cmd --reload
 
 # Add interfaces to zones
 <%     networks.each do |network, info| -%>
@@ -46,6 +45,8 @@ firewall-cmd --reload
 firewall-cmd --add-interface <%= info.interface %> --zone <%= info.firewallpolicy %> --permanent
 <%         end -%>
 <%     end -%>
+
+firewall-cmd --reload
 
 <% else -%>
 systemctl disable firewalld
