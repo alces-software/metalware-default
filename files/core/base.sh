@@ -68,6 +68,8 @@ EOF
 cat << EOF > /etc/chrony.conf
 server <%= ntp.server %> iburst
 
+makestep 360 10
+
 driftfile /var/lib/ntp/drift
 EOF
 <% end -%>
