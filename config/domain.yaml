@@ -9,7 +9,7 @@ ssh_key: '<%= alces.answers.root_ssh_key %>'
 
 # Generic networking properties.
 domain: <%= alces.answers.domain %>
-search_domains: "<%= networks.pri.domain %>.<%= domain %> <%= networks.mgt.domain %>.<%= domain %> <%= networks.ib.domain %>.<%= domain %> <%= domain %>"
+search_domains: "<% networks.each do |network, config| -%><%= config.domain %>.<%= domain %> <% end -%><%= domain %>"
 dns_type: "<%= alces.answers.dns_type %>"
 externaldns: <%= alces.answers.externaldns %>
 internaldns: <%= alces.answers.internaldns %>
@@ -117,9 +117,6 @@ disksetup: |
 #  part raid.04 --size=1 --ondisk sdb --asprimary --grow
 #
 #  raid /tmp --fstype ext4 --fstype=ext4 --device=md1 --level=0 raid.03 raid.04
-
-bond0_options: 'mode=1 primary=p3p2 miimon=80'
-bond0_interfaces: 'em1 em2 p3p2' # XXX Needed?
 
 templates:
   kickstart: <%= alces.answers.kickstart_template %>
