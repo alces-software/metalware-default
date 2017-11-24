@@ -37,6 +37,7 @@ files:
   main:
     - setup/main.sh
   core:
+    - core/base.sh
     - core/network-base.sh
     - core/network-ipmi.sh
     - core/network-join.sh
