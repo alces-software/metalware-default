@@ -1,8 +1,8 @@
 <% groups.each do |group| -%>
-<% if group.name == 'local' -%>
-local    local
-<% else -%>
+<% next if group.name == 'orphan' -%>
 <% additional_groups = group.answer.genders_additional_groups.empty? ? '' : ',' + group.answer.genders_additional_groups -%>
 <%= group.answer.genders_host_range %>    <%= group.name %><%= additional_groups %>
 <% end -%>
+<% orphan_list.each do |node| -%>
+<%= node %>    orphan
 <% end -%>
