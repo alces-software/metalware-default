@@ -129,9 +129,6 @@ files:
     - main.sh
   setup:
     - local-script.sh
-    - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
-    - non-existent-local-script.sh
-    - http://example.com/non-existent-remote-script.sh
   core:
     - core/base.sh
     - core/network-base.sh
@@ -141,10 +138,6 @@ files:
     - core/configs/authorized_keys
     - core/configs/ntp
   scripts:
-    - local-script.sh
-    - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
-    - non-existent-local-script.sh
-    - http://example.com/non-existent-remote-script.sh
 
 ntp:
   is_server: false
