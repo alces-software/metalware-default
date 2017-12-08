@@ -9,7 +9,7 @@ ssh_key: '<%= answer.root_ssh_key %>'
 
 # Generic networking properties.
 domain: <%= answer.domain %>
-search_domains: "<%= config.networks.pri.domain %>.<%= config.domain %> <%= config.networks.mgt.domain %>.<%= config.domain %> <%= config.networks.ib.domain %>.<%= config.domain %> <%= config.domain %>"
+search_domains: "<% config.networks.each do |network, details| -%><%= details.domain %>.<%= config.domain %> <% end -%><%= config.domain %>"
 dns_type: "<%= answer.dns_type %>"
 externaldns: <%= answer.externaldns %>
 internaldns: <%= answer.internaldns %>
@@ -27,7 +27,7 @@ networks:
     ip: "<%= answer.pri_network_ip %>"
     netmask: "<%= answer.pri_network_netmask %>"
     network: "<%= answer.pri_network_network %>"
-    gateway:
+    gateway: "<%= answer.pri_network_gateway %>"
     type:
     primary: true
     named_fwd_zone: "<%= config.networks.pri.domain %>.<%= config.domain %>"
@@ -67,8 +67,9 @@ networks:
   bmc:
     defined: <%= answer.bmc_network_defined %>
     interface: bmc
-    hostname: "<%= node.name %>.bmc.<%= config.networks.mgt.domain %>.<%= config.domain %>"
-    short_hostname: "<%= node.name %>.bmc"
+    hostname: "<%= config.networks.bmc.short_hostname %>.<%= config.networks.mgt.domain %>.<%= config.domain %>"
+    domain: 'bmc'
+    short_hostname: "<%= node.name %>.<%= config.networks.bmc.domain %>"
     ip: "<%= answer.bmc_network_ip %>"
     netmask: "<%= answer.mgt_network_netmask %>"
     network: "<%= answer.mgt_network_network %>"
@@ -76,7 +77,7 @@ networks:
     bmcpassword: "<%= answer.bmc_password %>"
     bmcchannel: 1
     bmcuser: 2
-    named_fwd_zone: "bmc.<%= config.domain %>"
+    bmcvlan: <%= answer.bmc_network_vlan %>
     firewallpolicy: management
 
 disksetup: |
@@ -131,9 +132,6 @@ files:
     - main.sh
   setup:
     - local-script.sh
-    - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
-    - non-existent-local-script.sh
-    - http://example.com/non-existent-remote-script.sh
   core:
     - core/base.sh
     - core/network-base.sh
@@ -144,9 +142,6 @@ files:
     - core/configs/ntp
   scripts:
     - local-script.sh
-    - https://raw.githubusercontent.com/alces-software/metalware-default/master/files/remote-script.sh
-    - non-existent-local-script.sh
-    - http://example.com/non-existent-remote-script.sh
 
 ntp:
   is_server: false
@@ -175,3 +170,5 @@ repoconfig:
   # The file for clients to curl containing repository information [OPTIONAL]
   # clientrepofile: http://myrepo.com/repo/client.repo
   clientrepofile: false
+postfix:
+  relayhost: "<%= answer.postfix_relay %>"
