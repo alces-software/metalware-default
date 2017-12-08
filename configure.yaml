@@ -52,6 +52,11 @@ questions:
     question: 'PXELINUX template to use'
     default: 'default'
 
+  - &postfix_relay
+    identifier: postfix_relay
+    question: 'Postfix relay server for mail (usually the controller)'
+    default: 'controller.<%= config.networks.pri.domain %>.<%= config.domain %>'
+
   # Primary network.
   - &pri_network_defined
     identifier: pri_network_defined
@@ -77,6 +82,11 @@ questions:
     identifier: pri_network_network
     question: 'Network IP for the primary network'
     default: '10.10.0.0'
+
+  - &pri_network_gateway
+    identifier: pri_network_gateway
+    question: "Gateway IP for the primary network (usually the controller's primary IP)"
+    default: '10.10.0.1'
 
   - &pri_network_interface
     identifier: pri_network_interface
@@ -134,6 +144,11 @@ questions:
     identifier: bmc_network_ip
     question: 'IP for nodes on the bmc network'
     default: '10.11.<%= node.group.index.to_i + 100%>.<%= node.index %>'
+
+  - &bmc_network_vlan
+    identifier: bmc_network_vlan
+    question: 'BMC network VLAN channel ID (if applicable)'
+    default: ''
 
   - &bmc_password
     identifier: bmc_password
@@ -224,11 +239,13 @@ domain:
   - *root_password
   - *root_ssh_key
   - *dns_type
+  - *postfix_relay
 
   - *pri_network_domain
   - *pri_network_ip
   - *pri_network_netmask
   - *pri_network_network
+  - *pri_network_gateway
   - *pri_network_interface
 
   - *mgt_network_domain
@@ -256,6 +273,7 @@ group:
 
   - *pri_network_defined
   - *pri_network_ip
+  - *pri_network_gateway
   - *pri_network_interface
 
   - *mgt_network_defined
@@ -265,6 +283,7 @@ group:
   - *bmc_network_defined
   - *bmc_network_ip
   - *bmc_password
+  - *bmc_network_vlan
 
   - *ib_network_defined
   - *ib_network_ip
@@ -288,6 +307,7 @@ node:
   - *bmc_network_defined
   - *bmc_network_ip
   - *bmc_password
+  - *bmc_network_vlan
 
   - *ib_network_defined
   - *ib_network_ip
