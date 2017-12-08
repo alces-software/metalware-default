@@ -1,8 +1,8 @@
 yum -y install tftp xinetd tftp-server syslinux syslinux-tftpboot php
 
 mkdir -p <%= config.build.pxeboot_path %>
-curl http://mirror.ox.ac.uk/sites/mirror.centos.org/7/os/x86_64/images/pxeboot/initrd.img > "<%= config.build.pxeboot_path %>/centos7-initrd.img"
-curl http://mirror.ox.ac.uk/sites/mirror.centos.org/7/os/x86_64/images/pxeboot/vmlinuz > "<%= config.build.pxeboot_path %>/centos7-kernel"
+curl <%= config.repoconfig.build_url %>/images/pxeboot/initrd.img > "<%= config.build.pxeboot_path %>/centos7-initrd.img"
+curl <%= config.repoconfig.build_url %>/images/pxeboot/vmlinuz > "<%= config.build.pxeboot_path %>/centos7-kernel"
 mkdir -p /var/lib/tftpboot/pxelinux.cfg/
 cat << EOF > /var/lib/tftpboot/pxelinux.cfg/default
 DEFAULT menu
