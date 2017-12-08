@@ -44,6 +44,8 @@ systemctl enable named
 systemctl stop named
 systemctl disable named
 
+yum install -y dnsmasq
+
 systemctl start dnsmasq
 systemctl enable dnsmasq
 <% end %>
