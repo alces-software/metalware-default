@@ -16,7 +16,7 @@ IN NS <%= domain.hostip %>.
 <%         group.nodes.each do |node| -%>
 <%             node.networks.each do |name, network| -%>
 <%                 if network.defined -%>
-<%                     if name.to_s == alces.named.zone.to_s -%>
+<%                     if network.network.to_s == alces.named.net.network.to_s -%>
 <%= node.node.name %> IN A <%= network.ip %>;
 <%                     end -%>
 <%                 end -%>
