@@ -7,7 +7,7 @@ omapi-port 7911;
 default-lease-time 43200;
 max-lease-time 86400;
 ddns-update-style none;
-option domain-name "<%= config.networks.pri.domain %>.<%= domain %>";
+option domain-name "<%= config.networks.pri.domain %>.<%= config.domain %>";
 option domain-name-servers <%= config.networks.pri.ip %>;
 option ntp-servers <%= config.networks.pri.ip %>;
 
