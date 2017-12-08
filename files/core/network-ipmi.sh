@@ -6,6 +6,7 @@
 BMCPASSWORD="<%= config.networks.bmc.bmcpassword %>"
 BMCCHANNEL="<%= config.networks.bmc.bmcchannel %>"
 BMCUSER="<%= config.networks.bmc.bmcuser %>"
+BMCVLAN="<%= config.networks.bmc.bmcvlan %>"
 
 # XXX Is the following still needed now defining IPs in configs?
 #No IP has been given, use the hosts file as a lookup table
@@ -28,6 +29,10 @@ if ! [ -z "$HOSTNAME" ]; then
     sleep 2
     ipmitool lan set "$BMCCHANNEL" defgw ipaddr "$GATEWAY"
     sleep 2
+    if ! [ -z "${BMCVLAN}" ] ; then
+        ipmitool lan set "$BMCCHANNEL" vlan id "${BMCVLAN}"
+        sleep 2
+    fi
     ipmitool user set name "$BMCUSER" admin
     sleep 2
     ipmitool user set password "$BMCUSER" "$BMCPASSWORD"
