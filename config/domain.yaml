@@ -118,9 +118,6 @@ disksetup: |
 #
 #  raid /tmp --fstype ext4 --fstype=ext4 --device=md1 --level=0 raid.03 raid.04
 
-bond0_options: 'mode=1 primary=p3p2 miimon=80'
-bond0_interfaces: 'em1 em2 p3p2' # XXX Needed?
-
 templates:
   kickstart: <%= answer.kickstart_template %>
   pxelinux: <%= answer.pxelinux_template %>
