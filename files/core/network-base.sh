@@ -23,8 +23,8 @@ EOF
 
 <% if config.firewall.enabled -%>
 systemctl enable firewalld
-systemctl start firewalld
 
+cat << EOF > /var/lib/firstrun/scripts/firewall_main.bash
 <%     config.firewall.each do |zone, info| -%>
 <%     next if zone.to_s == 'enabled' -%>
 # Create zone
@@ -38,7 +38,6 @@ firewall-cmd --add-service <%= service %> --zone <%= zone %> --permanent
 <%         end -%>
 
 <%     end -%>
-firewall-cmd --reload
 
 # Add interfaces to zones
 <%     config.networks.each do |network, info| -%>
@@ -46,7 +45,8 @@ firewall-cmd --reload
 firewall-cmd --add-interface <%= info.interface %> --zone <%= info.firewallpolicy %> --permanent
 <%         end -%>
 <%     end -%>
-
+firewall-cmd --reload
+EOF
 <% else -%>
 systemctl disable firewalld
 systemctl stop firewalld
