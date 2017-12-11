@@ -16,6 +16,10 @@ internaldns: <%= answer.internaldns %>
 kernelappendoptions: ""
 jobid: ""
 
+# IPMI configuration
+ipmi_username: <%= answer.ipmi_username %>
+ipmi_password: <%= answer.ipmi_password %>
+
 # Properties for specific config.networks.
 networks:
   pri:

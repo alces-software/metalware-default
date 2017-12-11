@@ -57,6 +57,16 @@ questions:
     question: 'Postfix relay server for mail (usually the controller)'
     default: 'controller.<%= config.networks.pri.domain %>.<%= config.domain %>'
 
+  - &ipmi_username
+    identifier: ipmi_username
+    question: 'IPMI username'
+    default: 'admin'
+
+  - &ipmi_password
+    identifier: ipmi_password
+    question: 'IPMI password'
+    default: 'Pa55Word'
+
   # Primary network.
   - &pri_network_defined
     identifier: pri_network_defined
