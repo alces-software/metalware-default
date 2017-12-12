@@ -1,4 +1,4 @@
-<% if config.dns_type == 'named' then %>
+<% if config.dns_type.to_s == 'named' then %>
 yum -y install bind bind-utils
 
 cat << EOF > /etc/named.conf
