@@ -28,7 +28,7 @@ mkdir -p /opt/alces/installers
 mkdir -p /var/lib/metalware/rendered/exec/
 cat << 'EOF' > /var/lib/metalware/rendered/exec/kscomplete.php
 <?php
-$cmd="touch /var/lib/metalware/cache/built-nodes/metalwarebooter." . $_GET['name'];
+$cmd="mkdir -p /var/lib/metalware/events/{$_GET['name']} && echo {$_GET['msg']} > /var/lib/metalware/events/{$_GET['name']}/{$_GET['event']}";
 exec($cmd);
 ?>
 EOF

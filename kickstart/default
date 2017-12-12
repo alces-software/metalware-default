@@ -31,6 +31,7 @@ url --url=<%= config.repoconfig.build_url %>
 
 #PRESCRIPT
 %pre
+curl '<%= node.build_complete_url %>&event=stage1&msg=Formatting%20disk'
 set -x -v
 exec 1>/tmp/ks-pre.log 2>&1
 
@@ -39,6 +40,7 @@ bootloaderappend="console=tty0 console=ttyS1,115200n8"
 cat > $DISKFILE << EOF
 <%= config.disksetup %>
 EOF
+curl '<%= node.build_complete_url %>&event=stage2&msg=Installing%20packages'
 %end
 
 #PACKAGES
@@ -71,6 +73,7 @@ ntpdate 0.centos.pool.ntp.org
 
 %end
 %post
+curl '<%= node.build_complete_url %>&event=stage3&msg=Running%20post%20scripts'
 set -x -v
 exec 1>/root/ks-post.log 2>&1
 
@@ -78,6 +81,6 @@ exec 1>/root/ks-post.log 2>&1
 # rendered files.
 curl <%= node.files.main.first.url %> | /bin/bash | tee /tmp/metalware-default-output
 
-curl <%= node.build_complete_url %>
+curl '<%= node.build_complete_url %>&event=complete&msg=Build%20is%20complete'
 
 %end
