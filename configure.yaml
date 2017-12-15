@@ -231,6 +231,10 @@ questions:
     question: 'Hostname for node EXT'
     default: 'controller.<%= config.networks.ext.domain %>'
 
+  - &libvirt_host
+    identifier: libvirt_host
+    question: 'Libvirt master hostname'
+
 domain:
   - *cluster_name
   - *domain
@@ -314,6 +318,8 @@ node:
   - *ib_network_interface
 
 local:
+  - *libvirt_host
+
   - *pri_network_defined
   - *pri_network_ip
   - *pri_network_interface
