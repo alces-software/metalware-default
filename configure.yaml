@@ -235,6 +235,10 @@ questions:
     identifier: libvirt_host
     question: 'Libvirt master hostname'
 
+  - &is_vm
+    identifier: is_vm
+    question: 'Define if a group or node is a VM'
+
 domain:
   - *cluster_name
   - *domain
@@ -293,6 +297,8 @@ group:
   - *ib_network_ip
   - *ib_network_interface
 
+  - *is_vm
+
 
 node:
   - *root_password
@@ -316,6 +322,8 @@ node:
   - *ib_network_defined
   - *ib_network_ip
   - *ib_network_interface
+
+  - *is_vm
 
 local:
   - *libvirt_host
