@@ -11,11 +11,11 @@ $TTL 300
 
 <%     groups.each do |group| -%>
 <%         group.nodes.each do |node| -%>
-<%             node.networks.each do |name, network| -%>
+<%             node.config.networks.each do |name, network| -%>
 <%                 if network.defined -%>
 <%                     if network.network.to_s == alces.named.net.network.to_s -%>
 <% ip_split = network.ip.split(/\./) -%>
-<%= ip_split[3] %>.<%= ip_split[2] %> IN PTR <%= node.networks[name].hostname %>.;
+<%= ip_split[3] %>.<%= ip_split[2] %> IN PTR <%= node.config.networks[name].hostname %>.;
 <%                     end -%>
 <%                 end -%>
 <%             end -%>

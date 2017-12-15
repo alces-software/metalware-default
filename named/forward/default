@@ -8,16 +8,16 @@ $TTL 300
                                         )
 
                         IN      NS      <%= domain.hostip %>.
-@       IN MX   <%= alces.named.net.network.split(/\./).first %>  <%= alces.named.net.hostname[1..-1] %>.
+@       IN MX   <%= alces.named.net.network.split(/\./).first %>  <%= alces.named.net.domain %>.<%= config.domain %>
 
 IN NS <%= domain.hostip %>.
 
 <%     groups.each do |group| -%>
 <%         group.nodes.each do |node| -%>
-<%             node.networks.each do |name, network| -%>
+<%             node.config.networks.each do |name, network| -%>
 <%                 if network.defined -%>
 <%                     if network.network.to_s == alces.named.net.network.to_s -%>
-<%= node.node.name %> IN A <%= network.ip %>;
+<%= node.name %> IN A <%= network.ip %>;
 <%                     end -%>
 <%                 end -%>
 <%             end -%>
