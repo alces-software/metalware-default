@@ -298,6 +298,7 @@ group:
   - *ib_network_interface
 
   - *is_vm
+  - *libvirt_host
 
 
 node:
@@ -324,6 +325,7 @@ node:
   - *ib_network_interface
 
   - *is_vm
+  - *libvirt_host
 
 local:
   - *libvirt_host
