@@ -1,0 +1,3 @@
+
+is_vm: '<%= answer.is_vm %>'
+libvirt_host: '<%= answer.libvirt_host %>
