@@ -239,6 +239,7 @@ questions:
   - &is_vm
     identifier: is_vm
     question: 'Define if a group or node is a VM'
+    type: 'boolean'
     default: false
 
 domain:
