@@ -17,7 +17,7 @@ IN NS <%= domain.hostip %>.
 <%             node.config.networks.each do |name, network| -%>
 <%                 if network.defined -%>
 <%                     if network.network.to_s == alces.named.net.network.to_s -%>
-<%= node.config.networks[name].hostname.split(/\./).first %> IN A <%= network.ip %>;
+<%= node.config.networks[name].hostname.split(/\./).first %><%= if name.to_s == 'bmc' then '.bmc' else '' end %> IN A <%= network.ip %>;
 <%                     end -%>
 <%                 end -%>
 <%             end -%>
