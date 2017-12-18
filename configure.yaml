@@ -234,10 +234,12 @@ questions:
   - &libvirt_host
     identifier: libvirt_host
     question: 'Libvirt master hostname'
+    default: '127.0.0.1'
 
   - &is_vm
     identifier: is_vm
     question: 'Define if a group or node is a VM'
+    default: false
 
 domain:
   - *cluster_name
