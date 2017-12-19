@@ -7,7 +7,7 @@ run_script network-base
 
 <% config.networks.each do |name, network| %>
 <% if network.defined %>
-export NET="<%= name %>"
+export NET="<%= network.domain %>"
 export INTERFACE="<%= network.interface %>"
 export HOSTNAME="<%= network.hostname %>"
 export IP="<%= network.ip %>"
