@@ -17,7 +17,7 @@ EOF
 <% else %>
 cat << EOF > /etc/resolv.conf
 search <%= config.search_domains %>
-nameserver <%= externaldns %>
+nameserver <%= config.externaldns %>
 EOF
 <% end %>
 
