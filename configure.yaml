@@ -271,23 +271,27 @@ group:
   - *kickstart_template
   - *pxelinux_template
 
-  - *pri_network_defined
-  - *pri_network_ip
-  - *pri_network_gateway
-  - *pri_network_interface
+  - <<: *pri_network_defined
+    dependent:
+    - *pri_network_ip
+    - *pri_network_gateway
+    - *pri_network_interface
 
-  - *mgt_network_defined
-  - *mgt_network_ip
-  - *mgt_network_interface
+  - <<: *mgt_network_defined
+    dependent:
+    - *mgt_network_ip
+    - *mgt_network_interface
 
-  - *bmc_network_defined
-  - *bmc_network_ip
-  - *bmc_password
-  - *bmc_network_vlan
+  - <<: *bmc_network_defined
+    dependent:
+    - *bmc_network_ip
+    - *bmc_password
+    - *bmc_network_vlan
 
-  - *ib_network_defined
-  - *ib_network_ip
-  - *ib_network_interface
+  - <<: *ib_network_defined
+    dependent:
+    - *ib_network_ip
+    - *ib_network_interface
 
 
 node:
@@ -296,48 +300,57 @@ node:
   - *kickstart_template
   - *pxelinux_template
 
-  - *pri_network_defined
-  - *pri_network_ip
-  - *pri_network_interface
+  - <<: *pri_network_defined
+    dependent:
+    - *pri_network_ip
+    - *pri_network_interface
 
-  - *mgt_network_defined
-  - *mgt_network_ip
-  - *mgt_network_interface
+  - <<: *mgt_network_defined
+    dependent:
+    - *mgt_network_ip
+    - *mgt_network_interface
 
-  - *bmc_network_defined
-  - *bmc_network_ip
-  - *bmc_password
-  - *bmc_network_vlan
+  - <<: *bmc_network_defined
+    dependent:
+    - *bmc_network_ip
+    - *bmc_password
+    - *bmc_network_vlan
 
-  - *ib_network_defined
-  - *ib_network_ip
-  - *ib_network_interface
+  - <<: *ib_network_defined
+    dependent:
+    - *ib_network_ip
+    - *ib_network_interface
 
 local:
-  - *pri_network_defined
-  - *pri_network_ip
-  - *pri_network_interface
-  - *pri_network_short_hostname
+  - <<: *pri_network_defined
+    dependent:
+    - *pri_network_ip
+    - *pri_network_interface
+    - *pri_network_short_hostname
 
-  - *mgt_network_defined
-  - *mgt_network_ip
-  - *mgt_network_interface
-  - *mgt_network_short_hostname
+  - <<: *mgt_network_defined
+    dependent:
+    - *mgt_network_ip
+    - *mgt_network_interface
+    - *mgt_network_short_hostname
 
-  - *bmc_network_defined
-  - *bmc_network_ip
-  - *bmc_password
+  - <<: *bmc_network_defined
+    dependent:
+    - *bmc_network_ip
+    - *bmc_password
 
-  - *ib_network_defined
-  - *ib_network_ip
-  - *ib_network_interface
-  - *ib_network_short_hostname
+  - <<: *ib_network_defined
+    dependent:
+    - *ib_network_ip
+    - *ib_network_interface
+    - *ib_network_short_hostname
 
-  - *ext_network_defined
-  - *ext_network_domain
-  - *ext_network_ip
-  - *ext_network_network
-  - *ext_network_netmask
-  - *ext_network_interface
-  - *ext_network_gateway
-  - *ext_network_short_hostname
+  - <<: *ext_network_defined
+    dependent:
+    - *ext_network_domain
+    - *ext_network_ip
+    - *ext_network_network
+    - *ext_network_netmask
+    - *ext_network_interface
+    - *ext_network_gateway
+    - *ext_network_short_hostname
