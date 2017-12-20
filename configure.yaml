@@ -231,6 +231,17 @@ questions:
     question: 'Hostname for node EXT'
     default: 'controller.<%= config.networks.ext.domain %>'
 
+  - &libvirt_host
+    identifier: libvirt_host
+    question: 'Libvirt master hostname'
+    default: '127.0.0.1'
+
+  - &is_vm
+    identifier: is_vm
+    question: 'Define if a group or node is a VM'
+    type: 'boolean'
+    default: false
+
 domain:
   - *cluster_name
   - *domain
@@ -289,6 +300,9 @@ group:
   - *ib_network_ip
   - *ib_network_interface
 
+  - *is_vm
+  - *libvirt_host
+
 
 node:
   - *root_password
@@ -313,7 +327,12 @@ node:
   - *ib_network_ip
   - *ib_network_interface
 
+  - *is_vm
+  - *libvirt_host
+
 local:
+  - *libvirt_host
+
   - *pri_network_defined
   - *pri_network_ip
   - *pri_network_interface
