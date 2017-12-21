@@ -275,6 +275,11 @@ questions:
     type: 'integer'
     default: 8
 
+  - &vm_disk_pool
+    identifier: vm_disk_pool
+    question: 'Specify the location VM disks are stored on the Libvirt host'
+    default: '/opt/vm'
+
 domain:
   - *cluster_name
   - *domain
@@ -345,6 +350,7 @@ group:
     - *vm_memory
     - *vm_cpus
     - *vm_root_disk_size
+      *vm_disk_pool
 
 
 node:
@@ -379,6 +385,7 @@ node:
     - *vm_memory
     - *vm_cpus
     - *vm_root_disk_size
+    - *vm_disk_pool
 
 local:
   - <<: *pri_network_defined

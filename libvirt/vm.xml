@@ -1,4 +1,4 @@
-<domain type='kvm' id='60'>
+<domain type='kvm'>
   <name><%= node.name %></name>
   <memory unit='GiB'><%= node.answer.vm_memory %></memory>
   <vcpu placement='static'><%= node.answer.vm_cpus %></vcpu>
@@ -27,6 +27,12 @@
     <suspend-to-disk enabled='no'/>
   </pm>
   <devices>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+      <source file='<%= answer.vm_disk_pool %>/%<= node.name %>-root.qcow2'/>
+      <target dev='vda' bus='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x08' function='0x0'/>
+    </disk>
     <controller type='virtio-serial' index='0'>
       <alias name='virtio-serial0'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
