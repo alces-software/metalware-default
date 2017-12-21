@@ -269,6 +269,12 @@ questions:
     type: 'integer'
     default: 1
 
+  - &vm_root_disk_size
+    identifier: vm_root_disk_size
+    question: 'Size of the VM root disk to allocate in GB'
+    type: 'integer'
+    default: 8
+
 domain:
   - *cluster_name
   - *domain
@@ -338,6 +344,7 @@ group:
     dependent:
     - *vm_memory
     - *vm_cpus
+    - *vm_root_disk_size
 
 
 node:
@@ -371,6 +378,7 @@ node:
     dependent:
     - *vm_memory
     - *vm_cpus
+    - *vm_root_disk_size
 
 local:
   - <<: *pri_network_defined
