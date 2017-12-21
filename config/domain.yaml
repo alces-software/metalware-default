@@ -169,3 +169,7 @@ repoconfig:
   clientrepofile: false
 postfix:
   relayhost: "<%= answer.postfix_relay %>"
+
+is_vm: '<%= answer.is_vm %>'
+vm_memory: '<%= answer.vm_memory %>'
+vm_cpus: '<%= answer.vm_cpus %>'

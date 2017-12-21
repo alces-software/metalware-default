@@ -231,6 +231,23 @@ questions:
     question: 'Hostname for node EXT'
     default: 'controller.<%= config.networks.ext.domain %>'
 
+  - &is_vm
+    identifier: is_vm
+    question: 'Indiciate whether a node or group is a VM'
+    type: 'boolean'
+
+  - &vm_memory
+    identifier: vm_memory
+    question: 'Amount of memory to allocate to a VM in GiB'
+    type: 'integer'
+    default: 4
+
+  - &vm_cpus
+    identifier: vm_cpus
+    question: 'Number of CPU cores to allocate to a VM'
+    type: 'integer'
+    default: 1
+
 domain:
   - *cluster_name
   - *domain
@@ -293,6 +310,11 @@ group:
     - *ib_network_ip
     - *ib_network_interface
 
+  - <<: *is_vm
+    dependent:
+    - *vm_memory
+    - *vm_cpus
+
 
 node:
   - *root_password
@@ -320,6 +342,11 @@ node:
     dependent:
     - *ib_network_ip
     - *ib_network_interface
+
+  - <<: *is_vm
+    dependent:
+    - *vm_memory
+    - *vm_cpus
 
 local:
   - <<: *pri_network_defined
