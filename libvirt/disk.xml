@@ -1,0 +1,21 @@
+<volume type='file'>
+  <name><%= node.name %></name>
+  <key><%= node.answer.vm_disk_pool %>/<%= node.name %>-root.qcow2</key>
+  <source>
+  </source>
+  <capacity unit='bytes'>17179869184</capacity>
+  <allocation unit='bytes'>1932922880</allocation>
+  <target>
+    <path><%= node.answer.vm_disk_pool %>/<%= node.name %>.qcow2</path>
+    <format type='qcow2'/>
+    <permissions>
+      <mode>0600</mode>
+      <owner>0</owner>
+      <group>0</group>
+    </permissions>
+    <compat>1.1</compat>
+    <features>
+      <lazy_refcounts/>
+    </features>
+  </target>
+</volume>
