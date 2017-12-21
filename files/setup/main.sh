@@ -16,6 +16,9 @@ export -f install_file
 
 echo
 
+echo 'Setting root password'
+usermod --password '<%= config.encrypted_root_password %>' root
+
 echo 'Running platform setup scripts:'
 for script in $CORE_DIR/../platform/* ; do
     bash $script
