@@ -9,7 +9,7 @@
     <path><%= node.answer.vm_disk_pool_path %>/<%= node.name %></path>
     <format type='qcow2'/>
     <permissions>
-      <mode>0600</mode>
+      <mode>0644</mode>
       <owner>0</owner>
       <group>0</group>
     </permissions>
