@@ -37,6 +37,27 @@ questions:
     identifier: genders_host_range
     question: "Genders host range specifier for this group, e.g. 'node01,node[05-08]'"
 
+  - &genders_host_type
+    identifier: genders_host_type
+    question: 'What type of machines are in this group?'
+    default: 'physical'
+    choices:
+      - 'physical'
+      - 'virtual'
+
+  - &genders_host_role
+    identifier: genders_host_role
+    question: 'What are the roles of machines in the group?'
+    default: 'compute'
+    choices:
+      - 'compute'
+      - 'service'
+
+  - &genders_all_group
+    identifier: genders_all_group
+    question: 'Include these nodes in the `all` group?'
+    type: 'boolean'
+
   - &genders_additional_groups
     identifier: genders_additional_groups
     question: "Additional genders groups for this group, e.g. 'gpunodes,nodes'; the group being configured is the primary group"
@@ -266,6 +287,9 @@ domain:
 
 group:
   - *genders_host_range
+  - *genders_host_type
+  - *genders_host_role
+  - *genders_all_group
   - *genders_additional_groups
 
   - *kickstart_template

@@ -1,7 +1,7 @@
 <% groups.each do |group| -%>
 <% next if group.name == 'orphan' -%>
 <% additional_groups = group.answer.genders_additional_groups.empty? ? '' : ',' + group.answer.genders_additional_groups -%>
-<%= group.answer.genders_host_range %>    <%= group.name %><%= additional_groups %>
+<%= group.answer.genders_host_range %>    <%= group.name %>,<%= group.answer.genders_host_type %>, <%= group.answer.genders_host_role %><%= additional_groups %><%= if group.answer.genders_all_group then ',all' else '' end %>
 <% end -%>
 <% orphan_list.each do |node| -%>
 <%= node %>    orphan
