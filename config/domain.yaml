@@ -9,7 +9,7 @@ ssh_key: '<%= answer.root_ssh_key %>'
 
 # Generic networking properties.
 domain: <%= answer.domain %>
-search_domains: "<% config.networks.each do |network, details| -%><%= details.domain %>.<%= config.domain %> <% end -%><%= config.domain %>"
+search_domains: "<% config.networks.each do |network, details| -%><%= details.domain %><%= if network.to_s == 'bmc' then '.mgt' else '' end %>.<%= config.domain %> <% end -%><%= config.domain %>"
 dns_type: "<%= answer.dns_type %>"
 externaldns: <%= answer.externaldns %>
 internaldns: <%= answer.internaldns %>
