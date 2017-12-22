@@ -39,7 +39,7 @@
     </controller>
     <% if node.config.networks.pri.defined -%>
     <interface type='bridge'>
-      <source bridge='pri'/>
+      <source bridge='prv'/>
       <target dev='vnet10'/>
       <model type='virtio'/>
       <alias name='net0'/>
