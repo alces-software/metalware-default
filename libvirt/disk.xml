@@ -6,7 +6,7 @@
   <capacity unit='bytes'>17179869184</capacity>
   <allocation unit='bytes'>1932922880</allocation>
   <target>
-    <path><%= node.answer.vm_disk_pool %>/<%= node.name %>.qcow2</path>
+    <path><%= node.answer.vm_disk_pool_path %>/<%= node.name %>.qcow2</path>
     <format type='qcow2'/>
     <permissions>
       <mode>0600</mode>

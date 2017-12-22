@@ -280,8 +280,13 @@ questions:
 
   - &vm_disk_pool
     identifier: vm_disk_pool
-    question: 'Specify the location VM disks are stored on the Libvirt host'
+    question: 'Specify the Libvirt disk pool name'
     default: 'vm'
+
+  - &vm_disk_pool_path
+    identifier: vm_disk_pool_path
+    question: 'Specify the Libvirt disk pool path'
+    default: '/opt/vm'
 
 domain:
   - *cluster_name
@@ -355,6 +360,7 @@ group:
     - *vm_cpus
     - *vm_root_disk_size
     - *vm_disk_pool
+    - *vm_disk_pool_path
 
 node:
   - *root_password
@@ -390,6 +396,7 @@ node:
     - *vm_cpus
     - *vm_root_disk_size
     - *vm_disk_pool
+    - *vm_disk_pool_path
 
 local:
   - <<: *pri_network_defined
