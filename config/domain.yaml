@@ -80,32 +80,34 @@ networks:
     bmcvlan: <%= answer.bmc_network_vlan %>
     firewallpolicy: management
 
+disklabel: 'sda'
 disksetup: |
   zerombr
-  bootloader --location=mbr --driveorder=sda --append="$bootloaderappend"
+  bootloader --location=mbr --driveorder=<%= config.disklabel %> --append="$bootloaderappend"
   clearpart --all --initlabel
 
   #Disk partitioning information
-  part /boot --fstype ext4 --size=4096 --asprimary --ondisk sda
-  part pv.01 --size=1 --grow --asprimary --ondisk sda
+  part /boot --fstype ext4 --size=4096 --asprimary --ondisk <%= config.disklabel %>
+  part pv.01 --size=1 --grow --asprimary --ondisk <%= config.disklabel %>
   volgroup system pv.01
   logvol  /  --fstype ext4 --vgname=system  --size=16384 --name=root
   logvol  /var --fstype ext4 --vgname=system --size=16384 --name=var
   logvol  /tmp --fstype ext4 --vgname=system --size=1 --grow --name=tmp
   logvol  swap  --fstype swap --vgname=system  --size=8096  --name=swap1
 
+#disklabel2: 'sdb'
 #disksetup: |
 #  zerombr
 #
-#  bootloader --location=mbr --driveorder=sda --append="$bootloaderappend"
+#  bootloader --location=mbr --driveorder=<%= config.disklabel %> --append="$bootloaderappend"
 #  clearpart --all --initlabel
 #
 #  #Disk partitioning information
-#  part /boot --fstype ext4 --size=1024 --asprimary --ondisk sda
-#  part /boot2 --fstype ext4 --size=1024 --asprimary --ondisk sdb
+#  part /boot --fstype ext4 --size=1024 --asprimary --ondisk <%= config.disklabel %>
+#  part /boot2 --fstype ext4 --size=1024 --asprimary --ondisk <%= config.disklabel2 %>
 #
-#  part raid.01 --size 60000 --ondisk sda --asprimary
-#  part raid.02 --size 60000 --ondisk sdb --asprimary
+#  part raid.01 --size 60000 --ondisk <%= config.disklabel %> --asprimary
+#  part raid.02 --size 60000 --ondisk <%= config.disklabel2 %> --asprimary
 #
 #  raid pv.01 --level=1 --fstype=ext4 --device=md0 raid.01 raid.02
 #  volgroup system pv.01
@@ -113,8 +115,8 @@ disksetup: |
 #  logvol  /var  --fstype ext4 --vgname=system  --size=16384  --name=var
 #  logvol  swap  --fstype swap --vgname=system  --size=16384  --name=swap1
 #
-#  part raid.03 --size=1 --ondisk sda --asprimary --grow
-#  part raid.04 --size=1 --ondisk sdb --asprimary --grow
+#  part raid.03 --size=1 --ondisk <%= config.disklabel %> --asprimary --grow
+#  part raid.04 --size=1 --ondisk <%= config.disklabel2 %> --asprimary --grow
 #
 #  raid /tmp --fstype ext4 --fstype=ext4 --device=md1 --level=0 raid.03 raid.04
 
