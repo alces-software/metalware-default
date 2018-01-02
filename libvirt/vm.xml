@@ -39,6 +39,7 @@
     </controller>
     <% if node.config.networks.pri.defined -%>
     <interface type='bridge'>
+      <mac address='<%= answer.vm_mac_address_build %>'/>
       <source bridge='prv'/>
       <target dev='vnet10'/>
       <model type='virtio'/>
