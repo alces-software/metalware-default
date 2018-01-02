@@ -270,7 +270,7 @@ questions:
   - &vm_mac_address_build
     identifier: vm_mac_address_build
     question: 'Build network interface MAC address'
-    default: '<%= (1..6).map{"%0.2X"%rand(256)}.join(":") %>'
+    default: '00:<%= (1..5).map{"%0.2X"%rand(256)}.join(":") %>'
 
 domain:
   - *cluster_name
