@@ -288,6 +288,11 @@ questions:
     question: 'Specify the Libvirt disk pool path'
     default: '/opt/vm'
 
+  - &vm_mac_address_build
+    identifier: vm_mac_address_build
+    question: 'Build network interface MAC address'
+    default: '<%= (1..6).map{"%0.2X"%rand(256)}.join(":") %>'
+
 domain:
   - *cluster_name
   - *domain
@@ -397,6 +402,7 @@ node:
     - *vm_root_disk_size
     - *vm_disk_pool
     - *vm_disk_pool_path
+    - *vm_mac_address_build
 
 local:
   - <<: *pri_network_defined
