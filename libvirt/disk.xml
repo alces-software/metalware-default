@@ -3,8 +3,7 @@
   <key><%= node.answer.vm_disk_pool %>/<%= node.name %></key>
   <source>
   </source>
-  <capacity unit='GiB'><%= node.answer.vm_root_disk_size %></capacity>
-  <allocation unit='GiB'><%= node.answer.vm_root_disk_size %></allocation>
+  <capacity unit='G'><%= node.answer.vm_root_disk_size %></capacity>
   <target>
     <path><%= node.answer.vm_disk_pool_path %>/<%= node.name %></path>
     <format type='qcow2'/>
