@@ -173,6 +173,7 @@ postfix:
   relayhost: "<%= answer.postfix_relay %>"
 
 is_vm: '<%= answer.is_vm %>'
+libvirt_host: '<%= answer.libvirt_host %>'
 vm_memory: '<%= answer.vm_memory %>'
 vm_cpus: '<%= answer.vm_cpus %>'
 vm_root_disk_size: '<%= answer.vm_root_disk_size %>'
