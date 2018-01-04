@@ -36,7 +36,7 @@ set -x -v
 exec 1>/tmp/ks-pre.log 2>&1
 
 DISKFILE=/tmp/disk.part
-bootloaderappend="console=tty0 console=ttyS1,115200n8"
+bootloaderappend="<%= config.kernelappendoptions %>"
 cat > $DISKFILE << EOF
 <%= config.disksetup %>
 EOF

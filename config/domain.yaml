@@ -13,7 +13,7 @@ search_domains: "<% config.networks.each do |network, details| -%><%= details.do
 dns_type: "<%= answer.dns_type %>"
 externaldns: <%= answer.externaldns %>
 internaldns: <%= answer.internaldns %>
-kernelappendoptions: ""
+kernelappendoptions: "console=tty0 console=ttyS1,115200n8"
 jobid: ""
 
 # Properties for specific config.networks.
