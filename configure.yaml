@@ -133,7 +133,7 @@ questions:
   - &mgt_network_ip
     identifier: mgt_network_ip
     question: 'IP for nodes on the management network'
-    default: '10.11.<%= node.group.index %>.<%= node.index %>'
+    default: '10.11.<%= node.group.index.to_i + 100 %>.<%= node.index %>'
 
   - &mgt_network_netmask
     identifier: mgt_network_netmask
@@ -164,7 +164,7 @@ questions:
   - &bmc_network_ip
     identifier: bmc_network_ip
     question: 'IP for nodes on the bmc network'
-    default: '10.11.<%= node.group.index.to_i + 100%>.<%= node.index %>'
+    default: '10.11.<%= node.group.index %>.<%= node.index %>'
 
   - &bmc_network_vlan
     identifier: bmc_network_vlan
