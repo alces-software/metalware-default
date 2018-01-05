@@ -253,7 +253,7 @@ questions:
 
   - &is_vm
     identifier: is_vm
-    question: 'Indiciate whether a node or group is a VM'
+    question: 'Indicate whether a node or group is a VM'
     type: 'boolean'
 
   - &libvirt_host
