@@ -29,7 +29,7 @@
   <devices>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2'/>
-      <source file='<%= answer.vm_disk_pool_path %>/<%= node.name %>'/>
+      <source file='<%= node.answer.vm_disk_pool_path %>/<%= node.name %>'/>
       <target dev='vda' bus='virtio'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x08' function='0x0'/>
     </disk>
@@ -39,7 +39,7 @@
     </controller>
     <% if node.config.networks.pri.defined -%>
     <interface type='bridge'>
-      <mac address='<%= answer.vm_mac_address_build %>'/>
+      <mac address='<%= node.answer.vm_mac_address_build %>'/>
       <source bridge='prv'/>
       <target dev='vnet10'/>
       <model type='virtio'/>
