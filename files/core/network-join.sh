@@ -3,30 +3,34 @@
 #Job ID: <%= config.jobid %>
 #Cluster: <%= config.cluster %>
 
-# XXX Is the following still needed now defining IPs in configs?
-#No IP has been given, use the hosts file as a lookup table
-if [ -z "${IP}" ]; then
-  IP="$(getent hosts | grep "$HOSTNAME" | awk ' { print $1 }')"
-fi
-
 echo "Running network configuration for NET:$NET HOSTNAME:$HOSTNAME INTERFACE:$INTERFACE NETMASK:$NETMASK NETWORK:$NETWORK GATEWAY:$GATEWAY IP:$IP"
 
+# Base Vars
 CONFIGDIR=/etc/sysconfig/network-scripts/
 FILENAME="${CONFIGDIR}ifcfg-${INTERFACE}"
 
-if ! [ -z "${TYPE}" ]; then
-  TYPE=$TYPE
-elif ( `echo "${INTERFACE}" | grep -q "^bond.*$"` ); then
+# Archive Existing ifcfg Files
+mkdir -p ${CONFIGDIR}archive_ifcfg/
+mv ${CONFIGDIR}ifcfg-* ${CONFIGDIR}archive_ifcfg/
+
+# Identify Type (Bridge takes priority over Bond, Bond over Eth/IB)
+if ! [ -z "${BRIDGE}" ] ; then
+  TYPE="Bridge"
+elif ! [ -z "${BOND}" ] ; then
   TYPE="Bond"
-elif ( `echo "${INTERFACE}" | grep -q "^ib.*$"` ); then
-  TYPE="InfiniBand"
+elif ( `echo "${INTERFACE}" | grep -q "^ib.*$"` ) ; then
+  TYPE="Infiniband"
 else
   TYPE="Ethernet"
 fi
 
-if ! [ -z "${IP}" ]; then
-  echo "Writing: $FILENAME"
-  cat << EOF > $FILENAME
+########
+# MAIN # 
+########
+
+# Base
+echo "Writing: $FILENAME"
+cat << EOF > $FILENAME
 TYPE=$TYPE
 BOOTPROTO=none
 DEFROUTE=yes
@@ -46,21 +50,27 @@ IPADDR=$IP
 NETMASK=$NETMASK
 ZONE=$ZONE
 EOF
-fi
 
+# Add Gateway
 if ! [ -z "$GATEWAY" ]; then
   echo "GATEWAY=\"${GATEWAY}\"" >> "$FILENAME"
 fi
 
-if [ $TYPE == "Bond" ]; then
-  echo "Setting up bond for $INTERFACE ($BONDOPTIONS) - $SLAVEINTERFACES"
+# BRIDGE - Main
+if [[ $INTERFACE == $BRIDGEINTERFACE ]] ; then
+  echo "STP=no" >> "$FILENAME"
+fi
+
+# BOND - Main
+if [[ $INTERFACE == $BONDINTERFACE ]] ; then
   echo "BONDING_OPTS=\"${BONDOPTIONS}\"" >> "$FILENAME"
-  for i in $SLAVEINTERFACES; do
-    FILENAME="${CONFIGDIR}ifcfg-${i}"
-    echo "Writing: $FILENAME"
-    cat << EOF > $FILENAME
-TYPE=Ethernet
-BOOTPROTO=none
+fi
+
+##########
+# SLAVES #
+##########
+
+SLAVEBASE="BOOTPROTO=none
 DEFROUTE=no
 PEERDNS=no
 PEERROUTES=no
@@ -71,38 +81,47 @@ IPV6_DEFROUTE=no
 IPV6_PEERDNS=no
 IPV6_PEERROUTES=no
 IPV6_FAILURE_FATAL=no
-NAME=$i
-DEVICE=$i
-ONBOOT=yes
-MASTER=$INTERFACE
-SLAVE=yes
-EOF
+ONBOOT=yes"
+
+slave_interface() {
+  iface=$1
+  slavefile="${CONFIGDIR}ifcfg-$iface"
+  echo "Writing: $slavefile"
+  
+  # Configure bond (if slave is a bond)
+  if [[ $iface == $BONDINTERFACE ]] ; then
+    echo "TYPE=Bond" >> $slavefile
+    echo "BONDING_OPTS=\"${BONDOPTIONS}\"" >> $slavefile
+  fi
+
+  # Base slave config to file
+  echo "$SLAVEBASE" >> $slavefile
+  echo "NAME=$iface
+DEVICE=$iface" >> $slavefile
+
+  # Add bridge slave config
+  if [[ $BRIDGESLAVEINTERFACES == *"$iface"* ]] ; then
+    echo "BRIDGE=$BRIDGEINTERFACE" >> $slavefile
+  fi
+
+  # Add bond slave config
+  if [[ $BONDSLAVEINTERFACES == *"$iface"* ]] ; then
+    echo "MASTER=$BONDINTERFACE
+SLAVE=yes" >> $slavefile
+  fi
+}
+
+
+# Setup Bridge Slaves
+if ! [ -z "${BRIDGE}" ] ; then
+  for i in $BRIDGESLAVEINTERFACES ; do
+    slave_interface $i
   done
 fi
 
-if [ $TYPE == "Bridge" ]; then
-  echo "Setting up bridge for $INTERFACE - $SLAVEINTERFACES"
-  echo "STP=no" >> "$FILENAME"
-  for i in $SLAVEINTERFACES; do
-    FILENAME="${CONFIGDIR}ifcfg-${i}"
-    echo "Writing: $FILENAME"
-    cat << EOF > $FILENAME
-TYPE=Ethernet
-BOOTPROTO=none
-DEFROUTE=no
-PEERDNS=no
-PEERROUTES=no
-IPV4_FAILURE_FATAL=no
-IPV6INIT=no
-IPV6_AUTOCONF=no
-IPV6_DEFROUTE=no
-IPV6_PEERDNS=no
-IPV6_PEERROUTES=no
-IPV6_FAILURE_FATAL=no
-NAME=$i
-DEVICE=$i
-ONBOOT=yes
-BRIDGE=$INTERFACE
-EOF
+# Setup Bond Slaves
+if ! [ -z "${BOND}" ] ; then
+  for i in $BONDSLAVEINTERFACES ; do
+    slave_interface $i
   done
 fi

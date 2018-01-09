@@ -7,6 +7,7 @@ run_script network-base
 
 <% config.networks.each do |name, network| %>
 <% if network.defined %>
+#Base Network Configuration
 export NET="<%= network.domain %>"
 export INTERFACE="<%= network.interface %>"
 export HOSTNAME="<%= network.hostname %>"
@@ -14,12 +15,18 @@ export IP="<%= network.ip %>"
 export NETMASK="<%= network.netmask %>"
 export NETWORK="<%= network.network %>"
 export GATEWAY="<%= network.gateway %>"
-#If TYPE is 'Bond' or 'Bridge', we'll also need these set to setup the slaves
-export SLAVEINTERFACES="<%= network.slave_interfaces %>"
-#Bond options
-export BONDOPTIONS="<%= network.bond_options %>"
-#This is literally translated to the TYPE in redhat-sysconfig-network
-export TYPE="<%= network.type %>"
+
+#Bridge Configuration
+export BRIDGE="<%= if (network.bridge rescue false) then 'Bridge' end %>"
+export BRIDGEINTERFACE="<%= if (network.bridge rescue false) then network.bridge.interface end %>"
+export BRIDGESLAVEINTERFACES="<%= if (network.bridge rescue false) then network.bridge.slave_interfaces end %>"
+
+#Bond Configuration
+export BOND="<%= if (network.bond rescue false) then 'Bond' end %>"
+export BONDINTERFACE="<%= if (network.bond rescue false) then network.bond.interface end %>"
+export BONDSLAVEINTERFACES="<%= if (network.bond rescue false) then network.bond.slave_interfaces end %>"
+export BONDOPTIONS="<%= if (network.bond rescue false) then network.bond.options end %>"
+
 export ZONE="<%= network.firewallpolicy %>"
 
 if [ "${INTERFACE}" == 'bmc' ]
