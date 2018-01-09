@@ -14,7 +14,8 @@ export HOSTNAME="<%= network.hostname %>"
 export IP="<%= network.ip %>"
 export NETMASK="<%= network.netmask %>"
 export NETWORK="<%= network.network %>"
-export GATEWAY="<%= network.gateway %>"
+# Set gateway unless an 'ext' network is defined (prevents a pri and ext gateway being set and confusing things)
+export GATEWAY="<%= if (config.networks.ext.gateway rescue false) && name.to_s != 'ext' then '' else network.gateway end %>"
 
 #Bridge Configuration
 export BRIDGE="<%= if (network.bridge rescue false) then 'Bridge' end %>"
