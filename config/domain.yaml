@@ -32,7 +32,7 @@ networks:
     primary: true
     named_fwd_zone: "<%= config.networks.pri.domain %>.<%= config.domain %>"
     named_rev_zone: <% split_net = answer.pri_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
-    firewallpolicy: internal
+    firewallpolicy: trusted
 
   mgt:
     defined: <%= answer.mgt_network_defined %>
@@ -47,7 +47,7 @@ networks:
     type:
     named_fwd_zone: "<%= config.networks.mgt.domain %>.<%= config.domain %>"
     named_rev_zone: <% split_net = answer.mgt_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
-    firewallpolicy: internal
+    firewallpolicy: trusted
 
   ib:
     defined: <%= answer.ib_network_defined %>
@@ -62,7 +62,7 @@ networks:
     type:
     named_fwd_zone: "<%= config.networks.ib.domain %>.<%= config.domain %>"
     named_rev_zone: <% split_net = answer.ib_network_network.split(/\./) -%><%= split_net[1] %>.<%= split_net[0] %>
-    firewallpolicy: internal
+    firewallpolicy: trusted
 
   bmc:
     defined: <%= answer.bmc_network_defined %>
@@ -78,7 +78,7 @@ networks:
     bmcchannel: 1
     bmcuser: 2
     bmcvlan: <%= answer.bmc_network_vlan %>
-    firewallpolicy: management
+    firewallpolicy: trusted
 
 disklabel: 'sda'
 disksetup: |
