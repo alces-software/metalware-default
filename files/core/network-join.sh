@@ -6,12 +6,7 @@
 echo "Running network configuration for NET:$NET HOSTNAME:$HOSTNAME INTERFACE:$INTERFACE NETMASK:$NETMASK NETWORK:$NETWORK GATEWAY:$GATEWAY IP:$IP"
 
 # Base Vars
-CONFIGDIR=/etc/sysconfig/network-scripts/
 FILENAME="${CONFIGDIR}ifcfg-${INTERFACE}"
-
-# Archive Existing ifcfg Files
-mkdir -p ${CONFIGDIR}archive_ifcfg/
-mv ${CONFIGDIR}ifcfg-* ${CONFIGDIR}archive_ifcfg/
 
 # Identify Type (Bridge takes priority over Bond, Bond over Eth/IB)
 if ! [ -z "${BRIDGE}" ] ; then
@@ -25,7 +20,7 @@ else
 fi
 
 ########
-# MAIN # 
+# MAIN #
 ########
 
 # Base
@@ -87,7 +82,7 @@ slave_interface() {
   iface=$1
   slavefile="${CONFIGDIR}ifcfg-$iface"
   echo "Writing: $slavefile"
-  
+
   # Configure bond (if slave is a bond)
   if [[ $iface == $BONDINTERFACE ]] ; then
     echo "TYPE=Bond" >> $slavefile

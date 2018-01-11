@@ -5,6 +5,10 @@
 
 run_script network-base
 
+export CONFIGDIR=/etc/sysconfig/network-scripts/
+mkdir -p ${CONFIGDIR}archive_ifcfg/
+mv ${CONFIGDIR}ifcfg-* ${CONFIGDIR}archive_ifcfg/
+
 <% config.networks.each do |name, network| %>
 <% if network.defined %>
 #Base Network Configuration
