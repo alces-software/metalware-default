@@ -46,6 +46,17 @@ curl "<%= script.url %>" | /bin/bash
   <% end %>
 <% end %>
 
+<% node.plugins.each do |plugin| %>
+echo
+echo 'Running setup scripts for plugin `<%= plugin.name %>`:'
+  <% (plugin.files.setup || []).each do |script| %>
+    <% if script.error %>
+echo '<%= script.name %>: <%= script.error %>'
+    <% else %>
+curl "<%= script.url %>" | /bin/bash
+    <% end %>
+  <% end %>
+<% end %>
 
 echo 'Running Alces core setup'
 run_script base
@@ -59,6 +70,17 @@ echo 'Running user scripts:'
 echo '<%= script.name %>: <%= script.error %>'
   <% else %>
 curl "<%= script.url %>" | /bin/bash
+  <% end %>
+<% end %>
+
+<% node.plugins.each do |plugin| %>
+echo 'Running scripts for plugin `<%= plugin.name %>`:'
+  <% (plugin.files.scripts || []).each do |script| %>
+    <% if script.error %>
+echo '<%= script.name %>: <%= script.error %>'
+    <% else %>
+curl "<%= script.url %>" | /bin/bash
+    <% end %>
   <% end %>
 <% end %>
 
