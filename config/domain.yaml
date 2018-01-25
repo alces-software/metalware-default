@@ -140,8 +140,10 @@ files:
     - core/networking.sh
     - core/configs/authorized_keys
     - core/configs/ntp
+    - https://raw.githubusercontent.com/alces-software/metalware-default/remote-files-issue/files/core/foo
   scripts:
     - local-script.sh
+    - https://raw.githubusercontent.com/alces-software/metalware-default/remote-files-issue/files/foo
 
 ntp:
   is_server: false
