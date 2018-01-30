@@ -1,7 +1,7 @@
 echo "Running main.sh on <%= node.name %> at $(date)!"
 
 
-export CORE_DIR=/var/lib/metalware/rendered/local/core/
+export CORE_DIR=/var/lib/metalware/rendered/local/files/repo/core/
 #mkdir -p "$CORE_DIR"
 
 run_script() {
@@ -29,6 +29,14 @@ for script in $CORE_DIR/../setup/* ; do
     bash $script
 done
 
+echo 'Running plugin setup scripts'
+for plugin in $CORE_DIR/../../plugin/* ; do
+    echo "Running setup scripts for $plugin"
+    for script in $plugin/setup/* ; do
+        bash $script
+    done
+done
+
 echo 'Running core setup scripts:'
 run_script base
 run_script networking
@@ -36,4 +44,12 @@ run_script networking
 echo 'Running user scripts:'
 for script in $CORE_DIR/../scripts/* ; do
     bash $script
+done
+
+echo 'Running plugin scripts'
+for plugin in $CORE_DIR/../../plugin/* ; do
+    echo "Running scripts for $plugin"
+    for script in $plugin/scripts/* ; do
+        bash $script
+    done
 done
