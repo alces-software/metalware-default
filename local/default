@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 exec 1>/tmp/metalware-default-output 2>&1
 
-/bin/bash /var/lib/metalware/rendered/local/main/main.sh
+/bin/bash /var/lib/metalware/rendered/local/files/repo/main/main.sh
 
 mkdir -p <%= local.events_dir %>
 touch <%= local.build_complete_path %>
