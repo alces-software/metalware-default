@@ -11,7 +11,7 @@ echo "<%= config.networks.pri.ip %> <%= config.networks.pri.hostname %>" >> /etc
 
 yum -y install git vim emacs xauth xhost xdpyinfo xterm xclock tigervnc-server ntpdate wget vconfig bridge-utils patch tcl-devel gettext
 
-mkdir -m 0700 /root/.ssh
+mkdir -p -m 0700 /root/.ssh
 install_file authorized_keys /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 echo "StrictHostKeyChecking no" >> /root/.ssh/config
