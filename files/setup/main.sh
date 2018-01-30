@@ -20,21 +20,27 @@ echo 'Setting root password'
 usermod --password '<%= config.encrypted_root_password %>' root
 
 echo 'Running platform setup scripts:'
-for script in $CORE_DIR/../platform/* ; do
+if [ $(ls $CORE_DIR/../platform |wc -l) != 0 ] ; then
+  for script in $CORE_DIR/../platform/* ; do
     bash $script
-done
+  done
+fi
 
 echo 'Running user setup scripts:'
-for script in $CORE_DIR/../setup/* ; do
+if [ $(ls $CORE_DIR/../setup |wc -l) != 0 ] ; then
+  for script in $CORE_DIR/../setup/* ; do
     bash $script
-done
+  done
+fi
 
 echo 'Running plugin setup scripts'
 for plugin in $CORE_DIR/../../plugin/* ; do
-    echo "Running setup scripts for $plugin"
+  echo "Running setup scripts for $plugin"
+  if [ $(ls $plugin/setup |wc -l) != 0 ] ; then
     for script in $plugin/setup/* ; do
         bash $script
     done
+  fi
 done
 
 echo 'Running core setup scripts:'
@@ -42,14 +48,18 @@ run_script base
 run_script networking
 
 echo 'Running user scripts:'
-for script in $CORE_DIR/../scripts/* ; do
+if [ $(ls $CORE_DIR/../scripts |wc -l) != 0 ] ; then
+  for script in $CORE_DIR/../scripts/* ; do
     bash $script
-done
+  done
+fi
 
 echo 'Running plugin scripts'
 for plugin in $CORE_DIR/../../plugin/* ; do
-    echo "Running scripts for $plugin"
+  echo "Running scripts for $plugin"
+  if [ $(ls $plugin/scripts |wc -l) != 0 ] ; then
     for script in $plugin/scripts/* ; do
         bash $script
     done
+  fi
 done
