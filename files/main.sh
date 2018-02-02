@@ -1,4 +1,15 @@
 
+<%
+# Sort plugins by `priority` config value, with plugins with a lower value for
+# `priority` appearing first.  Plugins without `priority` set will default to a
+# priority of 9999, i.e. will probably be last unless a plugin has a priority
+# explicitly set to more than this.
+default_priority = 9999
+prioritized_plugins = node.plugins.sort_by do |plugin|
+  plugin.config.priority || default_priority
+end
+%>
+
 echo "Running main.sh on <%= node.name %> at $(date)!"
 
 
@@ -46,7 +57,7 @@ curl "<%= script.url %>" | /bin/bash
   <% end %>
 <% end %>
 
-<% node.plugins.each do |plugin| %>
+<% prioritized_plugins.each do |plugin| %>
 echo
 echo 'Running setup scripts for plugin `<%= plugin.name %>`:'
   <% (plugin.files.setup || []).each do |script| %>
@@ -73,7 +84,7 @@ curl "<%= script.url %>" | /bin/bash
   <% end %>
 <% end %>
 
-<% node.plugins.each do |plugin| %>
+<% prioritized_plugins.each do |plugin| %>
 echo 'Running scripts for plugin `<%= plugin.name %>`:'
   <% (plugin.files.scripts || []).each do |script| %>
     <% if script.error %>
