@@ -41,7 +41,7 @@ firewall-cmd --add-service <%= service %> --zone <%= zone %> --permanent
 
 # Add interfaces to zones
 <%     config.networks.each do |network, info| -%>
-<%         if info.defined -%>
+<%         if info.defined && info.firewallpolicy -%>
 firewall-cmd --add-interface <%= info.interface %> --zone <%= info.firewallpolicy %> --permanent
 <%         end -%>
 <%     end -%>

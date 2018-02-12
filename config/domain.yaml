@@ -79,7 +79,6 @@ networks:
     bmcuser: admin
     bmcuserid: 2
     bmcvlan: <%= answer.bmc_network_vlan %>
-    firewallpolicy: trusted
 
 disklabel: 'sda'
 disksetup: |
