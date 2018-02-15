@@ -1,0 +1,6 @@
+headers:
+  - Additional Genders
+  - Nodes
+fields:
+  - <%= group.answer.genders_additional_groups %>
+  - <%= group.hostlist_nodes %>
