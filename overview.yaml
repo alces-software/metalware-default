@@ -1,0 +1,12 @@
+domain:
+  - header: Cluster Name
+    value: <%= domain.answer.cluster_name %>
+  - header: Domain
+    value: <%= domain.answer.domain %>
+  - header: DNS Config
+    value: <%= domain.answer.dns_type %>
+group:
+  - header: Additional Genders
+    value: <%= group.answer.genders_additional_groups %>
+  - header: Nodes
+    value: <%= group.hostlist_nodes %>
