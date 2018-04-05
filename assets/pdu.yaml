@@ -1,0 +1,6 @@
+network:
+  ip: null
+  netmask: null
+  user: null
+  password: null
+ports: 16
