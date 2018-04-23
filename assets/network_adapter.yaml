@@ -1,4 +1,7 @@
 #port_name: cable_colour
+manufacturer: null
+model: null
+serial: null
 ports:
   em1: null
   em2: null

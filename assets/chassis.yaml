@@ -1,4 +1,6 @@
 manufacturer: null
+model: null
+serial: null
 slots: 4
 oob:
   ip: null
