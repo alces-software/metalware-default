@@ -1,5 +1,5 @@
 
-<% alces.hunter.each do |hostname, mac_address| %>
+<% alces.data.hunter.each do |hostname, mac_address| %>
 host <%= hostname %> {
   hardware ethernet <%= mac_address %>;
   option host-name "<%= hostname %>.<%= config.networks.pri.domain %>.<%= config.domain %>";
